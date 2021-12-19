@@ -1,5 +1,6 @@
 import React, {useRef, useEffect} from 'react'
 import { CharacterMovement } from "./CharacterMovement"
+import { GridLines } from "./GridLines"
 
 import locations from "../locations"
 import { WallCollision } from "./utils"
@@ -20,11 +21,10 @@ export default function Board() {
 
             // ctx.fillStyle = 'red';
             // ctx.fillRect(10, 10, 50, 50);
+            GridLines(ctx, canvas);
             CharacterMovement(ctx, charObject);
 
             WallCollision(charObject, canvas);
-            console.log(charObject.dx)
-            console.log(charObject.dy)
             requestAnimationFrame(render)
         }
         render();

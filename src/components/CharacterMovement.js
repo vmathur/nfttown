@@ -15,12 +15,11 @@ class Character {
     }
 
     draw(ctx){
-        ctx.fillStyle = 'red';
+        ctx.fillStyle = '#80f4ff';
         ctx.beginPath();
-        ctx.fillStyle = 'red'
         ctx.arc(this.x, this.y, 20, 0, 2 * Math.PI);
         ctx.fill();
         ctx.stroke();
-        console.log('rendering frame')    
+        // console.log('rendering frame')    
     }
 } 

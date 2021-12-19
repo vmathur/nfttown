@@ -3,8 +3,8 @@ export default {
   charObject: {
     x: 20,
     y: 200,
-    dx: 5,
-    dy: 5,
+    dx: 3,
+    dy: 3,
     rad: 10,
     speed: 10,
   },

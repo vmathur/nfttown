@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-color: #4ee44e;
 }
 
 .App-logo {
@@ -38,6 +39,6 @@
 }
 
 #canvas{
-  background-color: green;
+  background-color: #90ee90;
   width: 80%;
 }
