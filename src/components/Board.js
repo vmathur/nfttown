@@ -12,6 +12,8 @@ import { WallCollision } from "./utils"
 let x=0;
 export default function Board() {
     const canvasRef = useRef(null);
+    let tileImage = new Image();   // Create new img element
+    tileImage.src = './assets/tiles.png'; // Set source path
 
     //didmount
     useEffect(()=>{
@@ -24,7 +26,7 @@ export default function Board() {
 
             // ctx.fillStyle = 'red';
             // ctx.fillRect(10, 10, 50, 50);
-            WorldMap(ctx);
+            WorldMap(ctx, tileImage);
             CharacterMovement(ctx, charObject);
             GridLines(ctx, canvas);
 

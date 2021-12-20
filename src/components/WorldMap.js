@@ -1,9 +1,9 @@
 import React, {useRef, useEffect} from 'react'
 import { tileMap, tileImage } from "../constants"
 
-export function WorldMap(ctx){
+export function WorldMap(ctx, img){
     let map = new Map();
-    map.draw(ctx, tileMap)
+    map.draw(ctx, tileMap, img)
 }
 
 class Map {
@@ -11,12 +11,10 @@ class Map {
 
     }
     
-    draw(ctx, tileMap){  
+    draw(ctx, tileMap, img){  
         // ctx.fillStyle = 'red';
         // ctx.fillRect(10, 10, 50, 50);
         // ctx.strokeStyle = 'black';
-        let img = new Image();   // Create new img element
-        img.src = './assets/tiles.png'; // Set source path
 
         for (let c = 0; c < tileMap.cols; c++) {
             for (let r = 0; r < tileMap.rows; r++) {
