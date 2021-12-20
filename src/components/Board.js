@@ -3,13 +3,10 @@ import { CharacterMovement } from "./CharacterMovement"
 import { GridLines } from "./GridLines"
 import { WorldMap } from "./WorldMap"
 import { tileMap } from "../constants"
-
-
-import locations from "../locations"
 import { WallCollision } from "./utils"
 
+import locations from "../locations"
 
-let x=0;
 export default function Board() {
     const canvasRef = useRef(null);
     let tileImage = new Image();   // Create new img element
