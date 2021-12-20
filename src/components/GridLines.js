@@ -1,7 +1,8 @@
 import React, {useRef, useEffect} from 'react'
+import { tileMap } from "../constants" 
 
 export function GridLines(ctx, canvas){
-    let grid = new Grid(50)
+    let grid = new Grid(tileMap.tsize)
     grid.draw(ctx, canvas.height, canvas.width)
 }
 

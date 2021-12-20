@@ -1,6 +1,9 @@
 import React, {useRef, useEffect} from 'react'
 import { CharacterMovement } from "./CharacterMovement"
 import { GridLines } from "./GridLines"
+import { WorldMap } from "./WorldMap"
+import { tileMap } from "../constants"
+
 
 import locations from "../locations"
 import { WallCollision } from "./utils"
@@ -21,8 +24,9 @@ export default function Board() {
 
             // ctx.fillStyle = 'red';
             // ctx.fillRect(10, 10, 50, 50);
-            GridLines(ctx, canvas);
+            WorldMap(ctx);
             CharacterMovement(ctx, charObject);
+            GridLines(ctx, canvas);
 
             WallCollision(charObject, canvas);
             requestAnimationFrame(render)
@@ -32,7 +36,7 @@ export default function Board() {
 
     return (
         <div>
-            <canvas id="canvas" ref={canvasRef} height="500px" width="800px"/>
+            <canvas id="canvas" ref={canvasRef} height={tileMap.tsize*tileMap.rows +'px'} width={tileMap.tsize*tileMap.cols +'px'}/>
         </div>
     )
 }

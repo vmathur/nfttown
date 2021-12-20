@@ -20,6 +20,5 @@ class Character {
         ctx.arc(this.x, this.y, 20, 0, 2 * Math.PI);
         ctx.fill();
         ctx.stroke();
-        // console.log('rendering frame')    
     }
 } 
