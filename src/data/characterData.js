@@ -7,7 +7,7 @@ export default {
         y: 500
     },
     velocity: {
-        dx: 3,
-        dy: 3
+        dx: 5,
+        dy: 5
     }
 }
