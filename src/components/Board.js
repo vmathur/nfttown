@@ -34,7 +34,7 @@ export default function Board() {
             GridLines(ctx, canvas);
 
             //draw character
-            character.draw(ctx, loopIndex, characterData.currentLocation)
+            character.draw(ctx, loopIndex, characterData)
             characterData.currentLocation.x+=characterData.velocity.dx;
             characterData.currentLocation.y+=characterData.velocity.dy;
             
