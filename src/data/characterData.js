@@ -3,7 +3,11 @@ export default {
     height: 18,
     imgSource : 'https://opengameart.org/sites/default/files/Green-Cap-Character-16x18.png',
     currentLocation: {
-        x: 0,
-        y: 0
+        x: 5,
+        y: 5
+    },
+    velocity: {
+        dx: 5,
+        dy: 5
     }
 }

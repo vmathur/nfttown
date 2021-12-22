@@ -4,7 +4,7 @@ import  Character  from "./Character"
 import { GridLines } from "./GridLines"
 import { WorldMap } from "./WorldMap"
 import { tileMap } from "../constants"
-import { WallCollision } from "./utils"
+import WallCollision from "../utils/WallCollision"
 import characterData from "../data/characterData" 
 
 export default function Board() {
@@ -35,9 +35,12 @@ export default function Board() {
 
             //draw character
             character.draw(ctx, loopIndex, characterData.currentLocation)
-            characterData.currentLocation.x+=5;
-            characterData.currentLocation.y+=5;
+            characterData.currentLocation.x+=characterData.velocity.dx;
+            characterData.currentLocation.y+=characterData.velocity.dy;
             
+            //check for collision
+            WallCollision(characterData, canvas);
+
             //increment loop animation once every 15 frames
             frameCount++;
             if (frameCount < frameLoopLimit) {
@@ -56,7 +59,6 @@ export default function Board() {
             }
 
             // todo 
-            // WallCollision(charObject, canvas);
             requestAnimationFrame(render)
         }
         render();
