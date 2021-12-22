@@ -5,7 +5,7 @@ import Board from './components/Board'
 function App() {
   return (
     <div className="App">
-      <div><b>NFT Town</b></div>
+      <div><b>NFT Townssss</b></div>
       <Board/>
     </div>
 

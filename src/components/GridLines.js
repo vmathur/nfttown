@@ -1,4 +1,3 @@
-import React, {useRef, useEffect} from 'react'
 import { tileMap } from "../constants" 
 
 export function GridLines(ctx, canvas){
@@ -12,7 +11,7 @@ class Grid {
     }
 
     draw(ctx, height, width){
-        ctx.strokeStyle = 'black';
+        ctx.strokeStyle = '#00bf37';
         let x = 0;
         let y = 0;
         for(let i = 0; i < height; i++) {    

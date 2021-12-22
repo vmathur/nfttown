@@ -1,33 +1,62 @@
-import React, {useRef, useEffect} from 'react'
-import { CharacterMovement } from "./CharacterMovement"
+import React, {useRef, useEffect, useState} from 'react'
+
+import  Character  from "./Character"
 import { GridLines } from "./GridLines"
 import { WorldMap } from "./WorldMap"
 import { tileMap } from "../constants"
 import { WallCollision } from "./utils"
-
-import locations from "../locations"
+import characterData from "../data/characterData" 
 
 export default function Board() {
     const canvasRef = useRef(null);
     let tileImage = new Image();   // Create new img element
     tileImage.src = './assets/tiles.png'; // Set source path
+    let charImg = new Image();
+    charImg.src = characterData.imgSource;
+
+    //create character object
+    let character = new Character(characterData.currentLocation, charImg, 3, characterData.width, characterData.height)
+
+    let loopIndex = 0;
+    let frameCount = 0;
+    let frameLoopLimit = 15;
+    let maxLoopIndex = 4;
 
     //didmount
     useEffect(()=>{
         const render = () => {
+            //get canvas
             const canvas = canvasRef.current;
             const ctx = canvas.getContext('2d');
-            let { charObject } =  locations
 
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            // ctx.fillStyle = 'red';
-            // ctx.fillRect(10, 10, 50, 50);
+            //draw world map
             WorldMap(ctx, tileImage);
-            CharacterMovement(ctx, charObject);
             GridLines(ctx, canvas);
 
-            WallCollision(charObject, canvas);
+            //draw character
+            character.draw(ctx, loopIndex, characterData.currentLocation)
+            characterData.currentLocation.x+=5;
+            characterData.currentLocation.y+=5;
+            
+            //increment loop animation once every 15 frames
+            frameCount++;
+            if (frameCount < frameLoopLimit) {
+                window.requestAnimationFrame(render);
+                return;
+            }
+            frameCount = 0;
+
+            //clear screen
+            // ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // update the loop index
+            loopIndex++;
+            if(loopIndex >= maxLoopIndex){
+                loopIndex = 0;
+            }
+
+            // todo 
+            // WallCollision(charObject, canvas);
             requestAnimationFrame(render)
         }
         render();
