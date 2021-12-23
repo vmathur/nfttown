@@ -1,20 +1,21 @@
 import React, {useRef, useEffect, useState} from 'react'
 
-import  Character  from "./Character"
 import { GridLines } from "./GridLines"
 import { WorldMap } from "./WorldMap"
 import { tileMap } from "../data/tileConstants"
 import WallCollision from "../utils/WallCollision"
 import characterData from "../data/characterData" 
+import  Character  from "./Character"
 
 export default function Board() {
     const canvasRef = useRef(null);
+
+    //initialize characters
     let characters = []
     for(let data of characterData){
         let character = new Character(data)
         characters.push(character)
     }
-    // let character = new Character(characterData)
 
     //indices
     let loopIndex = 0;
