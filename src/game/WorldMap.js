@@ -1,9 +1,12 @@
 import React, {useRef, useEffect} from 'react'
-import { tileMap, tileImage } from "../constants"
+import { tileMap, tileImage } from "../data/tileConstants"
 
-export function WorldMap(ctx, img){
+export function WorldMap(ctx){
     let map = new Map();
-    map.draw(ctx, tileMap, img)
+    let tileImage = new Image();   // Create new img element
+    tileImage.src = './assets/tiles.png'; // Set source path
+
+    map.draw(ctx, tileMap, tileImage)
 }
 
 class Map {

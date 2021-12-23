@@ -3,20 +3,20 @@ import React, {useRef, useEffect, useState} from 'react'
 import  Character  from "./Character"
 import { GridLines } from "./GridLines"
 import { WorldMap } from "./WorldMap"
-import { tileMap } from "../constants"
+import { tileMap } from "../data/tileConstants"
 import WallCollision from "../utils/WallCollision"
 import characterData from "../data/characterData" 
 
 export default function Board() {
     const canvasRef = useRef(null);
-    let tileImage = new Image();   // Create new img element
-    tileImage.src = './assets/tiles.png'; // Set source path
-    let charImg = new Image();
-    charImg.src = characterData.imgSource;
+    let characters = []
+    for(let data of characterData){
+        let character = new Character(data)
+        characters.push(character)
+    }
+    // let character = new Character(characterData)
 
-    //create character object
-    let character = new Character(characterData.currentLocation, charImg, 3, characterData.width, characterData.height)
-
+    //indices
     let loopIndex = 0;
     let frameCount = 0;
     let frameLoopLimit = 15;
@@ -30,16 +30,15 @@ export default function Board() {
             const ctx = canvas.getContext('2d');
 
             //draw world map
-            WorldMap(ctx, tileImage);
+            WorldMap(ctx);
             GridLines(ctx, canvas);
 
-            //draw character
-            character.draw(ctx, loopIndex, characterData)
-            characterData.currentLocation.x+=characterData.velocity.dx;
-            characterData.currentLocation.y+=characterData.velocity.dy;
-            
-            //check for collision
-            WallCollision(characterData, canvas);
+            //move characters
+            for(let character of characters){
+                character.move()
+                WallCollision(character, canvas);
+                character.draw(ctx, loopIndex)
+            }
 
             //increment loop animation once every 15 frames
             frameCount++;
@@ -49,16 +48,12 @@ export default function Board() {
             }
             frameCount = 0;
 
-            //clear screen
-            // ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            // update the loop index
+            // increment the loop index
             loopIndex++;
             if(loopIndex >= maxLoopIndex){
                 loopIndex = 0;
             }
 
-            // todo 
             requestAnimationFrame(render)
         }
         render();
@@ -70,3 +65,6 @@ export default function Board() {
         </div>
     )
 }
+
+//clear screen
+// ctx.clearRect(0, 0, canvas.width, canvas.height);

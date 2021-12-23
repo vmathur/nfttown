@@ -1,13 +1,26 @@
-export default {
-    width: 16,
-    height: 18,
-    imgSource : 'https://opengameart.org/sites/default/files/Green-Cap-Character-16x18.png',
-    currentLocation: {
-        x: 500,
-        y: 500
-    },
-    velocity: {
-        dx: 5,
-        dy: 5
-    }
-}
+export default 
+    [{
+        width: 16,
+        height: 18,
+        imgSource : 'https://opengameart.org/sites/default/files/Green-Cap-Character-16x18.png',
+        currentLocation: {
+            x: 500,
+            y: 500
+        },
+        velocity: {
+            dx: 3,
+            dy: 3
+        }
+    },{
+        width: 16,
+        height: 18,
+        imgSource : 'https://opengameart.org/sites/default/files/Green-Cap-Character-16x18.png',
+        currentLocation: {
+            x: 100,
+            y: 40
+        },
+        velocity: {
+            dx: -2,
+            dy: -3
+        }
+    }]

@@ -1,4 +1,4 @@
-import { tileMap } from "../constants" 
+import { tileMap } from "../data/tileConstants" 
 
 export function GridLines(ctx, canvas){
     let grid = new Grid(tileMap.tsize)
