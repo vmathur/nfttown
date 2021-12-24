@@ -1,7 +1,7 @@
 import React, {useRef, useEffect, useState} from 'react'
 
-import { GridLines } from "./GridLines"
-import { WorldMap } from "./WorldMap"
+import { Grid } from "./Grid"
+import { Map } from "./Map"
 import { tileMap } from "../data/tileConstants"
 import WallCollision from "../utils/WallCollision"
 import characterData from "../data/characterData" 
@@ -13,15 +13,9 @@ export default function Board() {
     //initialize characters
     let characters = []
     for(let data of characterData){
-        let character = new Character(data)
+        let character = new Character(data, tileMap.tsize)
         characters.push(character)
     }
-
-    //indices
-    let loopIndex = 0;
-    let frameCount = 0;
-    let frameLoopLimit = 15;
-    let maxLoopIndex = 4;
 
     //didmount
     useEffect(()=>{
@@ -31,28 +25,14 @@ export default function Board() {
             const ctx = canvas.getContext('2d');
 
             //draw world map
-            WorldMap(ctx);
-            GridLines(ctx, canvas);
+            Map(ctx);
+            Grid(ctx, canvas);
 
             //move characters
             for(let character of characters){
-                character.move()
+                character.update()
                 WallCollision(character, canvas);
-                character.draw(ctx, loopIndex)
-            }
-
-            //increment loop animation once every 15 frames
-            frameCount++;
-            if (frameCount < frameLoopLimit) {
-                window.requestAnimationFrame(render);
-                return;
-            }
-            frameCount = 0;
-
-            // increment the loop index
-            loopIndex++;
-            if(loopIndex >= maxLoopIndex){
-                loopIndex = 0;
+                character.draw(ctx)
             }
 
             requestAnimationFrame(render)

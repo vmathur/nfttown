@@ -1,11 +1,11 @@
 import { tileMap } from "../data/tileConstants" 
 
-export function GridLines(ctx, canvas){
-    let grid = new Grid(tileMap.tsize)
-    grid.draw(ctx, canvas.height, canvas.width)
+export function Grid(ctx, canvas){
+    let lines = new Lines(tileMap.tsize)
+    lines.draw(ctx, canvas.height, canvas.width)
 }
 
-class Grid {
+class Lines {
     constructor(tileSize){
         this.tileSize = tileSize
     }
