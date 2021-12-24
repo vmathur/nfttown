@@ -28,7 +28,7 @@ export default function Board() {
             Map(ctx);
             Grid(ctx, canvas);
 
-            //move characters
+            //update characters
             for(let character of characters){
                 character.update()
                 WallCollision(character, canvas);

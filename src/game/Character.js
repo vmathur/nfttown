@@ -17,15 +17,23 @@ export default class Character {
         this.height = characterData.height;
         this.tileSize = 64;
 
+        this.movingProgressRemaining = 0;
         this.currentAnimation = 'walk-down'
         this.animations = {
             'walk-down': [[0,0],[1,0],[0,0],[2,0]],
             'walk-up': [[0,1],[1,1],[0,1],[2,1]],
+            'walk-left': [[0,2],[1,2],[0,2],[2,2]],
+            'walk-right': [[0,3],[1,3],[0,3],[2,3]],
+            'stand': [[0,0]],
             'idle': [0,0]
         }
         this.currentAnimationFrame = 0;
         this.animationFrameLimit = 15;
         this.animationFrameProgress = this.animationFrameLimit;
+
+        this.id = null
+        this.behaviorLoop = characterData.behaviorLoop
+        this.behaviorLoopIndex = -1;
     }
 
     get frame(){
@@ -33,22 +41,73 @@ export default class Character {
     }
 
     update(){
-        this.updatePosition();
-        this.updateSprite();
+        if(this.movingProgressRemaining > 0){
+            this.updatePosition();            
+        }else{
+            this.behaviorLoopIndex += 1;
+            if (this.behaviorLoopIndex === this.behaviorLoop.length) {
+                this.behaviorLoopIndex = 0;
+            } 
+            let behavior = this.behaviorLoop[this.behaviorLoopIndex]
+            this.startBehavior(behavior)
+        }
+    }
+
+    startBehavior(behavior){
+        //set character direction to whatever the behavior is
+        if(behavior.type === 'walk'){
+            if(behavior.direction === 'up'){
+                this.dx = 0;
+                this.dy = -2;
+            }else if(behavior.direction === 'right'){
+                this.dx = 2;
+                this.dy = 0;
+            }else if(behavior.direction === 'down'){
+                this.dx = 0;
+                this.dy = 2;
+            }else if (behavior.direction === 'left'){
+                this.dx = -2;
+                this.dy = 0;
+            }
+    
+            //todo check for collisions
+        }else if(behavior.type === 'stand'){
+            this.dx = 0;
+            this.dy = 0;
+        } 
+        this.movingProgressRemaining = 60;
+        
+        this.updateSprite(behavior);
     }
 
     updatePosition(){
         this.x += this.dx;
         this.y += this.dy;
-    }
-
-    updateSprite(){
-        if(this.dy>0){
-            this.setAnimation('walk-down')
-        }else{
-            this.setAnimation('walk-up')
+        this.movingProgressRemaining -= 1;
+        if (this.movingProgressRemaining === 0) {
+            //todo emit event that it's finished
         }
     }
+
+    updateSprite(behavior){
+        if(!behavior){
+            return
+        }
+        if(behavior.type === 'stand'){
+            this.setAnimation('stand')
+        }else if(behavior.type === 'walk'){
+            if(behavior.direction === 'up'){
+                this.setAnimation('walk-up')
+            }else if(behavior.direction === 'right'){
+                this.setAnimation('walk-right')
+            }else if(behavior.direction === 'down'){
+                this.setAnimation('walk-down')
+            }else if (behavior.direction === 'left'){
+                this.setAnimation('walk-left')
+            }
+        }
+    }
+
     setAnimation(key){
         if(this.currentAnimation !== key){
             this.currentAnimation = key;
@@ -70,7 +129,6 @@ export default class Character {
     }
 
     draw(ctx){
-        this.updateSprite()
         const [frameX, frameY] = this.frame
         this.drawFrame(ctx, frameX, frameY , this.x, this.y);
         this.updateAnimationProgress();

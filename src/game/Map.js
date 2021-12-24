@@ -10,10 +10,6 @@ export function Map(ctx){
 }
 
 class MapTiles {
-    constructor(){
-
-    }
-    
     draw(ctx, tileMap, img){  
         for(let i = 0; i<tileMap.tiles.length; i++){
             for (let c = 0; c < tileMap.cols; c++) {
