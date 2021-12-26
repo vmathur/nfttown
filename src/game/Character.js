@@ -1,4 +1,6 @@
 import {getNextAction} from './utils'
+import {behaviorLoops} from '../data/characterData'
+import {objectLocations} from '../data/objectData'
 
 export default class Character {
     constructor(characterData, tileSize){
@@ -32,12 +34,12 @@ export default class Character {
         this.currentAnimationFrame = 0;
         this.animationFrameLimit = 15;
         this.animationFrameProgress = this.animationFrameLimit;
-        this.behaviorLoop = characterData.behaviorLoop
+        this.currentAction = characterData.currentAction
+        this.behaviorLoop = behaviorLoops[this.currentAction].behaviorLoop
 
         this.id = null
         this.behaviorLoopIndex = -1;
 
-        this.currentAction = characterData.currentAction
     }
 
     get frame(){
@@ -90,6 +92,17 @@ export default class Character {
     updatePosition(){
         this.x += this.dx;
         this.y += this.dy;
+
+        let tempX = Math.floor(this.x/64)+1;
+        let tempY = Math.floor(this.y/64)+1;
+        let isCollision = objectLocations[(tempY-1) * 24 + (tempX-1)]
+        
+        //if there's a collision with a game object, then move on to the next 
+        if(isCollision === 1){
+            this.movingProgressRemaining = 0
+            return
+        }
+
         this.movingProgressRemaining -= 1;
         if (this.movingProgressRemaining === 0) {
             //todo emit event that it's finished
