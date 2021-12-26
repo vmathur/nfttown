@@ -4,7 +4,7 @@ import { Grid } from "./Grid"
 import { Map } from "./Map"
 import { tileMap } from "../data/tileConstants"
 import WallCollision from "../utils/WallCollision"
-import characterData from "../data/characterData" 
+import {initialCharacterParams} from "../data/characterData" 
 import  Character  from "./Character"
 
 export default function Board() {
@@ -12,7 +12,7 @@ export default function Board() {
 
     //initialize characters
     let characters = []
-    for(let data of characterData){
+    for(let data of initialCharacterParams){
         let character = new Character(data, tileMap.tsize)
         characters.push(character)
     }

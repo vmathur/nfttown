@@ -1,3 +1,5 @@
+import {getNextAction} from './utils'
+
 export default class Character {
     constructor(characterData, tileSize){
 
@@ -25,15 +27,17 @@ export default class Character {
             'walk-left': [[0,2],[1,2],[0,2],[2,2]],
             'walk-right': [[0,3],[1,3],[0,3],[2,3]],
             'stand': [[0,0]],
-            'idle': [0,0]
+            'idle': [[0,0]]
         }
         this.currentAnimationFrame = 0;
         this.animationFrameLimit = 15;
         this.animationFrameProgress = this.animationFrameLimit;
+        this.behaviorLoop = characterData.behaviorLoop
 
         this.id = null
-        this.behaviorLoop = characterData.behaviorLoop
         this.behaviorLoopIndex = -1;
+
+        this.currentAction = characterData.currentAction
     }
 
     get frame(){
@@ -47,6 +51,9 @@ export default class Character {
             this.behaviorLoopIndex += 1;
             if (this.behaviorLoopIndex === this.behaviorLoop.length) {
                 this.behaviorLoopIndex = 0;
+                let [nextActionId, nextAction]  = getNextAction(this.currentAction)
+                this.currentAction = nextActionId
+                this.behaviorLoop = nextAction.behaviorLoop
             } 
             let behavior = this.behaviorLoop[this.behaviorLoopIndex]
             this.startBehavior(behavior)
@@ -71,11 +78,11 @@ export default class Character {
             }
     
             //todo check for collisions
-        }else if(behavior.type === 'stand'){
+        }else if(behavior.type === 'stand' || behavior.type === 'idle'){
             this.dx = 0;
             this.dy = 0;
         } 
-        this.movingProgressRemaining = 60;
+        this.movingProgressRemaining = behavior.duration ? behavior.duration : 60;
         
         this.updateSprite(behavior);
     }
@@ -105,6 +112,8 @@ export default class Character {
             }else if (behavior.direction === 'left'){
                 this.setAnimation('walk-left')
             }
+        }else if(behavior.type==='idle'){
+            this.setAnimation('walk-down')
         }
     }
 

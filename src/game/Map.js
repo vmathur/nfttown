@@ -21,8 +21,8 @@ class MapTiles {
                             img, // image
                             (tile - 1) * tileMap.tsize, // source x
                             0, // source y
-                            tileMap.tsize, // source width
-                            tileMap.tsize, // source height
+                            64, // source width
+                            64, // source height
                             c * tileMap.tsize, // target x
                             r * tileMap.tsize, // target y
                             tileMap.tsize, // target width

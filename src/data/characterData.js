@@ -1,4 +1,4 @@
-export default 
+export const initialCharacterParams = 
     [{
         width: 16,
         height: 18,
@@ -16,7 +16,8 @@ export default
             {type: 'walk', direction: 'down'},
             {type: 'stand', direction: 'down'},
             {type: 'walk', direction: 'up'},
-        ]
+        ],
+        currentAction: 'pace'
     },{
         width: 16,
         height: 18,
@@ -35,7 +36,8 @@ export default
             {type: 'walk', direction: 'up'},
             {type: 'walk', direction: 'right'},
             {type: 'walk', direction: 'down'},
-        ]
+        ],
+        currentAction: 'pace'
     },{
         width: 16,
         height: 18,
@@ -51,5 +53,53 @@ export default
         },
         behaviorLoop: [
             {type: 'idle', direction: 'left'},
-        ]
+        ],
+        currentAction: 'idle'
     }]
+
+export const behaviorLoops = {
+  randomWalk: {
+      behaviorLoop: [
+        {type: 'walk', direction: 'left'},
+        {type: 'walk', direction: 'up'},
+        {type: 'walk', direction: 'right'},
+        {type: 'walk', direction: 'down'},
+      ],
+      next: [{
+        weight: 2,
+        id: 'pace'
+      },{
+        weight: 1,
+        id: 'idle'
+    }]
+  },
+  pace: {
+      duration: 120,
+      behaviorLoop: [
+        {type: 'stand', direction: 'down'},
+        {type: 'walk', direction: 'down', duration: 120},
+        {type: 'stand', direction: 'down'},
+        {type: 'walk', direction: 'up', duration:120},
+      ],
+      next: [{
+        weight: 2,
+        id: 'randomWalk'
+      },{
+        weight: 1,
+        id: 'idle'
+    }]
+  },
+  idle: {
+      duration: 60,
+      behaviorLoop: [
+        {type: 'idle', direction: 'left'},
+      ],
+      next: [{
+        weight: 2,
+        id: 'idle'
+      },{
+        weight: 2,
+        id: 'pace'
+    }]
+  },
+}
