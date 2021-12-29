@@ -1,14 +1,23 @@
 export const initialCharacterParams = [
-    {
-        width: 16,
-        height: 18,
-        imgSource : '/assets/monkey.png',
-        currentLocation: {
-          x: 800,
-          y: 600
-        },
-        currentAction: 'randomWalk'
-    }]
+  {
+    width: 16,
+    height: 18,
+    imgSource : '/assets/monkey.png',
+    currentLocation: {
+      x: 700,
+      y: 600
+    },
+    currentAction: 'randomWalk'
+  },{
+    width: 16,
+    height: 18,
+    imgSource : '/assets/penguin.png',
+    currentLocation: {
+      x: 900,
+      y: 700
+    },
+    currentAction: 'paceRight'
+  }]
 
 export const behaviorLoops = {
   randomWalk: {

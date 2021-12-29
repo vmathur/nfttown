@@ -36,7 +36,7 @@ export default function Board() {
 
             // draw world map
             Map(ctx);
-            // Grid(ctx, canvas);
+            Grid(ctx, canvas);
 
             //update objects
             for(let object of objects){

@@ -1,11 +1,11 @@
 export const initialObjectParams = [
     {
         width: 384,
-        height: 256,
+        height: 384,
         imgSource : '/assets/pond.png',
         currentLocation: {
           x: 0,
-          y: 12
+          y: 10
         }
     }]
 
