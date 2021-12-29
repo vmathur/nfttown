@@ -5,7 +5,10 @@ import { Map } from "./Map"
 import { tileMap } from "../data/tileConstants"
 import WallCollision from "../utils/WallCollision"
 import {initialCharacterParams} from "../data/characterData" 
+import {initialObjectParams} from "../data/objectData" 
+
 import  Character  from "./Character"
+import Object from "./Object"
 
 export default function Board() {
     const canvasRef = useRef(null);
@@ -17,6 +20,13 @@ export default function Board() {
         characters.push(character)
     }
 
+    //initialize objects
+    let objects = []
+    for(let data of initialObjectParams){
+        let object = new Object(data, tileMap.tsize)
+        objects.push(object)
+    }
+
     //didmount
     useEffect(()=>{
         const render = () => {
@@ -24,9 +34,14 @@ export default function Board() {
             const canvas = canvasRef.current;
             const ctx = canvas.getContext('2d');
 
-            //draw world map
+            // draw world map
             Map(ctx);
-            Grid(ctx, canvas);
+            // Grid(ctx, canvas);
+
+            //update objects
+            for(let object of objects){
+                object.draw(ctx)
+            }
 
             //update characters
             for(let character of characters){

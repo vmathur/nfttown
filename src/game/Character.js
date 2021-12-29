@@ -12,8 +12,8 @@ export default class Character {
 
         this.x = characterData.currentLocation.x;
         this.y = characterData.currentLocation.y;
-        this.dx = characterData.velocity.dx;
-        this.dy = characterData.velocity.dy;
+        this.dx = 0;
+        this.dy = 0;
 
         this.img = charImage;
         this.scale = scale;
@@ -22,14 +22,14 @@ export default class Character {
         this.tileSize = 64;
 
         this.movingProgressRemaining = 0;
-        this.currentAnimation = 'walk-down'
+        this.currentAnimation = 'idle'
         this.animations = {
-            'walk-down': [[0,0],[1,0],[0,0],[2,0]],
-            'walk-up': [[0,1],[1,1],[0,1],[2,1]],
-            'walk-left': [[0,2],[1,2],[0,2],[2,2]],
-            'walk-right': [[0,3],[1,3],[0,3],[2,3]],
             'stand': [[0,0]],
-            'idle': [[0,0]]
+            'idle': [[0,0],[1,0],[2,0],[3,0]],
+            'walk-left': [[0,1],[1,1],[2,1],[3,1]],
+            'walk-right': [[0,2],[1,2],[2,2],[3,2]],
+            'walk-down': [[0,3],[1,3],[2,3],[3,3]],
+            'walk-up': [[0,4],[1,4],[2,4],[3,4]],
         }
         this.currentAnimationFrame = 0;
         this.animationFrameLimit = 15;
@@ -39,7 +39,6 @@ export default class Character {
 
         this.id = null
         this.behaviorLoopIndex = -1;
-
     }
 
     get frame(){
@@ -96,8 +95,8 @@ export default class Character {
         let tempX = Math.floor(this.x/64)+1;
         let tempY = Math.floor(this.y/64)+1;
         let isCollision = objectLocations[(tempY-1) * 24 + (tempX-1)]
-        
-        //if there's a collision with a game object, then move on to the next 
+
+        // if there's a collision with a game object, then move on to the next 
         if(isCollision === 1){
             this.movingProgressRemaining = 0
             return
@@ -126,7 +125,7 @@ export default class Character {
                 this.setAnimation('walk-left')
             }
         }else if(behavior.type==='idle'){
-            this.setAnimation('walk-down')
+            this.setAnimation('idle')
         }
     }
 
