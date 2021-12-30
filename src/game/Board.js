@@ -1,4 +1,4 @@
-import React, {useRef, useEffect, useState} from 'react'
+import React, {useRef, useEffect} from 'react'
 
 import { Grid } from "./Grid"
 import { Map } from "./Map"
@@ -7,8 +7,12 @@ import WallCollision from "../utils/WallCollision"
 import {initialCharacterParams} from "../data/characterData" 
 import {initialObjectParams} from "../data/objectData" 
 
-import  Character  from "./Character"
+import Character  from "./Character"
 import Object from "./Object"
+import UpdateTimeOfDay from './TimeOfDay';
+import './Board.css';
+
+const checkIntervalMinutes = 5;
 
 export default function Board() {
     const canvasRef = useRef(null);
@@ -26,6 +30,10 @@ export default function Board() {
         let object = new Object(data, tileMap.tsize)
         objects.push(object)
     }
+    //didmount
+    useEffect(()=>{
+        checkTimeOfDay();
+    },[])
 
     //didmount
     useEffect(()=>{
@@ -36,7 +44,7 @@ export default function Board() {
 
             // draw world map
             Map(ctx);
-            Grid(ctx, canvas);
+            // Grid(ctx, canvas);
 
             //update objects
             for(let object of objects){
@@ -49,14 +57,20 @@ export default function Board() {
                 WallCollision(character, canvas);
                 character.draw(ctx)
             }
-
+            
             requestAnimationFrame(render)
         }
         render();
     },[])
 
+    function checkTimeOfDay(){
+        UpdateTimeOfDay()
+        setTimeout(checkTimeOfDay, checkIntervalMinutes*1000*60);
+    }
+
     return (
-        <div>
+        <div className='container'>
+            <div id="rectangle"></div>
             <canvas id="canvas" ref={canvasRef} height={tileMap.tsize*tileMap.rows +'px'} width={tileMap.tsize*tileMap.cols +'px'}/>
         </div>
     )
