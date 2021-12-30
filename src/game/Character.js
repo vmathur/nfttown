@@ -17,6 +17,7 @@ export default class Character {
 
         this.img = charImage;
         this.scale = scale;
+        // this.scale = 4
         this.width = characterData.width;
         this.height = characterData.height;
         this.tileSize = 64;
