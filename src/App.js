@@ -1,14 +1,13 @@
 import './App.css';
 import Board from './game/Board'
-
+import Dashboard from './dashboard/Main'
 
 function App() {
   return (
     <div className="App">
-      {/* <div><b>NFT Town</b></div> */}
       <Board/>
+      <Dashboard/>
     </div>
-
   );
 }
 
