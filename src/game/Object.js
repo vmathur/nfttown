@@ -5,7 +5,7 @@ export default class Object {
         this.image = image;
 
         this.currentAnimationFrame = 0;
-        this.totalAnimationFrames = 12;
+        this.totalAnimationFrames = objectData.totalAnimationFrames;
         this.animationFrameLimit = 15;
         this.animationFrameProgress = this.animationFrameLimit;
 

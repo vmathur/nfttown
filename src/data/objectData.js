@@ -6,7 +6,17 @@ export const initialObjectParams = [
         currentLocation: {
           x: 0,
           y: 10
-        }
+        },
+        totalAnimationFrames: 12
+    },{
+        width: 256,
+        height: 128,
+        imgSource : '/assets/welcome.png',
+        currentLocation: {
+            x: 10,
+            y: 0
+        },
+        totalAnimationFrames: 1
     }]
 
 export const clockTowerData =
