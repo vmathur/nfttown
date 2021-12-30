@@ -9,6 +9,17 @@ export const initialObjectParams = [
         }
     }]
 
+export const clockTowerData =
+{
+    width: 64,
+    height: 128,
+    imgSource : '/assets/clocktower.png',
+    currentLocation: {
+        x: 16,
+        y: 1
+    }
+}
+    
 
 export const objectLocations = [
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,

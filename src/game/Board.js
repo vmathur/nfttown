@@ -6,9 +6,11 @@ import { tileMap } from "../data/tileConstants"
 import WallCollision from "../utils/WallCollision"
 import {initialCharacterParams} from "../data/characterData" 
 import {initialObjectParams} from "../data/objectData" 
+import {clockTowerData} from "../data/objectData" 
 
 import Character  from "./Character"
 import Object from "./Object"
+import ClockTower from "./ClockTower"
 import UpdateTimeOfDay from './TimeOfDay';
 import './Board.css';
 
@@ -30,6 +32,9 @@ export default function Board() {
         let object = new Object(data, tileMap.tsize)
         objects.push(object)
     }
+    
+    let clockTower = new ClockTower(clockTowerData, tileMap.tsize)
+
     //didmount
     useEffect(()=>{
         checkTimeOfDay();
@@ -45,6 +50,7 @@ export default function Board() {
             // draw world map
             Map(ctx);
             // Grid(ctx, canvas);
+            clockTower.draw(ctx)
 
             //update objects
             for(let object of objects){
