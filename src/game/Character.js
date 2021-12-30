@@ -30,6 +30,11 @@ export default class Character {
             'walk-right': [[0,2],[1,2],[2,2],[3,2]],
             'walk-down': [[0,3],[1,3],[2,3],[3,3]],
             'walk-up': [[0,4],[1,4],[2,4],[3,4]],
+            'eat':[[0,5],[1,5],[2,5],[3,5]],
+            'getting-seated':[[0,6],[1,6],[2,6],[3,6]],
+            'sit':[[3,6]],
+            'getting-up':[[3,6],[2,6],[1,6],[0,6]],
+            'sleep':[[0,7],[1,7],[2,7],[3,7]]
         }
         this.currentAnimationFrame = 0;
         this.animationFrameLimit = 15;
@@ -79,7 +84,7 @@ export default class Character {
             }
     
             //todo check for collisions
-        }else if(behavior.type === 'stand' || behavior.type === 'idle'){
+        }else if(behavior.type === 'stand' || behavior.type === 'idle' || behavior.type === 'sleep' || behavior.type === 'eat' || behavior.type === 'getting-seated' || behavior.type === 'sit' || behavior.type === 'getting-up'){
             this.dx = 0;
             this.dy = 0;
         } 
@@ -126,8 +131,18 @@ export default class Character {
             }
         }else if(behavior.type==='idle'){
             this.setAnimation('idle')
+        }else if (behavior.type ==='eat'){
+            this.setAnimation('eat')
+        }else if(behavior.type === 'getting-seated'){
+            this.setAnimation('getting-seated')
+        }else if(behavior.type === 'getting-up'){
+            this.setAnimation('getting-up')
+        }else if(behavior.type === 'sit'){
+            this.setAnimation('sit')
+        }else if(behavior.type === 'sleep'){
+            this.setAnimation('sleep')
         }
-    }
+}
 
     setAnimation(key){
         if(this.currentAnimation !== key){

@@ -1,13 +1,13 @@
 export const initialCharacterParams = [
-  {
+{
     width: 16,
     height: 18,
     imgSource : '/assets/monkey.png',
     currentLocation: {
-      x: 700,
-      y: 600
+      x: 600,
+      y: 400
     },
-    currentAction: 'randomWalk'
+    currentAction: 'eat'
   },{
     width: 16,
     height: 18,
@@ -16,16 +16,18 @@ export const initialCharacterParams = [
       x: 900,
       y: 700
     },
-    currentAction: 'paceRight'
-  }]
+    currentAction: 'sleep'
+}]
+
+let fps = 60
 
 export const behaviorLoops = {
   randomWalk: {
       behaviorLoop: [
-        {type: 'walk', direction: 'left', duration: 60},
-        {type: 'walk', direction: 'up', duration: 60},
-        {type: 'walk', direction: 'right', duration: 60},
-        {type: 'walk', direction: 'down', duration: 60},
+        {type: 'walk', direction: 'left', duration: fps*1},
+        {type: 'walk', direction: 'up', duration: fps*1},
+        {type: 'walk', direction: 'right', duration: fps*1},
+        {type: 'walk', direction: 'down', duration: fps*1},
       ],
       next: [{
         weight: 1,
@@ -41,15 +43,21 @@ export const behaviorLoops = {
         id: 'paceLeft'
       },{
         weight: 1,
+        id: 'eat'
+      },{
+        weight: 1,
         id: 'idle'
+      },{
+        weight: 1,
+        id: 'sleep'       
       }]
   },
   paceLeft: {
       behaviorLoop: [
         {type: 'stand', direction: 'down'},
-        {type: 'walk', direction: 'left', duration: 120},
+        {type: 'walk', direction: 'left', duration: fps*2},
         {type: 'stand', direction: 'down'},
-        {type: 'walk', direction: 'right', duration:120},
+        {type: 'walk', direction: 'right', duration:fps*2},
       ],
       next: [{
         weight: 2,
@@ -68,9 +76,9 @@ export const behaviorLoops = {
   paceRight: {
       behaviorLoop: [
         {type: 'stand', direction: 'down'},
-        {type: 'walk', direction: 'right', duration: 120},
+        {type: 'walk', direction: 'right', duration: fps*2},
         {type: 'stand', direction: 'down'},
-        {type: 'walk', direction: 'left', duration:120},
+        {type: 'walk', direction: 'left', duration:fps*2},
       ],
       next: [{
         weight: 2,
@@ -89,9 +97,9 @@ export const behaviorLoops = {
   paceUp: {
     behaviorLoop: [
       {type: 'stand', direction: 'down'},
-      {type: 'walk', direction: 'up', duration: 120},
+      {type: 'walk', direction: 'up', duration: fps*2},
       {type: 'stand', direction: 'down'},
-      {type: 'walk', direction: 'down', duration:120},
+      {type: 'walk', direction: 'down', duration:fps*2},
     ],
     next: [{
       weight: 2,
@@ -102,14 +110,17 @@ export const behaviorLoops = {
     },{
       weight: 1,
       id: 'randomWalk'
+    },{
+      weight: 3,
+      id: 'idle'
     }]
   },
   paceDown: {
     behaviorLoop: [
       {type: 'stand', direction: 'down'},
-      {type: 'walk', direction: 'down', duration: 120},
+      {type: 'walk', direction: 'down', duration: fps*2},
       {type: 'stand', direction: 'down'},
-      {type: 'walk', direction: 'up', duration:120},
+      {type: 'walk', direction: 'up', duration:fps*2},
     ],
     next: [{
       weight: 2,
@@ -120,68 +131,72 @@ export const behaviorLoops = {
     },{
       weight: 1,
       id: 'randomWalk'
+    },{
+      weight: 3,
+      id: 'idle'
     }]
   },
   idle: {
       behaviorLoop: [
-        {type: 'idle', direction: 'down', duration: 240},
+        {type: 'idle', direction: 'down', duration: fps*4},
       ],
       next: [{
         weight: 1,
         id: 'idle'
       },{
-        weight: 2,
+        weight: 1,
+        id: 'sit'
+      },{
+        weight: 1,
         id: 'randomWalk'
       },{
         weight: 2,
-        id: 'paceLeft'
+        id: 'sleep'
       },{
         weight: 2,
-        id: 'paceRight'
+        id: 'eat'
       }]
   },
+  eat: {
+    behaviorLoop: [
+      {type: 'eat', direction: 'down', duration: fps*4},
+    ],
+    next: [{
+      weight: 1,
+      id: 'eat'
+    },{
+      weight: 1,
+      id: 'sleep'
+    },{
+      weight: 1,
+      id: 'randomWalk'
+    }]
+  },
+  sit: {
+    behaviorLoop: [
+      {type: 'getting-seated', direction: 'down', duration: fps*1},
+      {type: 'sit', direction: 'down', duration: fps*4}
+    ],
+    next: [{
+      weight: 1,
+      id: 'randomWalk'
+    }]
+  },
+  sleep: {
+    behaviorLoop: [
+      {type: 'getting-seated', direction: 'down', duration: fps*1},
+      {type: 'sleep', direction: 'down', duration: fps*8},
+      {type: 'getting-up', direction: 'down', duration: fps*1},
+    ],
+    next: [{
+      weight: 1,
+      id: 'sleep'
+    },{
+      weight: 2,
+      id: 'randomWalk'
+    },{
+      weight: 1,
+      id: 'eat'
+    }]
+  },
 }
-
-
-    // [{
-    //     width: 16,
-    //     height: 18,
-    //     imgSource : './assets/player1.png',
-    //     currentLocation: {
-    //         x: 200,
-    //         y: 300
-    //     },
-    //     velocity: {
-    //         dx: 3,
-    //         dy: 3
-    //     },
-    //     currentAction: 'paceRight'
-    // },{
-    //     width: 16,
-    //     height: 18,
-    //     imgSource : './assets/player2.png',
-    //     //imgSource : 'https://opengameart.org/sites/default/files/Green-Cap-Character-16x18.png',
-    //     currentLocation: {
-    //         x: 800,
-    //         y: 500
-    //     },
-    //     velocity: {
-    //         dx: -2,
-    //         dy: -3
-    //     },
-    //     currentAction: 'paceLeft'
-    // },{
-    //     width: 16,
-    //     height: 18,
-    //     imgSource : './assets/player2.png',
-    //     //imgSource : 'https://opengameart.org/sites/default/files/Green-Cap-Character-16x18.png',
-    //     currentLocation: {
-    //         x: 1000,
-    //         y: 800
-    //     },
-    //     velocity: {
-    //         dx: 0,
-    //         dy: 0
-    //     },
-    //     currentAction: 'randomWalk'
-    // },{
