@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './BananaCount.css'
 
 function BananaCount(props) {
     const maxBananas = props.characters.current[props.id].maxBananas;
@@ -10,7 +11,8 @@ function BananaCount(props) {
     function getLatestBananaCount(){
         let currentTime = new Date ()
         let timeElapsed = Math.floor((currentTime - lastReplenished)/1000)
-        let bananasRemaining = maxBananas-(timeElapsed*bananasEatRate)
+        let bananasEaten = Math.floor(timeElapsed*bananasEatRate)
+        let bananasRemaining = maxBananas-bananasEaten
         bananasRemaining = bananasRemaining > 0 ? bananasRemaining : 0
         return bananasRemaining
     }
@@ -33,9 +35,10 @@ function BananaCount(props) {
 
     return (
       <div className="banana-count">
-        <div><h1>{props.id}</h1></div>
-        <div><h2>Bananas remaining: {count}</h2></div>
-        <div><button onClick={replenishBananaSupply}>Refill</button></div>
+        <div className="banana-count-container">
+          <div className="count-section"><h2>{props.id}'s bananas: {count}</h2></div>
+          <div className="count-section"><button className="refill-button" onClick={replenishBananaSupply}>Refill</button></div>
+        </div>
       </div>
   
     );

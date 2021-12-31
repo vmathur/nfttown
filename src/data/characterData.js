@@ -1,8 +1,8 @@
 export const initialCharacterParams = [
 {
     id: 'monkey',
-    maxBananas: 300,
-    eatRate: 5,
+    maxBananas: 30,
+    eatRate: 0.25,
     width: 16,
     height: 18,
     imgSource : '/assets/monkey.png',
@@ -13,8 +13,8 @@ export const initialCharacterParams = [
     currentAction: 'eat'
   },{
     id: 'penguin',
-    maxBananas: 100,
-    eatRate: 20,
+    maxBananas: 10,
+    eatRate: 0.5,
       width: 16,
       height: 18,
       imgSource : '/assets/penguin.png',
@@ -169,7 +169,7 @@ export const behaviorLoops = {
     ],
     next: [{
       weight: 1,
-      id: 'eat'
+      id: 'idle'
     },{
       weight: 1,
       id: 'sleep'

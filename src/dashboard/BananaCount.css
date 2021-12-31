@@ -1,0 +1,15 @@
+.banana-count-container{
+    display: flex;
+}
+
+.count-section{
+    flex: 1;
+}
+
+.refill-button{
+    padding-right: 60px;
+    padding-left: 60px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 20px;
+}

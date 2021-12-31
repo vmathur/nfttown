@@ -8,6 +8,7 @@ function Main(props) {
     );
     return (
       <div className="banana-count">
+        <div><h1>Bananas left</h1></div>
         {allCounts}
       </div>
     );
