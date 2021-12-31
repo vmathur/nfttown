@@ -1,12 +1,24 @@
 import './App.css';
 import Board from './game/Board'
 import Dashboard from './dashboard/Main'
+import React, {useRef} from 'react'
+import {initialCharacterParams} from './data/characterData'
 
 function App() {
+  let characterData = {}
+  for (let character of initialCharacterParams){
+    characterData[character.id] = {
+      maxBananas: character.maxBananas, 
+      bananasRemaining: character.maxBananas, 
+      eatRate: character.eatRate
+    }
+  }
+  let characters = useRef(characterData)
+
   return (
     <div className="App">
-      <Board/>
-      <Dashboard/>
+      <Board characters={characters}/>
+      <Dashboard characters={characters}/>
     </div>
   );
 }

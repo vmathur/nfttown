@@ -16,7 +16,8 @@ import './Board.css';
 
 const checkIntervalMinutes = 5;
 
-export default function Board() {
+export default function Board(props) {
+    let characterBananas = props.characters
     const canvasRef = useRef(null);
 
     //initialize characters
@@ -49,7 +50,7 @@ export default function Board() {
 
             // draw world map
             Map(ctx);
-            // Grid(ctx, canvas);
+            //Grid(ctx, canvas);
             clockTower.draw(ctx)
 
             //update objects
@@ -59,7 +60,8 @@ export default function Board() {
 
             //update characters
             for(let character of characters){
-                character.update()
+                let bananasRemaining = characterBananas.current[character.getId()].bananasRemaining
+                character.update(bananasRemaining)
                 WallCollision(character, canvas);
                 character.draw(ctx)
             }

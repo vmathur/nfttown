@@ -27,3 +27,8 @@ export function getNextAction(currentAction){
         }
     }
 }
+
+export function getBehaviorLoop(currentAction){
+    let behaviorLoop = behaviorLoops[currentAction].behaviorLoop
+    return behaviorLoop
+}

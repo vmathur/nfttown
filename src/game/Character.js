@@ -1,4 +1,4 @@
-import {getNextAction} from './utils'
+import {getNextAction, getBehaviorLoop} from './utils'
 import {behaviorLoops} from '../data/characterData'
 import {objectLocations} from '../data/objectData'
 
@@ -43,7 +43,7 @@ export default class Character {
         this.currentAction = characterData.currentAction
         this.behaviorLoop = behaviorLoops[this.currentAction].behaviorLoop
 
-        this.id = null
+        this.id = characterData.id
         this.behaviorLoopIndex = -1;
     }
 
@@ -51,7 +51,14 @@ export default class Character {
         return this.animations[this.currentAnimation][this.currentAnimationFrame]
     }
 
-    update(){
+    getId(){
+        return this.id;
+    }
+
+    update(bananasRemaining){
+        //check if it's hungry
+        this.checkIfHungry(bananasRemaining)
+
         if(this.movingProgressRemaining > 0){
             this.updatePosition();            
         }else{
@@ -64,6 +71,24 @@ export default class Character {
             } 
             let behavior = this.behaviorLoop[this.behaviorLoopIndex]
             this.startBehavior(behavior)
+        }
+    }
+
+    checkIfHungry(bananasRemaining){
+        if(this.currentAction!== 'hungry'){
+            if(bananasRemaining < 20){
+                this.currentAction = 'hungry'
+                this.behaviorLoopIndex = -1;
+                this.movingProgressRemaining = 0;
+                this.behaviorLoop = getBehaviorLoop(this.currentAction)
+            }
+        }else{
+            if(bananasRemaining >= 20){
+                this.currentAction = 'eat'
+                this.behaviorLoopIndex = -1;
+                this.movingProgressRemaining = 0;
+                this.behaviorLoop = getBehaviorLoop(this.currentAction)
+            }
         }
     }
 
@@ -83,14 +108,11 @@ export default class Character {
                 this.dx = -2;
                 this.dy = 0;
             }
-    
-            //todo check for collisions
         }else if(behavior.type === 'stand' || behavior.type === 'idle' || behavior.type === 'sleep' || behavior.type === 'eat' || behavior.type === 'getting-seated' || behavior.type === 'sit' || behavior.type === 'getting-up'){
             this.dx = 0;
             this.dy = 0;
         } 
         this.movingProgressRemaining = behavior.duration ? behavior.duration : 60;
-        
         this.updateSprite(behavior);
     }
 

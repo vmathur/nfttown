@@ -1,5 +1,8 @@
 export const initialCharacterParams = [
 {
+    id: 'monkey',
+    maxBananas: 300,
+    eatRate: 5,
     width: 16,
     height: 18,
     imgSource : '/assets/monkey.png',
@@ -9,14 +12,17 @@ export const initialCharacterParams = [
     },
     currentAction: 'eat'
   },{
-    width: 16,
-    height: 18,
-    imgSource : '/assets/penguin.png',
-    currentLocation: {
-      x: 900,
-      y: 700
-    },
-    currentAction: 'sleep'
+    id: 'penguin',
+    maxBananas: 100,
+    eatRate: 20,
+      width: 16,
+      height: 18,
+      imgSource : '/assets/penguin.png',
+      currentLocation: {
+        x: 900,
+        y: 700
+      },
+      currentAction: 'sleep'
 }]
 
 let fps = 60
@@ -197,6 +203,15 @@ export const behaviorLoops = {
     },{
       weight: 1,
       id: 'eat'
+    }]
+  },
+  hungry: {
+    behaviorLoop: [
+      {type: 'sit', direction: 'down', duration: fps*1},
+    ],
+    next: [{
+      weight: 2,
+      id: 'hungry'
     }]
   },
 }
