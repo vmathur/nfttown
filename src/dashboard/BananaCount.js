@@ -39,6 +39,7 @@ function BananaCount(props) {
           <div className="count-section"><h2>{props.id}'s bananas: {count}</h2></div>
           <div className="count-section"><button className="refill-button" onClick={replenishBananaSupply}>Refill</button></div>
         </div>
+        <i>{count===0? 'Press refill to add more bananas':''}</i>
       </div>
   
     );
