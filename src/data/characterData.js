@@ -10,7 +10,8 @@ export const initialCharacterParams = [
       x: 600,
       y: 400
     },
-    currentAction: 'eat'
+    currentAction: 'eat',
+    hungerThreshold: 2
   },{
     id: 'penguin',
     maxBananas: 10,
@@ -22,7 +23,8 @@ export const initialCharacterParams = [
         x: 900,
         y: 700
       },
-      currentAction: 'sleep'
+      currentAction: 'sleep',
+      hungerThreshold: 2
 }]
 
 let fps = 60

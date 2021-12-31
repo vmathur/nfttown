@@ -45,6 +45,8 @@ export default class Character {
 
         this.id = characterData.id
         this.behaviorLoopIndex = -1;
+
+        this.hungerThreshold = characterData.hungerThreshold;
     }
 
     get frame(){
@@ -76,14 +78,14 @@ export default class Character {
 
     checkIfHungry(bananasRemaining){
         if(this.currentAction!== 'hungry'){
-            if(bananasRemaining < 20){
+            if(bananasRemaining < this.hungerThreshold){
                 this.currentAction = 'hungry'
                 this.behaviorLoopIndex = -1;
                 this.movingProgressRemaining = 0;
                 this.behaviorLoop = getBehaviorLoop(this.currentAction)
             }
         }else{
-            if(bananasRemaining >= 20){
+            if(bananasRemaining >= this.hungerThreshold){
                 this.currentAction = 'eat'
                 this.behaviorLoopIndex = -1;
                 this.movingProgressRemaining = 0;
