@@ -1,6 +1,7 @@
 import './App.css';
 import Board from './game/Board'
 import Dashboard from './dashboard/Main'
+import Music from './Music/Music'
 import React, {useRef} from 'react'
 import {initialCharacterParams} from './data/characterData'
 
@@ -19,6 +20,7 @@ function App() {
     <div className="App">
       <Board characters={characters}/>
       <Dashboard characters={characters}/>
+      <Music/>
     </div>
   );
 }
