@@ -1,11 +1,11 @@
 export const initialCharacterParams = [
 {
-    id: 'monkey',
+    id: 'monkey1',
     maxBananas: 30,
     eatRate: 0.25,
     width: 16,
     height: 18,
-    imgSource : '/assets/monkey.png',
+    imgSource : '/assets/monkey-orange.png',
     currentLocation: {
       x: 600,
       y: 400
@@ -13,19 +13,46 @@ export const initialCharacterParams = [
     currentAction: 'eat',
     hungerThreshold: 2
   },{
-    id: 'penguin',
+    id: 'penguin1',
     maxBananas: 10,
     eatRate: 0.5,
       width: 16,
       height: 18,
-      imgSource : '/assets/penguin.png',
+      imgSource : '/assets/penguin-blue.png',
       currentLocation: {
         x: 900,
         y: 700
       },
       currentAction: 'sleep',
       hungerThreshold: 2
-}]
+    },{
+      id: 'monkey2',
+      maxBananas: 100,
+      eatRate: 0.5,
+        width: 16,
+        height: 18,
+        imgSource : '/assets/monkey-red.png',
+        currentLocation: {
+          x: 900,
+          y: 400
+        },
+        currentAction: 'idleForever',
+        hungerThreshold: 2
+  },{
+    id: 'penguin2',
+    maxBananas: 100,
+    eatRate: 0.5,
+      width: 16,
+      height: 18,
+      imgSource : '/assets/penguin-purple.png',
+      currentLocation: {
+        x: 600,
+        y: 700
+      },
+      currentAction: 'idleForever',
+      hungerThreshold: 2
+  }
+]
 
 let fps = 60
 
@@ -214,6 +241,15 @@ export const behaviorLoops = {
     next: [{
       weight: 2,
       id: 'hungry'
+    }]
+  },
+  idleForever: {
+    behaviorLoop: [
+      {type: 'idle', direction: 'down', duration: fps*4},
+    ],
+    next: [{
+      weight: 1,
+      id: 'idleForever'
     }]
   },
 }
