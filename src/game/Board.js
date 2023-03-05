@@ -1,6 +1,6 @@
 import React, {useRef, useEffect} from 'react'
 
-import { Grid } from "./Grid"
+//import { Grid } from "./Grid"
 import { Map } from "./Map"
 import { tileMap } from "../data/tileConstants"
 import WallCollision from "../utils/WallCollision"
@@ -39,7 +39,7 @@ export default function Board(props) {
     //didmount
     useEffect(()=>{
         checkTimeOfDay();
-    },[])
+    })
 
     //didmount
     useEffect(()=>{
@@ -69,7 +69,7 @@ export default function Board(props) {
             requestAnimationFrame(render)
         }
         render();
-    },[])
+    })
 
     function checkTimeOfDay(){
         UpdateTimeOfDay()

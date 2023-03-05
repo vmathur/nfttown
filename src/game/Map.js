@@ -1,5 +1,4 @@
-import React, {useRef, useEffect} from 'react'
-import { tileMap, tileImage } from "../data/tileConstants"
+import { tileMap } from "../data/tileConstants"
 
 export function Map(ctx){
     let mapTiles = new MapTiles();

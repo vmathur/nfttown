@@ -6,7 +6,7 @@ import { Magic } from "magic-sdk";
 import { ConnectExtension } from "@magic-ext/connect";
 import {initialCharacterParams} from './data/characterData'
 import {abi} from "./contract/abi"
-import Character from './game/Character';
+//import Character from './game/Character';
 
 const Web3 = require('web3');
 

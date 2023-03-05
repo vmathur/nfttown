@@ -30,7 +30,8 @@ function BananaCount(props) {
         }, updateFrequency*1000);
     
         return () => clearInterval(intervalId);
-      }, [count]);
+      // }, [count]);
+    });
 
 
     return (
