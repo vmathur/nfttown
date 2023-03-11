@@ -5,7 +5,7 @@ function Dashboard({charactersRef}) {
     const allStats = charactersRef.current.map((data) => 
       <div>
         <CharacterStat id={data.tokenId} key={data.tokenId} stats={data}/>
-        <button>Feed</button> 
+        {/* <button>Feed</button>  */}
       </div>
     );
     //todo add magic integration
