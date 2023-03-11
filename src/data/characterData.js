@@ -1,58 +1,68 @@
-export const initialCharacterParams = [
-{
-    id: 'monkey1',
-    maxBananas: 30,
-    eatRate: 0.25,
+export const spriteData = {
+  //monkey
+  '0' : {
     width: 16,
     height: 18,
-    imgSource : '/assets/monkey-orange.png',
-    currentLocation: {
+    imgSource : '/assets/monkey-orange.png', //need to update this
+    currentAction: 'idle',
+  }, 
+  //penguin
+  '1' : {
+    width: 16,
+    height: 18,
+    imgSource : '/assets/penguin-blue.png',
+    currentAction: 'idle',
+  },
+  //dog
+  '2' : {
+    width: 16,
+    height: 18,
+    imgSource :  '/assets/monkey-red.png',
+    currentAction: 'idle',
+  },
+  //turtle
+  '3' : {
+    width: 16,
+    height: 18,
+    imgSource : '/assets/penguin-purple.png',
+    currentAction: 'idle',
+  }   
+}
+
+export const startingLocation = {
+  '0' : {
       x: 600,
       y: 400
-    },
-    currentAction: 'eat',
-    hungerThreshold: 2
-  },{
-    id: 'penguin1',
-    maxBananas: 10,
-    eatRate: 0.5,
+  }, 
+  '1' : {
+      x: 900,
+      y: 400
+  }, 
+  '2' : {
+      x: 600,
+      y: 700
+  }, 
+  '3' : {
+      x: 900,
+      y: 700
+  }, 
+}
+
+export const initialCharacterParams = [
+  {
+      id: 'monkey1',
+      maxBananas: 30,
+      eatRate: 0.25,
       width: 16,
       height: 18,
-      imgSource : '/assets/penguin-blue.png',
-      currentLocation: {
-        x: 900,
-        y: 700
-      },
-      currentAction: 'sleep',
-      hungerThreshold: 2
-    },{
-      id: 'monkey2',
-      maxBananas: 100,
-      eatRate: 0.5,
-        width: 16,
-        height: 18,
-        imgSource : '/assets/monkey-red.png',
-        currentLocation: {
-          x: 900,
-          y: 400
-        },
-        currentAction: 'idleForever',
-        hungerThreshold: 2
-  },{
-    id: 'penguin2',
-    maxBananas: 100,
-    eatRate: 0.5,
-      width: 16,
-      height: 18,
-      imgSource : '/assets/penguin-purple.png',
+      imgSource : '/assets/monkey-orange.png',
       currentLocation: {
         x: 600,
-        y: 700
+        y: 400
       },
-      currentAction: 'idleForever',
-      hungerThreshold: 2
-  }
-]
+      currentAction: 'eat',
+    }
+  ]
 
 let fps = 60
 

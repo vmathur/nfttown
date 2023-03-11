@@ -4,7 +4,6 @@ import React, {useRef, useEffect} from 'react'
 import { Map } from "./Map"
 import { tileMap } from "../data/tileConstants"
 import WallCollision from "../utils/WallCollision"
-import {initialCharacterParams} from "../data/characterData" 
 import {initialObjectParams} from "../data/objectData" 
 import {clockTowerData} from "../data/objectData" 
 
@@ -12,17 +11,17 @@ import Character  from "./Character"
 import Object from "./Object"
 import ClockTower from "./ClockTower"
 import UpdateTimeOfDay from './TimeOfDay';
+import { getHealthRemaining } from './utils'
 import './Board.css';
 
 const checkIntervalMinutes = 5;
 
-export default function Board(props) {
-    let characterBananas = props.characters
+export default function Board({charactersRef}) {
     const canvasRef = useRef(null);
 
     //initialize characters
     let characters = []
-    for(let data of initialCharacterParams){
+    for(let data of charactersRef.current){
         let character = new Character(data, tileMap.tsize)
         characters.push(character)
     }
@@ -60,8 +59,8 @@ export default function Board(props) {
 
             //update characters
             for(let character of characters){
-                let bananasRemaining = characterBananas.current[character.getId()].bananasRemaining
-                character.update(bananasRemaining)
+                let health = getHealthRemaining(character.lastFed, character.maxTime);
+                character.update(health)
                 WallCollision(character, canvas);
                 character.draw(ctx)
             }

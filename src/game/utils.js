@@ -1,6 +1,30 @@
 import {behaviorLoops} from "../data/characterData" 
  
 
+export function getHealthRemaining(lastFed, maxTime){
+    let elapsedTime = getElapsedTime(lastFed);
+    let hoursRemaining = Math.floor( (maxTime - elapsedTime)/3600) //todo turn this into a % of max possible health
+
+    let health = Math.floor(100*(hoursRemaining/(maxTime/3600)));
+    health = health > 0 ? health : 0;
+    
+    return health
+}
+
+function getElapsedTime(lastFedTime){
+    let lastFed = new Date(0);
+    lastFed.setUTCSeconds(lastFedTime);
+    let currentDateTime = new Date();
+    let elapsedTime = Math.floor((currentDateTime.getTime()-lastFed.getTime())/1000);
+    return elapsedTime;
+}
+
+export function utcToDate(elapsedTime){
+    var d = new Date(0);
+    d.setUTCSeconds(elapsedTime)
+    return d.toLocaleString()
+  }
+  
 export function WallCollision(charObject, canvas){
     if(charObject.y - charObject.rad <= 0 || charObject.y + charObject.rad >= canvas.height){
         charObject.dy *=-1

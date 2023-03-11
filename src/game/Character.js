@@ -46,7 +46,9 @@ export default class Character {
         this.id = characterData.id
         this.behaviorLoopIndex = -1;
 
-        this.hungerThreshold = characterData.hungerThreshold;
+        this.lastFed = characterData.lastFed;
+        this.maxTime = characterData.maxTime;
+        this.hungerThreshold = 10; //set to 10 for all 
     }
 
     get frame(){
@@ -57,9 +59,9 @@ export default class Character {
         return this.id;
     }
 
-    update(bananasRemaining){
+    update(health){
         //check if it's hungry
-        this.checkIfHungry(bananasRemaining)
+        this.checkIfHungry(health)
 
         if(this.movingProgressRemaining > 0){
             this.updatePosition();            
@@ -76,16 +78,16 @@ export default class Character {
         }
     }
 
-    checkIfHungry(bananasRemaining){
+    checkIfHungry(health){
         if(this.currentAction!== 'hungry'){
-            if(bananasRemaining < this.hungerThreshold){
+            if(health < this.hungerThreshold){
                 this.currentAction = 'hungry'
                 this.behaviorLoopIndex = -1;
                 this.movingProgressRemaining = 0;
                 this.behaviorLoop = getBehaviorLoop(this.currentAction)
             }
         }else{
-            if(bananasRemaining >= this.hungerThreshold){
+            if(health >= this.hungerThreshold){
                 this.currentAction = 'eat'
                 this.behaviorLoopIndex = -1;
                 this.movingProgressRemaining = 0;
