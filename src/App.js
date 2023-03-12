@@ -98,9 +98,9 @@ function App() {
 
   return (
     <div className="App">
+      <Header account={account} setAccount={setAccount} getOwnedCitizens={getOwnedCitizens} setOwnedCitizens={setOwnedCitizens}/>
       {isUpdating? 'Loading ... ': ''}
       { getCitizenDone ? <Board charactersRef={characters}/>: 'loading'}
-      <Header account={account} setAccount={setAccount} getOwnedCitizens={getOwnedCitizens} setOwnedCitizens={setOwnedCitizens}/>
       <Dashboard charactersRef={characters} account={account} ownedCitizens={ownedCitizens} mint={mint} clean={clean} feed={feed}/>
     </div>
   );

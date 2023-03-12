@@ -77,7 +77,7 @@ export default function Board({charactersRef}) {
 
     return (
         <div className='container'>
-            <div id="rectangle"></div>
+            <div id="rectangle" height={tileMap.tsize*tileMap.rows +'px'} width={tileMap.tsize*tileMap.cols +'px'}></div>
             <canvas id="canvas" ref={canvasRef} height={tileMap.tsize*tileMap.rows +'px'} width={tileMap.tsize*tileMap.cols +'px'}/>
         </div>
     )

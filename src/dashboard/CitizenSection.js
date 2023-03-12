@@ -21,7 +21,7 @@ function CitizenSection(props) {
 
         {isOwner ? <div><i>*you own this citizen</i></div>: ''}
         {isOwner && !canClean ? <button className="feed-button button-primary"onClick={(e)=>props.feed(tokenId)}>Feed</button> : ''}
-        {canClean? <button className="feed-button button-secondary" onClick={(e)=>props.clean(tokenId)}>Remove</button> : ''}
+        {props.account && canClean? <button className="feed-button button-secondary" onClick={(e)=>props.clean(tokenId)}>Remove</button> : ''}
       </div>
     );
   }

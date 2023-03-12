@@ -13,7 +13,8 @@ function Dashboard({charactersRef, account, ownedCitizens, mint, clean, feed}) {
         <div>
           <CitizenSection 
             id={citizen.tokenId} 
-            key={citizen.tokenId} 
+            key={citizen.tokenId}
+            account={account} 
             stats={citizen}
             isOwner={isOwner}
             canClean={canClean}

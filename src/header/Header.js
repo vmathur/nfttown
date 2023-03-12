@@ -29,9 +29,9 @@ function Header({account, setAccount, getOwnedCitizens, setOwnedCitizens}) {
     }
   
     return (
-      <div>
+      <div className="header-container">
         {!account? 
-          <button className="connect-button button-primary" onClick={handleLogin}>Login</button> : 
+          <div><button className="connect-button button-primary" onClick={handleLogin}>Login</button></div> : 
           <div>
             <button className="view-account-button button-secondary" onClick={showWallet}>View account</button>
             <button className="logout-button button-secondary" onClick={handleLogout}>Logout</button>
