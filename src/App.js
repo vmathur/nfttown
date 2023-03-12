@@ -108,10 +108,8 @@ function App() {
 
 export default App;
 
-// todo
+// todo:
 // styling
-// use isUpdating
-// remove store/slices
 // get real assets for dog and turtle
 // make assets for all colors
 // figure out mobile and resizing
