@@ -42,3 +42,26 @@
 #canvas{
   background-color: grey;
 }
+
+.button-primary{
+  background-color: #cc7af5;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  padding: 7px;
+  text-align: center;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;  
+}
+
+.button-secondary{
+  border-radius: 5px;
+  border: none;
+  color: gray;
+  padding: 7px;
+  text-align: center;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;  
+}
