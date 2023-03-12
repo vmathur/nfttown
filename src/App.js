@@ -18,6 +18,7 @@ const contractAddress ='0x4F2200E53F90fDFd1E2ebcD05A221596bc545897'
 function App() {
   const [citizens, setCitizens] = useState([]);
   const [ownedCitizens, setOwnedCitizens] = useState([]);
+  const [selectedCitizen, setSelectedCitizen] = useState([]);
   const [isUpdating, setIsUpdating] = useState(false);
   const [getCitizenDone, setGetCitizenDone] = useState(false)
   const [account, setAccount] = useState(localStorage.getItem('user'));
@@ -100,8 +101,8 @@ function App() {
     <div className="App">
       <Header account={account} setAccount={setAccount} getOwnedCitizens={getOwnedCitizens} setOwnedCitizens={setOwnedCitizens}/>
       {isUpdating? 'Loading ... ': ''}
-      { getCitizenDone ? <Board charactersRef={characters}/>: 'loading'}
-      <Dashboard charactersRef={characters} account={account} ownedCitizens={ownedCitizens} mint={mint} clean={clean} feed={feed}/>
+      { getCitizenDone ? <Board charactersRef={characters} setSelectedCitizen={setSelectedCitizen}/>: 'loading'}
+      <Dashboard charactersRef={characters} account={account} ownedCitizens={ownedCitizens} selectedCitizen={selectedCitizen} mint={mint} clean={clean} feed={feed}/>
     </div>
   );
 }
@@ -109,11 +110,11 @@ function App() {
 export default App;
 
 // todo:
-// selected UI
-// get real assets for dog and turtle
-// make assets for all colors
-// figure out mobile and resizing
+// add animal assets to dash
+// add to polygon
+// get real assets for dog and turtle + all colors
 
-// dao element
+// figure out how to scale tile sizes
+// dao
 // new animations
 // animation optimization

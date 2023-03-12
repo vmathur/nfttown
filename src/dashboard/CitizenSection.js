@@ -4,6 +4,7 @@ import { getHealthRemaining, utcToDate } from '../game/utils';
 
 function CitizenSection(props) {
     let tokenId = props.stats.tokenId;
+    let selected = props.selected;
     let health = getHealthRemaining(props.stats.lastFed, props.stats.maxTime)
     let animalId = props.stats.animalId
     let isOwner = props.isOwner
@@ -14,7 +15,7 @@ function CitizenSection(props) {
 
     return (
       <div>
-        <div className="citizen-section">
+        <div className={"citizen-section " + (selected?'selected':'')}>
           <div className="citizen-section-item">ID: {tokenId}</div>
           <div className="citizen-section-item">{animalMapping[animalId]}</div>
           <div className="citizen-section-item">{health}% health</div>

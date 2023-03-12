@@ -23,7 +23,7 @@ export function utcToDate(elapsedTime){
     var d = new Date(0);
     d.setUTCSeconds(elapsedTime)
     return d.toLocaleString()
-  }
+}
   
 export function WallCollision(charObject, canvas){
     if(charObject.y - charObject.rad <= 0 || charObject.y + charObject.rad >= canvas.height){

@@ -16,9 +16,8 @@ import './Board.css';
 
 const checkIntervalMinutes = 5;
 
-export default function Board({charactersRef}) {
+export default function Board({charactersRef, setSelectedCitizen}) {
     const canvasRef = useRef(null);
-
     //initialize characters
     let characters = []
     for(let data of charactersRef.current){
@@ -34,6 +33,26 @@ export default function Board({charactersRef}) {
     }
     
     let clockTower = new ClockTower(clockTowerData, tileMap.tsize)
+
+    //click handler
+    const canvasClickHandler=(event)=>{
+        let rect = canvasRef.current.getBoundingClientRect();
+        const x = Math.floor(event.clientX-rect.left)
+        const y = Math.floor(event.clientY-rect.top)
+        let citizenId = getClickedCitizen(x,y)
+        console.log(citizenId)
+        setSelectedCitizen(citizenId)
+    }
+
+    function getClickedCitizen(x,y){
+        let offset=50
+        for(const character of characters){
+            if((x>=character.x-offset&&x<=character.x+offset)&&(y>=character.y-offset&&y<=character.y+offset)){
+                return character.id
+            }
+        }
+        return ''
+    }
 
     //didmount
     useEffect(()=>{
@@ -77,8 +96,8 @@ export default function Board({charactersRef}) {
 
     return (
         <div className='container'>
-            <div id="rectangle" height={tileMap.tsize*tileMap.rows +'px'} width={tileMap.tsize*tileMap.cols +'px'}></div>
-            <canvas id="canvas" ref={canvasRef} height={tileMap.tsize*tileMap.rows +'px'} width={tileMap.tsize*tileMap.cols +'px'}/>
+            <div id="rectangle" height={tileMap.tsize*tileMap.rows +'px'} width={tileMap.tsize*tileMap.cols +'px'} ></div>
+            <canvas id="canvas" ref={canvasRef} height={tileMap.tsize*tileMap.rows +'px'} width={tileMap.tsize*tileMap.cols +'px'} onClick={canvasClickHandler}/>
         </div>
     )
 }

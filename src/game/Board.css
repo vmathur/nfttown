@@ -1,7 +1,16 @@
+@media screen and (max-width: 1000px) {
+  .container  {
+    visibility: hidden;
+    display: none;
+  }
+}
+
+
 .container {
     position: relative;
-  }
-  .canvas, #rectangle {
+}
+
+.canvas, #rectangle {
     position: absolute;
     background-color: darkblue;
     opacity: 0.6;
@@ -9,6 +18,7 @@
     width: 1536px;
     left: calc((100vw - 1536px)/2);
     border-radius: 50px;
+    pointer-events: none;
   }
   canvas {
     border: 5px solid green;

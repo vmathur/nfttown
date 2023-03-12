@@ -3,17 +3,18 @@ import './Dashboard.css';
 import CitizenSection from './CitizenSection';
 import { getHealthRemaining } from '../game/utils';
 
-function Dashboard({charactersRef, account, ownedCitizens, mint, clean, feed}) {
-
+function Dashboard({charactersRef, account, ownedCitizens, selectedCitizen, mint, clean, feed}) {
     const allSections = charactersRef.current.map((citizen) => {
       let canClean = getHealthRemaining( parseInt(citizen.lastFed), parseInt(citizen.maxTime)) === 0 ? true : false;
       let isOwner = ownedCitizens.includes(citizen.tokenId);
+      let selected = citizen.tokenId===String(selectedCitizen)?true:false
   
       return (
         <div>
           <CitizenSection 
             id={citizen.tokenId} 
             key={citizen.tokenId}
+            selected={selected}
             account={account} 
             stats={citizen}
             isOwner={isOwner}

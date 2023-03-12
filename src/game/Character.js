@@ -43,7 +43,7 @@ export default class Character {
         this.currentAction = characterData.currentAction
         this.behaviorLoop = behaviorLoops[this.currentAction].behaviorLoop
 
-        this.id = characterData.id
+        this.id = characterData.tokenId
         this.behaviorLoopIndex = -1;
 
         this.lastFed = characterData.lastFed;

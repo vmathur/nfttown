@@ -1,13 +1,33 @@
-.citizen-section{
-    padding-top: 20px;
-    padding-bottom: 10px;
-    background-color: aliceblue;
-    width: 1536px;
-    border-radius: 20px;
-    margin: 20px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+@media screen and (max-width: 1000px) {
+    .citizen-section{
+        padding-top: 20px;
+        padding-bottom: 10px;
+        background-color: aliceblue;
+        width: 100%;
+        border-radius: 20px;
+        margin: 20px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .citizen-section{
+        padding-top: 20px;
+        padding-bottom: 10px;
+        background-color: aliceblue;
+        width: 1536px;
+        border-radius: 20px;
+        margin: 20px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }    
+}
+  
+.selected{
+    border: 3px solid#a4d4ff;
 }
 
 .citizen-section-item{
