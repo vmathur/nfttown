@@ -1,3 +1,19 @@
 .citizen-section{
-    padding: 10px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    background-color: aliceblue;
+    width: 1536px;
+    border-radius: 20px;
+    margin: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.citizen-section-item{
+    margin-left:20px;
+}
+
+.feedby{
+    color:gray
 }

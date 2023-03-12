@@ -109,10 +109,11 @@ function App() {
 export default App;
 
 // todo:
-// styling
+// selected UI
 // get real assets for dog and turtle
 // make assets for all colors
 // figure out mobile and resizing
+
 // dao element
 // new animations
 // animation optimization

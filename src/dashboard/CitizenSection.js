@@ -13,15 +13,15 @@ function CitizenSection(props) {
 
 
     return (
-      <div className="citizen-section">
-        <div><b>ID:</b> {tokenId}</div>
-        <div><b>animal:</b> {animalMapping[animalId]}</div>
-        <div><b>health: </b>{health}%</div>
-        <div><b>Feed by: </b>{feedByDate}</div>
-
-        {isOwner ? <div><i>*you own this citizen</i></div>: ''}
-        {isOwner && !canClean ? <button className="feed-button button-primary"onClick={(e)=>props.feed(tokenId)}>Feed</button> : ''}
-        {props.account && canClean? <button className="feed-button button-secondary" onClick={(e)=>props.clean(tokenId)}>Remove</button> : ''}
+      <div>
+        <div className="citizen-section">
+          <div className="citizen-section-item">ID: {tokenId}</div>
+          <div className="citizen-section-item">{animalMapping[animalId]}</div>
+          <div className="citizen-section-item">{health}% health</div>
+          {isOwner && !canClean ? <div className="citizen-section-item"><button className="feed-button button-primary"onClick={(e)=>props.feed(tokenId)}>Feed</button></div> : ''}
+          {props.account && canClean? <div className="citizen-section-item"><button className="feed-button button-secondary" onClick={(e)=>props.clean(tokenId)}>Remove</button></div> : ''}
+        </div>
+        {isOwner ? <div className="citizen-section-item feedby"><i>Feed by {feedByDate}</i></div> : ''}
       </div>
     );
   }
