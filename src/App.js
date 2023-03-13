@@ -111,9 +111,8 @@ export default App;
 
 // todo:
 // get real assets for dog and turtle + all colors
+
 // add to polygon
-
-
 // figure out how to scale tile sizes
 // dao
 // new animations

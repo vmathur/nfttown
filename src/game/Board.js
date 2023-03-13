@@ -40,7 +40,6 @@ export default function Board({charactersRef, setSelectedCitizen}) {
         const x = Math.floor(event.clientX-rect.left)
         const y = Math.floor(event.clientY-rect.top)
         let citizenId = getClickedCitizen(x,y)
-        console.log(citizenId)
         setSelectedCitizen(citizenId)
     }
 

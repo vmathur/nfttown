@@ -9,16 +9,14 @@ function CitizenSection(props) {
     let isOwner = props.isOwner
     let canClean = props.canClean
     // let feedByDate = utcToDate(parseInt(props.stats.lastFed)+parseInt(props.stats.maxTime))
-    let color = props.stats.color;
     let age = getAge(props.stats.birthDate);
     let img = props.stats.imgSource;
-    console.log(color)
-    console.log(age)
+
     return (
       <div>
         <div className={"citizen-section " + (selected?'selected':'')}>
           <div className="citizen-section-image" alt="" style={{backgroundImage: "url("+img}}/>
-          <div className="citizen-section-item">Age: {age > 0 ? age : 'New born'}</div>
+          <div className="citizen-section-item">Age: {age > 1 ? age + ' hours' : 'New born'}</div>
           <div className="citizen-section-item">{health}% health</div>
           {isOwner && !canClean ? <div className="citizen-section-item"><button className="feed-button button-primary"onClick={(e)=>props.feed(tokenId)}>Feed</button></div> : ''}
           {props.account && canClean? <div className="citizen-section-item"><button className="feed-button button-secondary" onClick={(e)=>props.clean(tokenId)}>Remove</button></div> : ''}

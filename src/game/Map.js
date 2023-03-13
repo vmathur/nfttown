@@ -13,8 +13,9 @@ export function Map(ctx){
 
     house1.draw(ctx, 2,1, 128,128)
     house2.draw(ctx, 5,1, 128,128)
-    house3.draw(ctx, 15,13, 128,128)
-    house4.draw(ctx, 18,13, 128,128)
+    house3.draw(ctx, 15,12, 128,128) //house3.draw(ctx, 15,13, 128,128)
+    house4.draw(ctx, 18,12, 128,128) //house4.draw(ctx, 18,13, 128,128)
+
 
     let townhall = new MapObjects('./assets/townhall.png');
     townhall.draw(ctx, 18, 0, 320,192)

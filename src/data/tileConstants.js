@@ -37,7 +37,7 @@ let tileLayers = [
 
 export const tileMap = {
   cols: 24,
-  rows: 16,
+  rows: 14, //16
   tsize: 64,
   tiles: tileLayers,
   getTile: function(layer, col, row) {
