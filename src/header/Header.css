@@ -2,6 +2,16 @@
     /* background-color: gainsboro; */
 }
 
-.connect-button{
-    font-size: large;
+@media screen and (max-width: 1000px) {
+    .connect-button{
+        font-size: large;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .connect-button{
+        font-size: large;
+        position: relative;
+        left:calc(1426px/2);
+    }
 }
