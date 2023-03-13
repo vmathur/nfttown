@@ -31,10 +31,10 @@ function Header({account, setAccount, getOwnedCitizens, setOwnedCitizens}) {
     return (
       <div className="header-container">
         {!account? 
-          <div><button className="connect-button button-primary" onClick={handleLogin}>Login</button></div> : 
+          <div><button className="connect-button button-primary" onClick={handleLogin}>Connect</button></div> : 
           <div>
             <button className="view-account-button button-secondary" onClick={showWallet}>View account</button>
-            <button className="logout-button button-secondary" onClick={handleLogout}>Logout</button>
+            <button className="disconnect-button button-secondary" onClick={handleLogout}>Disconnect</button>
           </div>}
       </div>
     );

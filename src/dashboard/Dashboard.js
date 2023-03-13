@@ -29,7 +29,7 @@ function Dashboard({charactersRef, account, ownedCitizens, selectedCitizen, mint
       <div className="citizen-container">
         {!account && charactersRef.current.length<4 ? <div className="login-message"><i>Login to mint and feed</i></div> : ''}
         <div className="citien-section-container">{allSections}</div>
-        {account && charactersRef.current.length<4 ? <button onClick={mint} className="mint-button button-secondary">Mint new NFTZen</button> : ''}
+        {account && charactersRef.current.length<4 ? <button onClick={mint} className="mint-button button-secondary">Mint new citizen</button> : ''}
       </div>
     );
   }

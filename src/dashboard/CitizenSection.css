@@ -1,11 +1,11 @@
 @media screen and (max-width: 1000px) {
     .citizen-section{
         padding-top: 20px;
-        padding-bottom: 10px;
+        padding-bottom: 20px;
         background-color: aliceblue;
         width: 100%;
         border-radius: 20px;
-        margin: 20px;
+        margin-bottom: 20px;
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
@@ -15,7 +15,7 @@
 @media screen and (min-width: 1000px) {
     .citizen-section{
         padding-top: 20px;
-        padding-bottom: 10px;
+        padding-bottom: 20px;
         background-color: aliceblue;
         width: 1536px;
         border-radius: 20px;

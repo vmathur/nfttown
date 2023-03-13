@@ -6,6 +6,14 @@
     .connect-button{
         font-size: large;
     }
+
+    .view-account-button{
+        font-size: large;
+    }
+
+    .disconnect-button{
+        font-size: large;
+    }
 }
 
 @media screen and (min-width: 1000px) {
@@ -13,5 +21,17 @@
         font-size: large;
         position: relative;
         left:calc(1426px/2);
+    }
+
+    .view-account-button{
+        font-size: large;
+        position: relative;
+        left:calc(1326px/2);
+    }
+
+    .disconnect-button{
+        font-size: large;
+        position: relative;
+        left:calc(1326px/2);
     }
 }
