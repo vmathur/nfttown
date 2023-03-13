@@ -11,13 +11,13 @@ function CitizenSection(props) {
     let canClean = props.canClean
     let animalMapping = ['monkey', 'penguin', 'dog', 'turtle']
     let feedByDate = utcToDate(parseInt(props.stats.lastFed)+parseInt(props.stats.maxTime))
-
-
+    let img = props.stats.imgSource;
+    console.log(img)
     return (
       <div>
         <div className={"citizen-section " + (selected?'selected':'')}>
+          <div className="citizen-section-image" alt="" style={{backgroundImage: "url("+img}}/>
           <div className="citizen-section-item">ID: {tokenId}</div>
-          <div className="citizen-section-item">{animalMapping[animalId]}</div>
           <div className="citizen-section-item">{health}% health</div>
           {isOwner && !canClean ? <div className="citizen-section-item"><button className="feed-button button-primary"onClick={(e)=>props.feed(tokenId)}>Feed</button></div> : ''}
           {props.account && canClean? <div className="citizen-section-item"><button className="feed-button button-secondary" onClick={(e)=>props.clean(tokenId)}>Remove</button></div> : ''}

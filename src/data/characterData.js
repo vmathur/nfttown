@@ -3,28 +3,28 @@ export const spriteData = {
   '0' : {
     width: 16,
     height: 18,
-    imgSource : '/assets/monkey-orange.png', //need to update this
+    imgSource : '/assets/monkey-orange.gif', //need to update this
     currentAction: 'idle',
   }, 
   //penguin
   '1' : {
     width: 16,
     height: 18,
-    imgSource : '/assets/penguin-blue.png',
+    imgSource : '/assets/penguin-blue.gif',
     currentAction: 'idle',
   },
   //dog
   '2' : {
     width: 16,
     height: 18,
-    imgSource :  '/assets/monkey-red.png',
+    imgSource :  '/assets/monkey-red.gif',
     currentAction: 'idle',
   },
   //turtle
   '3' : {
     width: 16,
     height: 18,
-    imgSource : '/assets/penguin-purple.png',
+    imgSource : '/assets/penguin-purple.gif',
     currentAction: 'idle',
   }   
 }

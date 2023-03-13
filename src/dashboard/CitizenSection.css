@@ -25,6 +25,12 @@
         justify-content: space-evenly;
     }    
 }
+
+.citizen-section-image {
+  width: 16px;
+  height: 18px;
+  transform: scale(2.5,2.5);
+}
   
 .selected{
     border: 3px solid#a4d4ff;

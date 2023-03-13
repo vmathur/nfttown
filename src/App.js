@@ -110,9 +110,9 @@ function App() {
 export default App;
 
 // todo:
-// add animal assets to dash
 // add to polygon
 // get real assets for dog and turtle + all colors
+// add age on chain
 
 // figure out how to scale tile sizes
 // dao
