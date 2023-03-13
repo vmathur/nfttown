@@ -3,12 +3,17 @@ import {behaviorLoops} from "../data/characterData"
 
 export function getHealthRemaining(lastFed, maxTime){
     let elapsedTime = getElapsedTime(lastFed);
-    let hoursRemaining = Math.floor( (maxTime - elapsedTime)/3600) //todo turn this into a % of max possible health
+    let hoursRemaining = Math.floor( (maxTime - elapsedTime)/3600)
 
     let health = Math.floor(100*(hoursRemaining/(maxTime/3600)));
     health = health > 0 ? health : 0;
     
     return health
+}
+
+export function getAge(birthDate){
+    let elapsedHours = Math.floor(getElapsedTime(birthDate)/(60*60));
+    return elapsedHours
 }
 
 function getElapsedTime(lastFedTime){

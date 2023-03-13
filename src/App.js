@@ -13,7 +13,7 @@ const magic = new Magic("pk_live_1028C005B37C96E7", {
   network: "goerli",
 });
 const web3 = new Web3(magic.rpcProvider);
-const contractAddress ='0x4F2200E53F90fDFd1E2ebcD05A221596bc545897'
+const contractAddress ='0xdd8245b6394f31159c5d22a0e2526ab87838b5c9'
 
 function App() {
   const [citizens, setCitizens] = useState([]);
@@ -22,18 +22,18 @@ function App() {
   const [isUpdating, setIsUpdating] = useState(false);
   const [getCitizenDone, setGetCitizenDone] = useState(false)
   const [account, setAccount] = useState(localStorage.getItem('user'));
-
   let characterData3 = []
   for (const [i, citizen] of citizens.entries()){
     if(i>=4){break} //can only render 4 NFTs right now
     let spriteMap = spriteData[String(citizen.animal)];
     let currentLocation = startingLocation[String(i)]
-
     characterData3.push({
       animalId: citizen.animal,
       tokenId: citizen.tokenId,
       lastFed: citizen.lastFed,
       maxTime: citizen.maxTime,
+      color: citizen.color,
+      birthDate: citizen.birthDate,
       width: spriteMap.width,
       height: spriteMap.height,
       imgSource : spriteMap.imgSource,
@@ -110,9 +110,9 @@ function App() {
 export default App;
 
 // todo:
-// add to polygon
 // get real assets for dog and turtle + all colors
-// add age on chain
+// add to polygon
+
 
 // figure out how to scale tile sizes
 // dao
