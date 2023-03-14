@@ -11,7 +11,7 @@ export function getHealthRemaining(lastFed, maxTime){
     return health
 }
 
-export function getAge(birthDate){
+export function getAgeInHours(birthDate){
     let elapsedHours = Math.floor(getElapsedTime(birthDate)/(60*60));
     return elapsedHours
 }
