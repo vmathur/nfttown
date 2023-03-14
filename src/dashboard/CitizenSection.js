@@ -13,6 +13,15 @@ function CitizenSection(props) {
     let ageInHours = getAgeInHours(props.stats.birthDate);
     let img = props.stats.imgSource;
     let ageLabel = ''
+    let bgColor = ''
+
+    if(health > 60){
+      bgColor = 'PaleGreen'
+    }else if (health<=60 && health > 20){
+      bgColor = 'SandyBrown'
+    }else{
+      bgColor = 'LightCoral'
+    }
 
     if(ageInHours >= 48){
       ageLabel =  Math.floor(ageInHours/24) + ' days old'
@@ -30,8 +39,9 @@ function CitizenSection(props) {
           <ProgressBar 
             className="citizen-section-health" 
             completed={health} 
-            bgColor={'lightgreen'}
-            labelAlignment={'center'}
+            bgColor={bgColor}
+            isLabelVisible={false}
+            // labelAlignment={'center'}
             />
           {isOwner && !canClean ? <div className="citizen-section-item"><button className="feed-button button-primary"onClick={(e)=>props.feed(tokenId)}>Feed</button></div> : ''}
           {props.account && canClean? <div className="citizen-section-item"><button className="feed-button button-secondary" onClick={(e)=>props.clean(tokenId)}>Remove</button></div> : ''}
