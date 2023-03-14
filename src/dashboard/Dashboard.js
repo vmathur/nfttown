@@ -27,7 +27,7 @@ function Dashboard({charactersRef, account, ownedCitizens, selectedCitizen, mint
 
     return (
       <div className="citizen-container">
-        {!account && charactersRef.current.length<4 ? <div className="login-message"><i>Login to mint and feed</i></div> : ''}
+        {!account && charactersRef.current.length<4 ? <div className="login-message"><i>Connect walelt to mint and feed</i></div> : ''}
         <div className="citien-section-container">{allSections}</div>
         {account && charactersRef.current.length<4 ? <button onClick={mint} className="mint-button button-secondary">Mint new citizen</button> : ''}
       </div>
