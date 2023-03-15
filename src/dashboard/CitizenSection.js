@@ -31,6 +31,10 @@ function CitizenSection(props) {
       ageLabel = 'New born'
     }
 
+    if(health<=0){
+      ageLabel = 'Left NFT Town'
+    }
+
     return (
       <div>
         <div className={"citizen-section " + (selected?'selected':'')}>
