@@ -32,8 +32,10 @@ function CitizenSection(props) {
     }
 
     if(health<=0){
-      ageLabel = 'Left NFT Town'
+      ageLabel = 'Departed NFT Town'
     }
+
+
 
     return (
       <div>
