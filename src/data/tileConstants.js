@@ -40,6 +40,7 @@ export const tileMap = {
   rows: 14, //16
   tsize: 64,
   tiles: tileLayers,
+  sourceTileHeight: 64,
   getTile: function(layer, col, row) {
     return this.tiles[layer][row * tileMap.cols + col]
   }

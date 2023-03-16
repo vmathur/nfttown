@@ -7,20 +7,20 @@ export default class Character {
 
         let charImage = new Image();   // Create new img element
         charImage.src = characterData.imgSource
+        
+        this.tileSize = tileSize;
+        let scale = Math.floor(this.tileSize/characterData.height)
+        this.scale = scale;
 
-        let scale = Math.floor(tileSize/characterData.height)
-
-        this.x = characterData.currentLocation.x;
-        this.y = characterData.currentLocation.y;
+        this.x = characterData.currentLocation.x/(64/this.tileSize);
+        this.y = characterData.currentLocation.y/(64/this.tileSize);
         this.dx = 0;
         this.dy = 0;
 
         this.img = charImage;
-        this.scale = scale;
         // this.scale = 4
         this.width = characterData.width;
         this.height = characterData.height;
-        this.tileSize = 64;
 
         this.movingProgressRemaining = 0;
         this.currentAnimation = 'idle'
@@ -198,6 +198,16 @@ export default class Character {
     }
 
     drawFrame(ctx, frameX, frameY, canvasX, canvasY){         
-        ctx.drawImage(this.img, frameX*this.width, frameY*this.height, this.width, this.height, canvasX, canvasY, this.width*this.scale, this.height*this.scale);
+        ctx.drawImage(
+            this.img, 
+            frameX*this.width, 
+            frameY*this.height, 
+            this.width, 
+            this.height, 
+            canvasX, 
+            canvasY, 
+            this.width*this.scale, 
+            this.height*this.scale
+        );
     }
 } 

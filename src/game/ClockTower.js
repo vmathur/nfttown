@@ -9,6 +9,9 @@ export default class ClockTower {
 
         this.x = clockTowerData.currentLocation.x
         this.y = clockTowerData.currentLocation.y
+
+        this.scale = Math.floor(tileSize/16)
+        this.tileSize = tileSize; 
     }
 
     getPositionFromTime(){
@@ -56,10 +59,10 @@ export default class ClockTower {
             0, // source y
             this.width, // source width
             this.height, // source height
-            this.x * 64, // target x
-            this.y * 64, // target y
-            this.width, // target width
-            this.height // target height
+            this.x*(16*this.scale), // target x
+            this.y*(16*this.scale), // target y
+            this.width/(64/this.tileSize), // target width
+            this.height/(64/this.tileSize) // target height
         );
     }
 }

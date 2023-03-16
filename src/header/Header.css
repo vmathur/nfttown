@@ -1,37 +1,23 @@
 .header-container{
-    /* background-color: gainsboro; */
-}
-
-@media screen and (max-width: 1000px) {
-    .connect-button{
-        font-size: large;
-    }
-
-    .view-account-button{
-        font-size: large;
-    }
-
-    .disconnect-button{
-        font-size: large;
-    }
+    display: flow-root;
 }
 
 @media screen and (min-width: 1000px) {
-    .connect-button{
-        font-size: large;
-        position: relative;
-        left:calc(1426px/2);
+    .header-button-area{
+        /* justify-content: space-between; */
+        float: right;
+        margin: 10px;
     }
+}
 
-    .view-account-button{
-        font-size: large;
-        position: relative;
-        left:calc(1326px/2);
-    }
+.connect-button{
+    font-size: large;
+}
 
-    .disconnect-button{
-        font-size: large;
-        position: relative;
-        left:calc(1326px/2);
-    }
+.view-account-button{
+    font-size: large;
+}
+
+.disconnect-button{
+    font-size: large;
 }

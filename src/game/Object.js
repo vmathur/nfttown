@@ -12,6 +12,9 @@ export default class Object {
         this.width = objectData.width;
         this.height = objectData.height;
 
+        this.tileSize = tileSize
+        this.scale = Math.floor(tileSize/16)
+
         this.x = objectData.currentLocation.x
         this.y = objectData.currentLocation.y
     }
@@ -35,10 +38,10 @@ export default class Object {
             0, // source y
             this.width, // source width
             this.height, // source height
-            this.x * 64, // target x
-            this.y * 64, // target y
-            this.width, // target width
-            this.height // target height
+            this.x*(16*this.scale), // target x
+            this.y*(16*this.scale), // target y
+            this.width/(64/this.tileSize), // target width
+            this.height/(64/this.tileSize) // target height
         );
         this.updateAnimationProgress();
     }

@@ -22,7 +22,7 @@
         padding-top: 20px;
         padding-bottom: 20px;
         background-color: aliceblue;
-        width: 1536px;
+        width: 100%;
         border-radius: 20px;
         margin: 20px;
         display: flex;
@@ -48,6 +48,7 @@
 .citizen-section-item{
     color:gray;
     margin-left:20px;
+    margin-right:20px;
 }
 
 .feedby{

@@ -1,6 +1,6 @@
 import React, {useRef, useEffect} from 'react'
 
-//import { Grid } from "./Grid"
+// import { Grid } from "./Grid"
 import { Map } from "./Map"
 import { tileMap } from "../data/tileConstants"
 import WallCollision from "../utils/WallCollision"
@@ -31,7 +31,7 @@ export default function Board({charactersRef, setSelectedCitizen}) {
         let object = new Object(data, tileMap.tsize)
         objects.push(object)
     }
-    
+
     let clockTower = new ClockTower(clockTowerData, tileMap.tsize)
 
     //click handler
@@ -67,7 +67,7 @@ export default function Board({charactersRef, setSelectedCitizen}) {
 
             // draw world map
             Map(ctx);
-            //Grid(ctx, canvas);
+            // Grid(ctx, canvas);
             clockTower.draw(ctx)
 
             //update objects
@@ -95,11 +95,10 @@ export default function Board({charactersRef, setSelectedCitizen}) {
         UpdateTimeOfDay()
         setTimeout(checkTimeOfDay, checkIntervalMinutes*1000*60);
     }
-
     return (
         <div className='container'>
-            <div id="rectangle" height={tileMap.tsize*tileMap.rows +'px'} width={tileMap.tsize*tileMap.cols +'px'} ></div>
-            <canvas id="canvas" ref={canvasRef} height={tileMap.tsize*tileMap.rows +'px'} width={tileMap.tsize*tileMap.cols +'px'} onClick={canvasClickHandler}/>
+            <div id="rectangle" style={{left: "calc((100vw - "+tileMap.tsize*tileMap.cols+"px)/2)", width:tileMap.tsize*tileMap.cols+"px"}} height={tileMap.tsize*tileMap.rows +'px'} width={tileMap.tsize*tileMap.cols +'px'} ></div>
+        <canvas id="canvas" ref={canvasRef} height={tileMap.tsize*tileMap.rows +'px'} width={tileMap.tsize*tileMap.cols +'px'} onClick={canvasClickHandler}/>
         </div>
     )
 }
