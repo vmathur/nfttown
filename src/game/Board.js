@@ -79,7 +79,7 @@ export default function Board({charactersRef, setSelectedCitizen}) {
             for(let character of characters){
                 let health = getHealthRemaining(character.lastFed, character.maxTime);
                 if(health<=0){
-                    break;
+                    continue;
                 }
                 character.update(health)
                 WallCollision(character, canvas);
