@@ -110,16 +110,13 @@ function App() {
 export default App;
 
 // todo:
-
-//blocking
 // get real assets for dog and turtle + all colors
-// buttons are off once you log in
 // eat right after feed
-// animation optimization
-// heart next to health bar
-// scale based on tile size
 // add to polygon
+// make header and dashboard in line with canvas
 
-// backlog
+//backlog
+// scale based on tile size
 // dao
+// animation optimization
 // new animations
