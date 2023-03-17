@@ -42,6 +42,7 @@ function CitizenSection(props) {
           <div className="citizen-section-item">{ageLabel}</div>
           <div>
             <span><AiFillHeart
+              className="heart-icon"
               color={'red'}
               size={20}
             />

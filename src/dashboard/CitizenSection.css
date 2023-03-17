@@ -1,3 +1,9 @@
+@media screen and (max-width: 500px) {
+    .heart-icon{
+        visibility: hidden;
+    }
+}
+
 @media screen and (max-width: 1000px) {
     .citizen-section{
         padding-top: 20px;
