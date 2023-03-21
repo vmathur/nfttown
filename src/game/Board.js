@@ -39,11 +39,11 @@ export default function Board({charactersRef, initialActions, setSelectedCitizen
 
     //click handler
     const canvasClickHandler=(event)=>{
-        // let rect = canvasRef.current.getBoundingClientRect();
-        // const x = Math.floor(event.clientX-rect.left)
-        // const y = Math.floor(event.clientY-rect.top)
-        // let citizenId = getClickedCitizen(x,y)
-        // setSelectedCitizen(citizenId)
+        let rect = canvasRef.current.getBoundingClientRect();
+        const x = Math.floor(event.clientX-rect.left)
+        const y = Math.floor(event.clientY-rect.top)
+        let citizenId = getClickedCitizen(x,y)
+        setSelectedCitizen(citizenId)
     }
 
     function getClickedCitizen(x,y){
