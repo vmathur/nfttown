@@ -21,6 +21,7 @@ function App() {
   const [selectedCitizen, setSelectedCitizen] = useState([]);
   const [isUpdating, setIsUpdating] = useState(false);
   const [getCitizenDone, setGetCitizenDone] = useState(false)
+  const [initialActions, setInitiatlActions] = useState({});
   const [account, setAccount] = useState(localStorage.getItem('user'));
   let characterData3 = []
   for (const [i, citizen] of citizens.entries()){
@@ -70,7 +71,7 @@ function App() {
     const contract = new web3.eth.Contract(abi, contractAddress);
     await contract.methods.feed(tokenId).send({ from: account });
     setIsUpdating(false)
-    getCitizens();
+    setInitiatlActions({tokenId: tokenId, currentAction: 'eatLots'})
   };
 
   const clean = async (tokenId) => {
@@ -79,7 +80,7 @@ function App() {
     const contract = new web3.eth.Contract(abi, contractAddress);
     await contract.methods.clean(tokenId).send({ from: account });
     setIsUpdating(false)
-    getCitizens();
+    setInitiatlActions({})
   };
 
   const mint = async () => {
@@ -89,7 +90,7 @@ function App() {
     const receipt = await contract.methods.mint().send({ from: account });
     console.log(receipt)
     setIsUpdating(false)
-    getCitizens();
+    setInitiatlActions({})
     getOwnedCitizens(account);
   };
 
@@ -99,10 +100,25 @@ function App() {
 
   return (
     <div className="App">
-      <Header account={account} setAccount={setAccount} getOwnedCitizens={getOwnedCitizens} setOwnedCitizens={setOwnedCitizens}/>
+      <Header 
+        account={account} 
+        setAccount={setAccount} 
+        getOwnedCitizens={getOwnedCitizens} 
+        setOwnedCitizens={setOwnedCitizens}/>
       {isUpdating? 'Loading ... ': ''}
-      { getCitizenDone ? <Board charactersRef={characters} setSelectedCitizen={setSelectedCitizen}/>: 'loading'}
-      <Dashboard charactersRef={characters} account={account} ownedCitizens={ownedCitizens} selectedCitizen={selectedCitizen} mint={mint} clean={clean} feed={feed}/>
+      { getCitizenDone ? 
+        <Board 
+          charactersRef={characters}
+          initialActions={initialActions} 
+          setSelectedCitizen={setSelectedCitizen}/>: 'loading'}
+      <Dashboard 
+        charactersRef={characters} 
+        account={account} 
+        ownedCitizens={ownedCitizens} 
+        selectedCitizen={selectedCitizen} 
+        mint={mint} 
+        clean={clean} 
+        feed={feed}/>
     </div>
   );
 }

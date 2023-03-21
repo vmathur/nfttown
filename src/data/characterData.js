@@ -217,6 +217,21 @@ export const behaviorLoops = {
       id: 'randomWalk'
     }]
   },
+  eatLots: {
+    behaviorLoop: [
+      {type: 'eat', direction: 'down', duration: fps*8},
+    ],
+    next: [{
+      weight: 1,
+      id: 'idle'
+    },{
+      weight: 1,
+      id: 'sleep'
+    },{
+      weight: 1,
+      id: 'randomWalk'
+    }]
+  },
   sit: {
     behaviorLoop: [
       {type: 'getting-seated', direction: 'down', duration: fps*1},

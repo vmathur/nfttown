@@ -23,7 +23,7 @@ export default class Character {
         this.height = characterData.height;
 
         this.movingProgressRemaining = 0;
-        this.currentAnimation = 'idle'
+        this.currentAnimation = ''
         this.animations = {
             'stand': [[0,0]],
             'idle': [[0,0],[1,0],[2,0],[3,0]],
