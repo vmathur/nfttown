@@ -153,6 +153,7 @@ function getModalContet(data){
   console.log(data.tokenId)
 
   return (<div className='modal-container'>
+    <div style={{marginBottom: '20px'}}><b>On chain metadata</b></div>
     <div>id:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{data.tokenId}</div>
     <div>animal: &nbsp;&nbsp;&nbsp;{data.animalId}</div>
     <div>color: &nbsp;&nbsp;&nbsp;&nbsp;{data.color}</div>
