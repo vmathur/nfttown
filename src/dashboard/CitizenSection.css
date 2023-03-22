@@ -55,9 +55,6 @@
 
 .citizen-section-item{
     color:gray;
-    margin-left:20px;
-    margin-right:20px;
-    width: 90px;
 }
 
 .feedby{
@@ -70,4 +67,9 @@
 
 .disabled{
     background-color: lightgrey;
+}
+
+.info-line{
+    display: flex;
+    align-items: center;
 }

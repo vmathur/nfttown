@@ -65,3 +65,9 @@
   margin: 4px 2px;
   cursor: pointer;  
 }
+
+.modal-container{
+  background-color: #353739;
+  color: white;
+  padding: 20px;
+}
