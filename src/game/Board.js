@@ -10,13 +10,11 @@ import {clockTowerData} from "../data/objectData"
 import Character  from "./Character"
 import Object from "./Object"
 import ClockTower from "./ClockTower"
-import UpdateTimeOfDay from './TimeOfDay';
+import getColorFromTime from './TimeOfDay';
 import { getHealthRemaining } from './utils'
 import './Board.css';
 
-const checkIntervalMinutes = 5;
-
-export default function Board({charactersRef, initialActions, setSelectedCitizen}) {
+export default function Board({charactersRef, initialActions, isUpdating, setSelectedCitizen}) {
     const canvasRef = useRef(null);
     //initialize characters
     let characters = []
@@ -58,11 +56,6 @@ export default function Board({charactersRef, initialActions, setSelectedCitizen
 
     //didmount
     useEffect(()=>{
-        checkTimeOfDay();
-    })
-
-    //didmount
-    useEffect(()=>{
         const render = () => {
             //get canvas
             const canvas = canvasRef.current;
@@ -94,14 +87,17 @@ export default function Board({charactersRef, initialActions, setSelectedCitizen
         render();
     })
 
-    function checkTimeOfDay(){
-        UpdateTimeOfDay()
-        setTimeout(checkTimeOfDay, checkIntervalMinutes*1000*60);
+    //get the color of the overlay
+    let [color, opacity] = getColorFromTime();
+    if(isUpdating){
+        color = 'black'
+        opacity = 0.8
     }
+
     return (
         <div className='container'>
-            <div id="rectangle" style={{left: "calc((100vw - "+tileMap.tsize*tileMap.cols+"px)/2)", width:tileMap.tsize*tileMap.cols+"px"}} height={tileMap.tsize*tileMap.rows +'px'} width={tileMap.tsize*tileMap.cols +'px'} ></div>
-        <canvas id="canvas" ref={canvasRef} height={tileMap.tsize*tileMap.rows +'px'} width={tileMap.tsize*tileMap.cols +'px'} onClick={canvasClickHandler}/>
+            <div id="rectangle" className="loading-rectangle" style={{left: "calc((100vw - "+tileMap.tsize*tileMap.cols+"px)/2)", width:tileMap.tsize*tileMap.cols+"px", backgroundColor : color, opacity:opacity}} height={tileMap.tsize*tileMap.rows +'px'} width={tileMap.tsize*tileMap.cols +'px'} ><div className='loading-text'>{isUpdating ? 'Loading...': ''}</div></div>
+            <canvas id="canvas" ref={canvasRef} height={tileMap.tsize*tileMap.rows +'px'} width={tileMap.tsize*tileMap.cols +'px'} onClick={canvasClickHandler}/>
         </div>
     )
 }

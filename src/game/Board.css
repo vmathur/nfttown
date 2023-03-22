@@ -12,8 +12,6 @@
 
 .canvas, #rectangle {
     position: absolute;
-    background-color: darkblue;
-    opacity: 0.6;
     height: 100%;
     border-radius: 50px;
     pointer-events: none;
@@ -21,4 +19,11 @@
   canvas {
     border: 5px solid green;
     border-radius: 50px;
+}
+
+.loading-text{
+  font-size: x-large;
+  font-weight: 5px;
+  color: white;
+  margin-top:300px;
 }

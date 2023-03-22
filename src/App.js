@@ -80,6 +80,7 @@ function App() {
     const contract = new web3.eth.Contract(abi, contractAddress);
     await contract.methods.clean(tokenId).send({ from: account });
     setIsUpdating(false)
+    getCitizens();
     setInitiatlActions({})
   };
 
@@ -91,6 +92,7 @@ function App() {
     console.log(receipt)
     setIsUpdating(false)
     setInitiatlActions({})
+    getCitizens();
     getOwnedCitizens(account);
   };
 
@@ -105,11 +107,11 @@ function App() {
         setAccount={setAccount} 
         getOwnedCitizens={getOwnedCitizens} 
         setOwnedCitizens={setOwnedCitizens}/>
-      {isUpdating? 'Loading ... ': ''}
       { getCitizenDone ? 
         <Board 
           charactersRef={characters}
           initialActions={initialActions} 
+          isUpdating={isUpdating}
           setSelectedCitizen={setSelectedCitizen}/>: 'loading'}
       <Dashboard 
         charactersRef={characters} 
@@ -127,9 +129,8 @@ export default App;
 
 // todo:
 // get real assets for dog and turtle + all colors
-// eat right after feed
-// add to polygon
 // make header and dashboard in line with canvas
+// add to polygon
 
 //backlog
 // scale based on tile size

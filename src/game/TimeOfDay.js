@@ -1,16 +1,16 @@
-export default function UpdateTimeOfDay() {
-    let [color, opacity] = getColorFromTime()
-    document.getElementById("rectangle").style.backgroundColor = color;
-    document.getElementById("rectangle").style.opacity = opacity;
-}
+// export default function UpdateTimeOfDay() {
+//     let [color, opacity] = getColorFromTime()
+//     // document.getElementById("rectangle").style.backgroundColor = color;
+//     // document.getElementById("rectangle").style.opacity = opacity;
+//     return [color, opacity];
+// }
 
-function getColorFromTime(){
+export default function getColorFromTime(){
     let dt = new Date();
     dt.setTime(dt.getTime()+dt.getTimezoneOffset()*60*1000);
     let offset = -300; //Timezone offset for EST in minutes.
     let estDate = new Date(dt.getTime() + offset*60*1000);
 
-    // let hour = estDate.getSeconds()
     let hour = estDate.getHours()
 
     if(hour >=0 && hour < 4){
