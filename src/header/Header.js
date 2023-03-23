@@ -5,7 +5,7 @@ const magic = new Magic("pk_live_1028C005B37C96E7", {
     network: "goerli",
 });
 
-function Header({account, setAccount, getOwnedCitizens, setOwnedCitizens}) {
+function Header({account, setAccount, clickHelpHandler, getOwnedCitizens, setOwnedCitizens}) {
     async function handleLogin(){
       await magic.wallet.connectWithUI().then(data=>{
         setAccount(data[0])
@@ -30,12 +30,17 @@ function Header({account, setAccount, getOwnedCitizens, setOwnedCitizens}) {
   
     return (
       <div className="header-container">
+        <div className="header-button-area">
+        <button className="how-to-play-button button-secondary" onClick={clickHelpHandler}>How to play</button>
+
         {!account? 
-          <div className="header-button-area"><button className="connect-button button-primary" onClick={handleLogin}>Connect</button></div> : 
-          <div className="header-button-area">
-            <button className="view-account-button button-secondary" onClick={showWallet}>View account</button>
+          <button className="connect-button button-primary" onClick={handleLogin}>Connect</button> : 
+          <span>
+            {/* <button className="view-account-button button-secondary" onClick={clickHelpHandler}>How to play</button> */}
+            {/* <button className="view-account-button button-secondary" onClick={showWallet}>View account</button> */}
             <button className="disconnect-button button-secondary" onClick={handleLogout}>Disconnect</button>
-          </div>}
+          </span>}
+          </div>
       </div>
     );
 }

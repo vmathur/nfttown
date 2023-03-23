@@ -26,6 +26,10 @@
     .info-icon{
         visibility: hidden;
     }
+    .citizen-section-item-text{
+        color:gray;
+        width:100px;
+    }    
 }
 
 @media screen and (min-width: 1000px) {
@@ -33,7 +37,8 @@
         padding-top: 20px;
         padding-bottom: 20px;
         background-color: aliceblue;
-        width: 100%;
+        width: 1162px;
+        left: calc((100vw - 1162px)/2);;
         border-radius: 20px;
         margin: 20px;
         display: flex;
@@ -45,12 +50,16 @@
         text-align: left;
         width: 200px;    
     }    
+    .citizen-section-item-text{
+        color:gray;
+        width:200px;
+    }    
 }
 
 .citizen-section-image {
   width: 16px;
   height: 18px;
-  transform: scale(2.5,2.5);
+  transform: scale(2,2);
 }
   
 .selected{
@@ -59,7 +68,7 @@
 
 .citizen-section-item{
     color:gray;
-    width:150px;
+    width:100px;
 }
 
 .feedby{

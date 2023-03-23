@@ -4,9 +4,11 @@
 
 @media screen and (min-width: 1000px) {
     .header-button-area{
-        /* justify-content: space-between; */
-        float: right;
-        margin: 10px;
+        justify-content: space-between;
+        /* float: right;
+        margin: 10px; */
+        position: relative;
+        left:470px;;
     }
 }
 
@@ -19,5 +21,9 @@
 }
 
 .disconnect-button{
+    font-size: large;
+}
+
+.how-to-play-button{
     font-size: large;
 }

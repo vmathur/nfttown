@@ -28,6 +28,7 @@ function App() {
   const [account, setAccount] = useState(localStorage.getItem('user'));
   const [modalIsOpen, setIsOpen] = useState(false);
   const [modalData, setModalData] = useState();
+  const [modalType, setModalType] = useState('help');
 
   let characterData3 = []
   for (const [i, citizen] of citizens.entries()){
@@ -104,6 +105,12 @@ function App() {
 
   function clickInfoHandler(modalData) {
     setModalData(modalData)
+    setModalType('info')
+    setIsOpen(true);
+  }
+
+  function clickHelpHandler() {
+    setModalType('help')
     setIsOpen(true);
   }
 
@@ -120,11 +127,12 @@ function App() {
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
-        style={customModalStyles}
-      >{getModalContet(modalData)}</Modal>
+        style={modalType === 'help'? helpModalStyle : infoModalStyle}
+      >{modalType === 'help'? getHelpContent(closeModal) : getInfoModalContet(modalData, closeModal)}</Modal>
       <Header 
         account={account} 
         setAccount={setAccount} 
+        clickHelpHandler={clickHelpHandler}
         getOwnedCitizens={getOwnedCitizens} 
         setOwnedCitizens={setOwnedCitizens}/>
       { getCitizenDone ? 
@@ -148,9 +156,18 @@ function App() {
 
 export default App;
 
-function getModalContet(data){
+function getHelpContent(closeModal){
+  return (<div className='modal-container'>
+    <div onClick={closeModal} style={{float:'right'}}>X</div>
+    <div style={{marginBottom: '20px'}}><b>How to play</b></div>
+    <div style={{marginBottom: '20px'}}>1. Connect your wallet and mint a new citizen NFT to get started. NFT Town is limited to 4 citizens at a time</div>
+    <div style={{marginBottom: '20px'}}>2. Feed your citizen to keep them happy. If their health goes to 0 they will leave town</div>
+    <div style={{marginBottom: '20px'}}>3. If a citizen leaves town, it can be removed by anyone. The NFT gets burned, making room for anyone to mint a new citizen</div>
+  </div>)
+}
+
+function getInfoModalContet(data, closeModal){
   if(!data){return}
-  console.log(data.tokenId)
 
   return (<div className='modal-container'>
     <div style={{marginBottom: '20px'}}><b>On chain metadata</b></div>
@@ -160,11 +177,27 @@ function getModalContet(data){
     <div>lastFed: &nbsp;&nbsp;{data.lastFed}</div>
     <div>maxTime: &nbsp;&nbsp;{data.maxTime}</div>
     <div>birthDate: {data.birthDate}</div>
-
   </div>)
 }
 
-const customModalStyles = {
+const helpModalStyle = {
+  content: {
+    top: '50%',
+    left: '50%',
+    width: '80%',
+    height: '80%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    fontFamily: 'Monospace',
+    backgroundColor: '#353739',
+    borderRadius: '10px',
+    fontSize: '20px',
+    transform: 'translate(-50%, -50%)',
+  },
+};
+
+const infoModalStyle = {
   content: {
     top: '50%',
     left: '50%',

@@ -53,7 +53,7 @@ function CitizenSection(props) {
       <div>
         <div className={"citizen-section " + (selected?'selected':'')}>
           <div className="citizen-section-image" alt="" style={{backgroundImage: "url("+img}}/>
-          <div className="citizen-section-item">
+          <div className="citizen-section-item-text">
             <span className='info-line'>{ageLabel}&nbsp;
               <HiInformationCircle
                 className="info-icon"

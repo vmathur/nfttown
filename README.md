@@ -1,9 +1,18 @@
 # NFT Town
 
-## TODO
+## How to play
+1. Connect your wallet and mint a new citizen NFT to get started. NFT Town is limited to 4 citizens at a time
+2. Feed your citizen to keep them happy. If their health goes to 0 they will leave town
+3. If a citizen leaves town, it can be removed by anyone. The NFT gets burned, making room for anyone to mint a new citizen
 
-- Camera following a character
-- Blocto integration
+## To do
+- get real assets for dog and turtle + all colors
+- audit and deploy contract
+
+- new animations
+- scale based on tile size
+- dao
+- animation optimization
 
 ## Available Scripts
 
