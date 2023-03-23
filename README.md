@@ -7,6 +7,7 @@
 
 ## To do
 - get real assets for dog and turtle + all colors
+- make the how to modal mobile friendly
 - audit and deploy contract
 
 - new animations

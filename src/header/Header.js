@@ -20,13 +20,13 @@ function Header({account, setAccount, clickHelpHandler, getOwnedCitizens, setOwn
       })
     }
   
-    async function showWallet(){
-      const walletInfo = await magic.wallet.getInfo();
-      const walletType = walletInfo.walletType;
-      if (walletType === "magic") {
-        await magic.wallet.showUI();
-      };
-    }
+    // async function showWallet(){
+    //   const walletInfo = await magic.wallet.getInfo();
+    //   const walletType = walletInfo.walletType;
+    //   if (walletType === "magic") {
+    //     await magic.wallet.showUI();
+    //   };
+    // }
   
     return (
       <div className="header-container">
