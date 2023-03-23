@@ -74,3 +74,11 @@
     display: flex;
     align-items: center;
 }
+
+.info-icon{
+    color: #c9cace;
+}
+
+.info-icon:hover{
+    color: #797b84;
+}

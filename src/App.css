@@ -55,6 +55,10 @@
   cursor: pointer;  
 }
 
+.button-primary:hover {
+  background-color: #b133f0;
+}
+
 .button-secondary{
   border-radius: 10px;
   border: none;
@@ -64,6 +68,10 @@
   text-decoration: none;
   margin: 4px 2px;
   cursor: pointer;  
+}
+
+.button-secondary:hover {
+  background-color:rgb(224, 224, 222);
 }
 
 .modal-container{

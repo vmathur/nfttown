@@ -58,7 +58,7 @@ function CitizenSection(props) {
               <HiInformationCircle
                 className="info-icon"
                 onClick={infoClickHandler}
-                color="#A1A2A9"
+                size={20}
                             />
             </span></div>
           <div>
@@ -78,7 +78,7 @@ function CitizenSection(props) {
           {props.account ? 
             <div className="citizen-section-item">
               {!canClean && isOwner ? 
-                <button className="feed-button button-primary"onClick={(e)=>props.feed(tokenId)}>Feed</button> 
+              <button className="feed-button button-primary"onClick={(e)=>props.feed(tokenId)}>Feed</button> 
               : ''}
               {canClean ? 
                 <button className="feed-button button-secondary" onClick={(e)=>props.clean(tokenId)}>Remove</button>
