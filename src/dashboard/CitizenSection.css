@@ -20,7 +20,7 @@
     .citizen-section-health {
         display: inline-block;
         text-align: left;
-        width: 100px;    
+        width: 70px;    
     }
 
     .info-icon{
@@ -28,7 +28,7 @@
     }
     .citizen-section-item-text{
         color:gray;
-        width:100px;
+        width:110px;
     }    
 }
 
