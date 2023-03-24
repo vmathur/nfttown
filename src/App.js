@@ -7,6 +7,7 @@ import Modal from 'react-modal';
 import { Magic } from "magic-sdk";
 import {spriteData, startingLocation} from './data/characterData'
 import {abi} from "./contract/abi"
+import { MdClose } from 'react-icons/md';
 
 const Web3 = require('web3');
 
@@ -158,11 +159,11 @@ export default App;
 
 function getHelpContent(closeModal){
   return (<div className='modal-container'>
-    <div onClick={closeModal} style={{float:'right'}}>X</div>
+    <MdClose onClick={closeModal} style={{ color: "white", fontSize: "1em", right:'30px', position: 'absolute'}}/>
     <div style={{marginBottom: '20px'}}><b>How to play</b></div>
     <div style={{marginBottom: '20px'}}>1. Connect your wallet and mint a new citizen NFT to get started. NFT Town is limited to 4 citizens at a time</div>
     <div style={{marginBottom: '20px'}}>2. Feed your citizen to keep them happy. If their health goes to 0 they will leave town</div>
-    <div style={{marginBottom: '20px'}}>3. If a citizen leaves town, it can be removed by anyone. The NFT gets burned, making room for anyone to mint a new citizen</div>
+    <div style={{marginBottom: '20px'}}>3. If a citizen leaves town, it can be removed by anyone burning the NFT forever. This will make room for anyone to mint a new citizen</div>
   </div>)
 }
 
@@ -170,6 +171,7 @@ function getInfoModalContet(data, closeModal){
   if(!data){return}
 
   return (<div className='modal-container'>
+    <MdClose onClick={closeModal} style={{ color: "white", fontSize: "1em", right:'30px', position: 'absolute'}}/>
     <div style={{marginBottom: '20px'}}><b>On chain metadata</b></div>
     <div>id:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{data.tokenId}</div>
     <div>animal: &nbsp;&nbsp;&nbsp;{data.animalId}</div>
@@ -182,14 +184,14 @@ function getInfoModalContet(data, closeModal){
 
 const helpModalStyle = {
   content: {
+    position: 'relative',
     top: '50%',
     left: '50%',
-    width: '80%',
-    height: '80%',
+    width: '60%',
     right: 'auto',
     bottom: 'auto',
     marginRight: '-50%',
-    fontFamily: 'Monospace',
+    fontFamily: 'Monaco',
     backgroundColor: '#353739',
     borderRadius: '10px',
     fontSize: '20px',
