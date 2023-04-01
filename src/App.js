@@ -5,7 +5,7 @@ import Header from './header/Header'
 import React, {useRef, useEffect, useState} from 'react'
 import Modal from 'react-modal';
 import { Magic } from "magic-sdk";
-import {spriteData, startingLocation} from './data/characterData'
+import {spriteData, spriteDimensions, startingLocation} from './data/characterData'
 import {abi} from "./contract/abi"
 import { MdClose } from 'react-icons/md';
 
@@ -34,7 +34,7 @@ function App() {
   let characterData3 = []
   for (const [i, citizen] of citizens.entries()){
     if(i>=4){break} //can only render 4 NFTs right now
-    let spriteMap = spriteData[String(citizen.animal)];
+    let spriteMap = spriteData[String(citizen.animal)][String(citizen.color)];
     let currentLocation = startingLocation[String(i)]
     characterData3.push({
       animalId: citizen.animal,
@@ -43,10 +43,10 @@ function App() {
       maxTime: citizen.maxTime,
       color: citizen.color,
       birthDate: citizen.birthDate,
-      width: spriteMap.width,
-      height: spriteMap.height,
+      width: spriteDimensions.width,
+      height: spriteDimensions.height,
       imgSource : spriteMap.imgSource,
-      currentAction: spriteMap.currentAction,
+      currentAction: 'idle',
       currentLocation: currentLocation,
     });
   }
@@ -213,16 +213,3 @@ const infoModalStyle = {
     transform: 'translate(-50%, -50%)',
   },
 };
-
-
-// todo:
-// get real assets for dog and turtle + all colors
-// make header and dashboard in line with canvas
-// audit control and verify
-// add to polygon
-
-//backlog
-// new animations
-// scale based on tile size
-// dao
-// animation optimization

@@ -1,32 +1,69 @@
 export const spriteData = {
   //monkey
   '0' : {
-    width: 16,
-    height: 18,
-    imgSource : '/assets/monkey-orange.gif', //need to update this
-    currentAction: 'idle',
+    '0' :{
+      imgSource : '/assets/characters/monkey-orange.gif', //need to update this
+    },
+    '1' :{
+      imgSource : '/assets/characters/monkey-red.gif', //need to update this
+    },
+    '2' :{
+      imgSource : '/assets/characters/monkey-blue.gif', //need to update this
+    },
+    '3' :{
+      imgSource : '/assets/characters/monkey-green.gif', //need to update this
+    },
   }, 
   //penguin
   '1' : {
-    width: 16,
-    height: 18,
-    imgSource : '/assets/penguin-blue.gif',
-    currentAction: 'idle',
-  },
+    '0' :{
+      imgSource : '/assets/characters/penguin-orange.gif', //need to update this
+    },
+    '1' :{
+      imgSource : '/assets/characters/penguin-red.gif', //need to update this
+    },
+    '2' :{
+      imgSource : '/assets/characters/penguin-blue.gif', //need to update this
+    },
+    '3' :{
+      imgSource : '/assets/characters/penguin-green.gif', //need to update this
+    },
+  }, 
   //dog
   '2' : {
-    width: 16,
-    height: 18,
-    imgSource :  '/assets/monkey-red.gif',
-    currentAction: 'idle',
+    '0' :{
+      imgSource : '/assets/characters/dog-orange.gif', //need to update this
+    },
+    '1' :{
+      imgSource : '/assets/characters/dog-red.gif', //need to update this
+    },
+    '2' :{
+      imgSource : '/assets/characters/dog-blue.gif', //need to update this
+    },
+    '3' :{
+      imgSource : '/assets/characters/dog-green.gif', //need to update this
+    },
   },
-  //turtle
+  //cat 
   '3' : {
-    width: 16,
-    height: 18,
-    imgSource : '/assets/penguin-purple.gif',
-    currentAction: 'idle',
-  }   
+    '0' :{
+      imgSource : '/assets/characters/monkey-orange.gif', //need to update this
+    },
+    '1' :{
+      imgSource : '/assets/characters/monkey-red.gif', //need to update this
+    },
+    '2' :{
+      imgSource : '/assets/characters/monkey-blue.gif', //need to update this
+    },
+    '3' :{
+      imgSource : '/assets/characters/monkey-green.gif', //need to update this
+    },
+  }, 
+}
+
+export const spriteDimensions = {
+  width: 16,
+  height: 18,
 }
 
 export const startingLocation = {

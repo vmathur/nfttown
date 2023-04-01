@@ -6,9 +6,8 @@
 3. If a citizen leaves town, it can be removed by anyone. The NFT gets burned, making room for anyone to mint a new citizen
 
 ## To do
-- get real assets for dog and turtle + all colors
-- make the how to modal mobile friendly
-- audit and deploy contract
+- make cat sprite
+- polygon + gasless
 
 - new animations
 - scale based on tile size
