@@ -51,6 +51,10 @@ function App() {
     });
   }
 
+  // characterData3[0].imgSource = spriteData['3']['0'].imgSource;
+  // characterData3[1].imgSource = spriteData['2']['0'].imgSource;
+  // characterData3[2].imgSource = spriteData['1']['0'].imgSource;
+  // characterData3[3].imgSource = spriteData['0']['0'].imgSource;
   let characters = useRef([])
   characters.current=characterData3
 

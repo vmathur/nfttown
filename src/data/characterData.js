@@ -47,7 +47,7 @@ export const spriteData = {
   //cat 
   '3' : {
     '0' :{
-      imgSource : '/assets/characters/monkey-orange.gif', //need to update this
+      imgSource : '/assets/characters/cat-orange.gif', //need to update this
     },
     '1' :{
       imgSource : '/assets/characters/monkey-red.gif', //need to update this
