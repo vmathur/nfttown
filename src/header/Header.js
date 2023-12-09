@@ -1,9 +1,12 @@
 import { Magic } from "magic-sdk";
 import './Header.css'
 
-const magic = new Magic("pk_live_1028C005B37C96E7", {
-    network: "goerli",
-});
+const polygonNode = {
+  rpcUrl:'https://polygon-mumbai.g.alchemy.com/v2/9b1326CuGOhpxr_RhB2QoPXKpfbuJsDF',
+  chainId: 80001, // Polygon chain id 
+}
+
+const magic = new Magic("pk_live_BFB02F3E6751D40B", {network: polygonNode});
 
 function Header({account, setAccount, clickHelpHandler, getOwnedCitizens, setOwnedCitizens}) {
     async function handleLogin(){
@@ -12,21 +15,10 @@ function Header({account, setAccount, clickHelpHandler, getOwnedCitizens, setOwn
         getOwnedCitizens(data[0]);
       })
     }
-  
-    async function handleLogout(){
-      await magic.wallet.disconnect().then(data=>{
-        setAccount("")
-        setOwnedCitizens('')
-      })
+
+    async function handleWallet(){
+      await magic.wallet.showUI()
     }
-  
-    // async function showWallet(){
-    //   const walletInfo = await magic.wallet.getInfo();
-    //   const walletType = walletInfo.walletType;
-    //   if (walletType === "magic") {
-    //     await magic.wallet.showUI();
-    //   };
-    // }
   
     return (
       <div className="header-container">
@@ -36,9 +28,7 @@ function Header({account, setAccount, clickHelpHandler, getOwnedCitizens, setOwn
         {!account? 
           <button className="connect-button button-primary" onClick={handleLogin}>Connect</button> : 
           <span>
-            {/* <button className="view-account-button button-secondary" onClick={clickHelpHandler}>How to play</button> */}
-            {/* <button className="view-account-button button-secondary" onClick={showWallet}>View account</button> */}
-            <button className="disconnect-button button-secondary" onClick={handleLogout}>Disconnect</button>
+            <button className="disconnect-button button-secondary" onClick={handleWallet}>Account</button>
           </span>}
           </div>
       </div>

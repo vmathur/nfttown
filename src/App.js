@@ -6,16 +6,24 @@ import React, {useRef, useEffect, useState} from 'react'
 import Modal from 'react-modal';
 import { Magic } from "magic-sdk";
 import {spriteData, spriteDimensions, startingLocation} from './data/characterData'
-import {abi} from "./contract/abi"
+import {abi} from "./contract/abi-2771.js"
 import { MdClose } from 'react-icons/md';
 
-const Web3 = require('web3');
+const polygonNode = {
+  rpcUrl:'https://polygon-mumbai.g.alchemy.com/v2/9b1326CuGOhpxr_RhB2QoPXKpfbuJsDF',
+  chainId: 80001, // Polygon chain id 
+}
+const magic = new Magic("pk_live_BFB02F3E6751D40B", {network: polygonNode});
 
-const magic = new Magic("pk_live_1028C005B37C96E7", {
-  network: "goerli",
-});
-const web3 = new Web3(magic.rpcProvider);
-const contractAddress ='0xdd8245b6394f31159c5d22a0e2526ab87838b5c9'
+const ethers = require('ethers')
+const provider = new ethers.providers.Web3Provider(magic.rpcProvider);
+const contractAddress ='0xb3d2381f29c2d0db43628a130f21b83772820499'
+
+const contract = new ethers.Contract(
+  contractAddress,
+  abi,
+  provider,
+);
 
 Modal.setAppElement('#root');
 
@@ -51,61 +59,102 @@ function App() {
     });
   }
 
-  // characterData3[0].imgSource = spriteData['3']['0'].imgSource;
-  // characterData3[1].imgSource = spriteData['2']['0'].imgSource;
-  // characterData3[2].imgSource = spriteData['1']['0'].imgSource;
-  // characterData3[3].imgSource = spriteData['0']['0'].imgSource;
   let characters = useRef([])
   characters.current=characterData3
 
+  //get all
   const getCitizens = async () => {
-    console.log('About to fetch latest citizens')
+    console.log('Fetching latest citizens')
     setIsUpdating(true)
-    const contract = new web3.eth.Contract(abi, contractAddress);
-    contract.methods.getAllTokens().call().then(setCitizens);
+
+    const result = await contract.getAllTokens();
+    const convertedCitizens = result.map(function(element) {
+      console.log(element)
+      return {
+        animal : element.animal.toNumber(),
+        birthDate: element.birthDate.toNumber(),
+        color : element.color.toNumber(),
+        lastFed: element.lastFed.toNumber(),
+        maxTime: element.maxTime.toNumber(),
+        tokenId: element.tokenId.toNumber()
+      }; // Example: Double each element
+    });
+    console.log(convertedCitizens)
+    setCitizens(convertedCitizens)
     setIsUpdating(false)
     setGetCitizenDone(true)
-    console.log('updated')
+    console.log('Fetched citizens')
   }
 
-  const getOwnedCitizens = async (account) => {
-    console.log('About to fetch users citizens')
-    setIsUpdating(true)
-    const contract = new web3.eth.Contract(abi, contractAddress);
-    await contract.methods.getAllOwnedTokenIDs().call({ from: account }).then(setOwnedCitizens);
-    setIsUpdating(false)
-    console.log('updated')
-  }
-
-  const feed = async (tokenId) => {
-    console.log('calling feed contract')
-    setIsUpdating(true)
-    const contract = new web3.eth.Contract(abi, contractAddress);
-    await contract.methods.feed(tokenId).send({ from: account });
-    setIsUpdating(false)
-    setInitiatlActions({tokenId: tokenId, currentAction: 'eatLots'})
-  };
-
-  const clean = async (tokenId) => {
-    console.log('calling clean contract')
-    setIsUpdating(true)
-    const contract = new web3.eth.Contract(abi, contractAddress);
-    await contract.methods.clean(tokenId).send({ from: account });
-    setIsUpdating(false)
-    getCitizens();
-    setInitiatlActions({})
-  };
-
+  //mint
   const mint = async () => {
-    console.log('calling mint contract')
+    console.log('Calling mint')
     setIsUpdating(true)
-    const contract = new web3.eth.Contract(abi, contractAddress);
-    const receipt = await contract.methods.mint().send({ from: account });
-    console.log(receipt)
+    // const contract = new ethers.Contract(
+    //   contractAddress,
+    //   abi,
+    //   provider,
+    // );
+    let transaction = await contract.populateTransaction.mint();
+
+    const gasless_request = await magic.wallet.sendGaslessTransaction(account,
+      transaction,
+    )
+    
+    console.log('Minted')
     setIsUpdating(false)
     setInitiatlActions({})
     getCitizens();
     getOwnedCitizens(account);
+  };
+
+  //getOwnedCitizens
+  const getOwnedCitizens = async (account) => {
+    console.log('Fetching wallets citizens')
+    setIsUpdating(true)
+    // const contract = new ethers.Contract(
+    //   contractAddress,
+    //   abi,
+    //   provider,
+    // );
+      
+    const result = await contract.getAllOwnedTokenIDs(account);
+    const newArray = result.map(function(element) {
+      return element.toNumber();
+    });
+
+    setOwnedCitizens(newArray)
+    setIsUpdating(false)
+    console.log('Fetched wallets citizens')
+  }
+  
+  //feed
+  const feed = async (tokenId) => {
+    console.log('Calling feed contract')
+    setIsUpdating(true)
+
+    let transaction = await contract.populateTransaction.feed(tokenId);
+    const gasless_request = await magic.wallet.sendGaslessTransaction(account,
+      transaction,
+    )
+
+    setIsUpdating(false)
+    setInitiatlActions({tokenId: tokenId, currentAction: 'eatLots'})
+  };
+
+  //clean
+  const clean = async (tokenId) => {
+    console.log('Calling clean contract')
+    setIsUpdating(true)
+
+    let transaction = await contract.populateTransaction.clean(tokenId);
+    const gasless_request = await magic.wallet.sendGaslessTransaction(account,
+      transaction,
+    )
+
+    setIsUpdating(false)
+    getCitizens();
+    setInitiatlActions({})
   };
 
   function clickInfoHandler(modalData) {
