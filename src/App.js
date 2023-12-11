@@ -4,21 +4,15 @@ import Dashboard from './dashboard/Dashboard'
 import Header from './header/Header'
 import React, {useRef, useEffect, useState} from 'react'
 import Modal from 'react-modal';
-import { Magic } from "magic-sdk";
 import {spriteData, spriteDimensions, startingLocation} from './data/characterData'
 import { abi } from "./contract/abi.js"
 import { MdClose } from 'react-icons/md';
-
-const polygonNode = {
-  rpcUrl:'https://polygon-mumbai.g.alchemy.com/v2/9b1326CuGOhpxr_RhB2QoPXKpfbuJsDF',
-  chainId: 80001, // Polygon chain id 
-}
-const magic = new Magic("pk_live_BFB02F3E6751D40B", {network: polygonNode});
+import magic from './utils/magic.js'
 
 const ethers = require('ethers')
 const provider = new ethers.providers.Web3Provider(magic.rpcProvider);
-const contractAddress ='0xb3d2381f29c2d0db43628a130f21b83772820499'
 
+const contractAddress ='0xb3d2381f29c2d0db43628a130f21b83772820499'
 const contract = new ethers.Contract(
   contractAddress,
   abi,
@@ -69,7 +63,6 @@ function App() {
 
     const result = await contract.getAllTokens();
     const convertedCitizens = result.map(function(element) {
-      console.log(element)
       return {
         animal : element.animal.toNumber(),
         birthDate: element.birthDate.toNumber(),

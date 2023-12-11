@@ -1,12 +1,5 @@
-import { Magic } from "magic-sdk";
+import magic from "../utils/magic"
 import './Header.css'
-
-const polygonNode = {
-  rpcUrl:'https://polygon-mumbai.g.alchemy.com/v2/9b1326CuGOhpxr_RhB2QoPXKpfbuJsDF',
-  chainId: 80001, // Polygon chain id 
-}
-
-const magic = new Magic("pk_live_BFB02F3E6751D40B", {network: polygonNode});
 
 function Header({account, setAccount, clickHelpHandler, getOwnedCitizens, setOwnedCitizens}) {
     async function handleLogin(){

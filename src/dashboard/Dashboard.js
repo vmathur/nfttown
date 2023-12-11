@@ -8,12 +8,10 @@ function Dashboard({charactersRef, account, ownedCitizens, selectedCitizen, clic
       let canClean = getHealthRemaining( parseInt(citizen.lastFed), parseInt(citizen.maxTime)) === 0 ? true : false;
       let isOwner = ownedCitizens.includes(citizen.tokenId);
       let selected = citizen.tokenId===String(selectedCitizen)?true:false
-  
       return (
-        <div>
+        <div key={citizen.tokenId}>
           <CitizenSection 
             id={citizen.tokenId} 
-            key={citizen.tokenId}
             selected={selected}
             account={account} 
             stats={citizen}
