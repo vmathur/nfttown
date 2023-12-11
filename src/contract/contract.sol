@@ -7,8 +7,9 @@ import "@openzeppelin/contracts@4.8.0/token/ERC721/extensions/ERC721Burnable.sol
 import "@openzeppelin/contracts@4.8.0/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts@4.8.0/utils/Counters.sol";
 import "@openzeppelin/contracts@4.8.0/utils/Strings.sol";
+import "@openzeppelin/contracts@4.8.0/metatx/ERC2771Context.sol";
 
-contract NFTzen is ERC721, ERC721Enumerable, ERC721Burnable {
+contract NFTzen is ERC2771Context, ERC721, ERC721Enumerable, ERC721Burnable {
     using Counters for Counters.Counter;
     using Strings for uint256;
 
@@ -32,7 +33,18 @@ contract NFTzen is ERC721, ERC721Enumerable, ERC721Burnable {
     uint256 maxAnimals = 4;
     uint256 maxColors = 4;
 
-    constructor() ERC721("NFTzen", "Zen") {}
+    address TRUSTEDFORWADER = 0xB7B46474aAA2729e07EEC90596cdD9772b29Ecfb;
+
+    constructor() ERC2771Context(TRUSTEDFORWADER) ERC721("NFTzen", "Zen") {}
+
+    function _msgData() internal view override(Context, ERC2771Context) returns (bytes calldata) {
+        return ERC2771Context._msgData();
+    }
+
+    // Use internal _msgSender() instead of msg.sender for meta transactions
+    function _msgSender() internal view override(Context, ERC2771Context) returns (address sender) {
+        return ERC2771Context._msgSender();
+    }
 
     //key methods
     function mint() public returns (uint256){
@@ -42,7 +54,7 @@ contract NFTzen is ERC721, ERC721Enumerable, ERC721Burnable {
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
 
-        _safeMint(msg.sender, tokenId);
+        _safeMint(_msgSender(), tokenId);
         allTokenIds.push(tokenId);
 
         uint256 currentTimestamp = block.timestamp;
@@ -60,7 +72,7 @@ contract NFTzen is ERC721, ERC721Enumerable, ERC721Burnable {
         uint256 newLastFed =  block.timestamp;
 
         require(_exists(tokenId), "Please use an existing token");
-        require(ownerOf(tokenId) == msg.sender, "You must own this token to feed it");
+        require(ownerOf(tokenId) == _msgSender(), "You must own this token to feed it");
         
         tokenMetadata[tokenId].lastFed = newLastFed;
         return newLastFed.toString();
@@ -88,12 +100,12 @@ contract NFTzen is ERC721, ERC721Enumerable, ERC721Burnable {
         return itemList;    
     }
 
-    function getAllOwnedTokenIDs() public view returns (uint256[] memory){
-        uint256 length = balanceOf(msg.sender);
+    function getAllOwnedTokenIDs(address account) public view returns (uint256[] memory){
+        uint256 length = balanceOf(account);
         uint256[] memory itemList = new uint256[](length);
 
         for (uint256 i=0; i < length; i++){
-            uint256 tokenId = tokenOfOwnerByIndex(msg.sender, i);
+            uint256 tokenId = tokenOfOwnerByIndex(account, i);
             itemList[i] = tokenId;
         }
         return itemList;    
@@ -102,7 +114,7 @@ contract NFTzen is ERC721, ERC721Enumerable, ERC721Burnable {
     //supporting methods
     function burn(uint256 tokenId) public override {
         require(_exists(tokenId), "Please use an existing token");
-        require(ownerOf(tokenId) == msg.sender, "You must own this token to feed it");
+        require(ownerOf(tokenId) == _msgSender(), "You must own this token to feed it");
 
         removeByValue(tokenId);
         _burn(tokenId);
@@ -126,7 +138,7 @@ contract NFTzen is ERC721, ERC721Enumerable, ERC721Burnable {
 
     //utilities
     function random(uint range) public view returns(uint){
-        return uint(keccak256(abi.encodePacked(block.timestamp,block.difficulty,msg.sender))) % range;
+        return uint(keccak256(abi.encodePacked(block.timestamp,block.difficulty,_msgSender()))) % range;
     }    
 
     function findElement(uint value) private view returns(uint) {

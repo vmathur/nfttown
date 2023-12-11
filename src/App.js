@@ -6,7 +6,7 @@ import React, {useRef, useEffect, useState} from 'react'
 import Modal from 'react-modal';
 import { Magic } from "magic-sdk";
 import {spriteData, spriteDimensions, startingLocation} from './data/characterData'
-import {abi} from "./contract/abi-2771.js"
+import { abi } from "./contract/abi.js"
 import { MdClose } from 'react-icons/md';
 
 const polygonNode = {
@@ -218,7 +218,7 @@ function getHelpContent(closeModal){
     <div style={{marginBottom: '20px'}}>2. Feed your citizen to keep them happy. If their health goes to 0 they will leave town</div>
     <div style={{marginBottom: '20px'}}>3. If a citizen leaves town, it can be removed by anyone burning the NFT forever. This will make room for anyone to mint a new citizen</div>
     <div style={{marginBottom: '20px'}}></div>
-    <div style={{marginBottom: '20px'}}><a href={'https://mumbai.polygonscan.com/address/0xb3d2381f29c2d0db43628a130f21b83772820499'} style ={{color:'white'}}>View contract</a></div>
+    <div style={{marginBottom: '20px'}}><a href={'https://mumbai.polygonscan.com/address/0xb3d2381f29c2d0db43628a130f21b83772820499'} style ={{color:'white'}} target={"_blank"}>View contract</a></div>
   </div>)
 }
 
