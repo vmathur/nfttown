@@ -135,10 +135,11 @@ function App() {
     let transaction = await contract.populateTransaction.clean(tokenId);
     await magic.wallet.sendGaslessTransaction(account,transaction)
 
+    console.log('Cleaned')
+
     setIsUpdating(false)
     getCitizens();
     setInitiatlActions({})
-    console.log('Cleaned')
   };
 
   function clickInfoHandler(modalData) {
