@@ -77,12 +77,12 @@ function App() {
         lastFed: element.lastFed.toNumber(),
         maxTime: element.maxTime.toNumber(),
         tokenId: element.tokenId.toNumber()
-      }; // Example: Double each element
+      };
     });
-    console.log(convertedCitizens)
+
     setCitizens(convertedCitizens)
-    setIsUpdating(false)
     setGetCitizenDone(true)
+    setIsUpdating(false)
     console.log('Fetched citizens')
   }
 
@@ -90,34 +90,21 @@ function App() {
   const mint = async () => {
     console.log('Calling mint')
     setIsUpdating(true)
-    // const contract = new ethers.Contract(
-    //   contractAddress,
-    //   abi,
-    //   provider,
-    // );
     let transaction = await contract.populateTransaction.mint();
+    await magic.wallet.sendGaslessTransaction(account,transaction)
 
-    const gasless_request = await magic.wallet.sendGaslessTransaction(account,
-      transaction,
-    )
-    
-    console.log('Minted')
     setIsUpdating(false)
     setInitiatlActions({})
     getCitizens();
     getOwnedCitizens(account);
+    console.log('Minted')
   };
 
   //getOwnedCitizens
   const getOwnedCitizens = async (account) => {
     console.log('Fetching wallets citizens')
     setIsUpdating(true)
-    // const contract = new ethers.Contract(
-    //   contractAddress,
-    //   abi,
-    //   provider,
-    // );
-      
+
     const result = await contract.getAllOwnedTokenIDs(account);
     const newArray = result.map(function(element) {
       return element.toNumber();
@@ -134,9 +121,7 @@ function App() {
     setIsUpdating(true)
 
     let transaction = await contract.populateTransaction.feed(tokenId);
-    const gasless_request = await magic.wallet.sendGaslessTransaction(account,
-      transaction,
-    )
+    await magic.wallet.sendGaslessTransaction(account,transaction)
 
     setIsUpdating(false)
     setInitiatlActions({tokenId: tokenId, currentAction: 'eatLots'})
@@ -148,13 +133,12 @@ function App() {
     setIsUpdating(true)
 
     let transaction = await contract.populateTransaction.clean(tokenId);
-    const gasless_request = await magic.wallet.sendGaslessTransaction(account,
-      transaction,
-    )
+    await magic.wallet.sendGaslessTransaction(account,transaction)
 
     setIsUpdating(false)
     getCitizens();
     setInitiatlActions({})
+    console.log('Cleaned')
   };
 
   function clickInfoHandler(modalData) {
@@ -218,7 +202,7 @@ function getHelpContent(closeModal){
     <div style={{marginBottom: '20px'}}>2. Feed your citizen to keep them happy. If their health goes to 0 they will leave town</div>
     <div style={{marginBottom: '20px'}}>3. If a citizen leaves town, it can be removed by anyone burning the NFT forever. This will make room for anyone to mint a new citizen</div>
     <div style={{marginBottom: '20px'}}></div>
-    <div style={{marginBottom: '20px'}}><a href={'https://mumbai.polygonscan.com/address/0xb3d2381f29c2d0db43628a130f21b83772820499'} style ={{color:'white'}} target={"_blank"}>View contract</a></div>
+    <div style={{marginBottom: '20px'}}><a href={'https://mumbai.polygonscan.com/address/0xb3d2381f29c2d0db43628a130f21b83772820499'} style ={{color:'white'}} target={"_blank"} rel="noreferrer">View contract</a></div>
   </div>)
 }
 
