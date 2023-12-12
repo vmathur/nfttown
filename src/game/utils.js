@@ -6,7 +6,8 @@ export function getHealthRemaining(lastFed, maxTime){
     let hoursRemaining = Math.floor( (maxTime - elapsedTime)/3600)
 
     let health = Math.floor(100*(hoursRemaining/(maxTime/3600)));
-    health = health > 0 ? health : 0;
+    health = health > 0 ? health : 0; //if health is less than 0, it should be 0
+    health = health > 94 ? 100 : health; //if health is greater than 95s, it should be 100
     
     return health
 }

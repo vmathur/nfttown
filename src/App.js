@@ -5,30 +5,26 @@ import Header from './header/Header'
 import React, {useRef, useEffect, useState} from 'react'
 import Modal from 'react-modal';
 import {spriteData, spriteDimensions, startingLocation} from './data/characterData'
-import { abi } from "./contract/abi.js"
 import { MdClose } from 'react-icons/md';
-import magic from './utils/magic.js'
-
-const ethers = require('ethers')
-const provider = new ethers.providers.Web3Provider(magic.rpcProvider);
-
-const contractAddress ='0xb3d2381f29c2d0db43628a130f21b83772820499'
-const contract = new ethers.Contract(
-  contractAddress,
-  abi,
-  provider,
-);
+import { getCitizens, getOwnedCitizens } from './contract/contractFunctions.js';
 
 Modal.setAppElement('#root');
 
 function App() {
+  //game objects
   const [citizens, setCitizens] = useState([]);
   const [ownedCitizens, setOwnedCitizens] = useState([]);
   const [selectedCitizen, setSelectedCitizen] = useState([]);
+  const [initialActions, setInitiatlActions] = useState({});
+
+  //state variables
   const [isUpdating, setIsUpdating] = useState(false);
   const [getCitizenDone, setGetCitizenDone] = useState(false)
-  const [initialActions, setInitiatlActions] = useState({});
+
+  //user objects
   const [account, setAccount] = useState(localStorage.getItem('user'));
+
+  //modal
   const [modalIsOpen, setIsOpen] = useState(false);
   const [modalData, setModalData] = useState();
   const [modalType, setModalType] = useState('help');
@@ -56,85 +52,6 @@ function App() {
   let characters = useRef([])
   characters.current=characterData3
 
-  //get all
-  const getCitizens = async () => {
-    console.log('Fetching latest citizens')
-    setIsUpdating(true)
-
-    const result = await contract.getAllTokens();
-    const convertedCitizens = result.map(function(element) {
-      return {
-        animal : element.animal.toNumber(),
-        birthDate: element.birthDate.toNumber(),
-        color : element.color.toNumber(),
-        lastFed: element.lastFed.toNumber(),
-        maxTime: element.maxTime.toNumber(),
-        tokenId: element.tokenId.toNumber()
-      };
-    });
-
-    setCitizens(convertedCitizens)
-    setGetCitizenDone(true)
-    setIsUpdating(false)
-    console.log('Fetched citizens')
-  }
-
-  //mint
-  const mint = async () => {
-    console.log('Calling mint')
-    setIsUpdating(true)
-    let transaction = await contract.populateTransaction.mint();
-    await magic.wallet.sendGaslessTransaction(account,transaction)
-
-    setIsUpdating(false)
-    setInitiatlActions({})
-    getCitizens();
-    getOwnedCitizens(account);
-    console.log('Minted')
-  };
-
-  //getOwnedCitizens
-  const getOwnedCitizens = async (account) => {
-    console.log('Fetching wallets citizens')
-    setIsUpdating(true)
-
-    const result = await contract.getAllOwnedTokenIDs(account);
-    const newArray = result.map(function(element) {
-      return element.toNumber();
-    });
-
-    setOwnedCitizens(newArray)
-    setIsUpdating(false)
-    console.log('Fetched wallets citizens')
-  }
-  
-  //feed
-  const feed = async (tokenId) => {
-    console.log('Calling feed contract')
-    setIsUpdating(true)
-
-    let transaction = await contract.populateTransaction.feed(tokenId);
-    await magic.wallet.sendGaslessTransaction(account,transaction)
-
-    setIsUpdating(false)
-    setInitiatlActions({tokenId: tokenId, currentAction: 'eatLots'})
-  };
-
-  //clean
-  const clean = async (tokenId) => {
-    console.log('Calling clean contract')
-    setIsUpdating(true)
-
-    let transaction = await contract.populateTransaction.clean(tokenId);
-    await magic.wallet.sendGaslessTransaction(account,transaction)
-
-    console.log('Cleaned')
-
-    setIsUpdating(false)
-    getCitizens();
-    setInitiatlActions({})
-  };
-
   function clickInfoHandler(modalData) {
     setModalData(modalData)
     setModalType('info')
@@ -151,8 +68,15 @@ function App() {
   }
 
   useEffect(() => {
-    getCitizens();
-  },[]);
+    setIsUpdating(true);
+    setGetCitizenDone(false)
+    getCitizens(setCitizens);
+    if(account){
+      getOwnedCitizens(setOwnedCitizens, account)
+    }
+    setGetCitizenDone(true)
+    setIsUpdating(false);
+  },[account]);
 
   return (
     <div className="App">
@@ -165,7 +89,7 @@ function App() {
         account={account} 
         setAccount={setAccount} 
         clickHelpHandler={clickHelpHandler}
-        getOwnedCitizens={getOwnedCitizens} 
+        getOwnedCitizens={getOwnedCitizens}
         setOwnedCitizens={setOwnedCitizens}/>
       { getCitizenDone ? 
         <Board 
@@ -179,9 +103,9 @@ function App() {
         ownedCitizens={ownedCitizens} 
         selectedCitizen={selectedCitizen} 
         clickInfoHandler={clickInfoHandler}
-        mint={mint} 
-        clean={clean} 
-        feed={feed}/>
+        setCitizens={setCitizens}
+        setIsUpdating={setIsUpdating}
+        setInitiatlActions={setInitiatlActions}/>
     </div>
   );
 }

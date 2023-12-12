@@ -2,8 +2,9 @@ import React from 'react';
 import './Dashboard.css';
 import CitizenSection from './CitizenSection';
 import { getHealthRemaining } from '../game/utils';
+import { mint } from "../contract/contractFunctions"
 
-function Dashboard({charactersRef, account, ownedCitizens, selectedCitizen, clickInfoHandler, mint, clean, feed}) {
+function Dashboard({charactersRef, account, ownedCitizens, selectedCitizen, clickInfoHandler, setCitizens, setIsUpdating, setInitiatlActions}) {
     const allSections = charactersRef.current.map((citizen) => {
       let canClean = getHealthRemaining( parseInt(citizen.lastFed), parseInt(citizen.maxTime)) === 0 ? true : false;
       let isOwner = ownedCitizens.includes(citizen.tokenId);
@@ -17,18 +18,25 @@ function Dashboard({charactersRef, account, ownedCitizens, selectedCitizen, clic
             stats={citizen}
             isOwner={isOwner}
             clickInfoHandler={clickInfoHandler}
-            canClean={canClean}
-            clean={clean}
-            feed={feed}/>
+            setIsUpdating={setIsUpdating}
+            setInitiatlActions={setInitiatlActions}
+            setCitizens={setCitizens}
+            canClean={canClean}/>
         </div>
       )
     });
+
+    const callMint = () =>{
+      setIsUpdating(true);
+      mint(setInitiatlActions, setCitizens, account)
+      setIsUpdating(false)
+    }
 
     return (
       <div className="citizen-container">
         {!account && charactersRef.current.length<4 ? <div className="login-message"><i>Connect wallet to mint and feed</i></div> : ''}
         <div className="citien-section-container">{allSections}</div>
-        {account && charactersRef.current.length<4 ? <button onClick={mint} className="mint-button button-secondary">Mint a citizen</button> : ''}
+        {account && charactersRef.current.length<4 ? <button onClick={callMint} className="mint-button button-secondary">Mint a citizen</button> : ''}
       </div>
     );
   }

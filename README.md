@@ -9,12 +9,12 @@
 - make cat sprite and add more colors
 - mobile friendly
 - scale to more players
+
 - passkeys
 - refactor
 - add wallet owner to the metadata
-
-- new animations
 - base
+
 
 ## Available Scripts
 

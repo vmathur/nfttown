@@ -3,10 +3,10 @@ import './Header.css'
 
 function Header({account, setAccount, clickHelpHandler, getOwnedCitizens, setOwnedCitizens}) {
     async function handleLogin(){
-      await magic.wallet.connectWithUI().then(data=>{
-        setAccount(data[0])
-        getOwnedCitizens(data[0]);
-      })
+      let account = await magic.wallet.connectWithUI();
+      localStorage.setItem('user', account[0])
+      setAccount(account[0]);
+      getOwnedCitizens(setOwnedCitizens, account[0]);
     }
 
     async function handleWallet(){

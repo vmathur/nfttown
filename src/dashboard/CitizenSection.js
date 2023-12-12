@@ -4,6 +4,7 @@ import { getHealthRemaining, getAgeInHours } from '../game/utils';
 import ProgressBar from "@ramonak/react-progress-bar";
 import { AiFillHeart } from 'react-icons/ai';
 import { HiInformationCircle } from 'react-icons/hi'
+import { feed, clean } from '../contract/contractFunctions'
 
 function CitizenSection(props) {
     let tokenId = props.stats.tokenId;
@@ -49,6 +50,18 @@ function CitizenSection(props) {
 
     }
 
+    const callFeed = () =>{
+      props.setIsUpdating(true)
+      feed(props.stats.tokenId, props.account, props.setCitizens, props.setInitiatlActions)
+      props.setIsUpdating(false)
+    }
+
+    const callClean = () =>{
+      props.setIsUpdating(true)
+      clean(props.stats.tokenId, props.account, props.setCitizens, props.setInitiatlActions)
+      props.setIsUpdating(false)
+    }
+
     return (
       <div>
         <div className={"citizen-section " + (selected?'selected':'')}>
@@ -78,10 +91,10 @@ function CitizenSection(props) {
           {props.account ? 
             <div className="citizen-section-item">
               {!canClean && isOwner ? 
-              <button className="feed-button button-primary"onClick={(e)=>props.feed(tokenId)}>Feed</button> 
+              <button className="feed-button button-primary"onClick={callFeed}>Feed</button> 
               : ''}
               {canClean ? 
-                <button className="feed-button button-secondary" onClick={(e)=>props.clean(tokenId)}>Remove</button>
+                <button className="feed-button button-secondary" onClick={callClean}>Remove</button>
               :''}
             </div> : ''}
         </div>
