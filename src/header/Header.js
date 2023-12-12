@@ -19,7 +19,7 @@ function Header({account, setAccount, clickHelpHandler, getOwnedCitizens, setOwn
     return (
       <div className="header-container">
         <div className="header-button-area">
-        <button className="how-to-play-button button-secondary" onClick={clickHelpHandler}>How to play</button>
+        <button className="how-to-play-button button-secondary" onClick={clickHelpHandler}>About</button>
 
         {!account? 
           <button className="connect-button button-primary" onClick={handleLogin}>Connect</button> : 
