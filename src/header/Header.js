@@ -12,6 +12,7 @@ function Header({account, setAccount, clickHelpHandler, getOwnedCitizens, setOwn
     async function handleWallet(){
       await magic.wallet.showUI().on("disconnect", ()=>{
         setAccount('')
+        localStorage.setItem('user', '')
       })
     }
   

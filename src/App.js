@@ -38,6 +38,7 @@ function App() {
       maxTime: citizen.maxTime,
       color: citizen.color,
       birthDate: citizen.birthDate,
+      owner: citizen.owner,
       width: spriteDimensions.width,
       height: spriteDimensions.height,
       imgSource : spriteMap.imgSource,
@@ -102,6 +103,7 @@ function App() {
         selectedCitizen={selectedCitizen} 
         clickInfoHandler={clickInfoHandler}
         setCitizens={setCitizens}
+        setOwnedCitizens={setOwnedCitizens}
         setIsUpdating={setIsUpdating}
         setInitiatlActions={setInitiatlActions}/>
     </div>

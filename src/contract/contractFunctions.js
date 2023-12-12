@@ -4,7 +4,7 @@ import { abi } from "./abi.js"
 const ethers = require('ethers')
 const provider = new ethers.providers.Web3Provider(magic.rpcProvider);
 
-export const contractAddress ='0xb3d2381f29c2d0db43628a130f21b83772820499';
+export const contractAddress ='0xd553bE46FfA4eC816b0Bd2ba68EeE64ca853b361';
 
 const contract = new ethers.Contract(
   contractAddress,
@@ -24,7 +24,8 @@ export async function getCitizens(setCitizens){
         color : element.color.toNumber(),
         lastFed: element.lastFed.toNumber(),
         maxTime: element.maxTime.toNumber(),
-        tokenId: element.tokenId.toNumber()
+        tokenId: element.tokenId.toNumber(),
+        owner: element.owner
       };
     });
 
@@ -46,7 +47,7 @@ export async function getOwnedCitizens(setOwnedCitizens, account){
 }
   
 //mint
-export async function mint(setInitiatlActions, setCitizens, account){
+export async function mint(setInitiatlActions, setCitizens, setOwnedCitizens, account){
     console.log('Calling mint')
     let transaction = await contract.populateTransaction.mint();
     await magic.wallet.sendGaslessTransaction(account,transaction)
@@ -54,7 +55,7 @@ export async function mint(setInitiatlActions, setCitizens, account){
 
     setInitiatlActions({})
     getCitizens(setCitizens);
-    getOwnedCitizens(account);
+    getOwnedCitizens(setOwnedCitizens, account);
 };
 
 //feed

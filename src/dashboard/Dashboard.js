@@ -4,7 +4,7 @@ import CitizenSection from './CitizenSection';
 import { getHealthRemaining } from '../game/utils';
 import { mint } from "../contract/contractFunctions"
 
-function Dashboard({charactersRef, account, ownedCitizens, selectedCitizen, clickInfoHandler, setCitizens, setIsUpdating, setInitiatlActions}) {
+function Dashboard({charactersRef, account, ownedCitizens, selectedCitizen, clickInfoHandler, setCitizens, setOwnedCitizens, setIsUpdating, setInitiatlActions}) {
     const allSections = charactersRef.current.map((citizen) => {
       let canClean = getHealthRemaining( parseInt(citizen.lastFed), parseInt(citizen.maxTime)) === 0 ? true : false;
       let isOwner = ownedCitizens.includes(citizen.tokenId);
@@ -28,7 +28,7 @@ function Dashboard({charactersRef, account, ownedCitizens, selectedCitizen, clic
 
     const callMint = () =>{
       setIsUpdating(true);
-      mint(setInitiatlActions, setCitizens, account)
+      mint(setInitiatlActions, setCitizens, setOwnedCitizens, account)
       setIsUpdating(false)
     }
 

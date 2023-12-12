@@ -22,6 +22,7 @@ function getInfoModalContet(data, closeModal){
     return (<div className='modal-container'>
       <MdClose onClick={closeModal} style={{ color: "white", fontSize: "1em", right:'30px', position: 'absolute'}}/>
       <div style={{marginBottom: '20px'}}><b>On chain metadata</b></div>
+      <div>owner: &nbsp;&nbsp;&nbsp;&nbsp;{data.owner}</div>
       <div>id:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{data.tokenId}</div>
       <div>animal: &nbsp;&nbsp;&nbsp;{data.animalId}</div>
       <div>color: &nbsp;&nbsp;&nbsp;&nbsp;{data.color}</div>

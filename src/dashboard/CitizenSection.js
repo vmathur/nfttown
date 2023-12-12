@@ -45,6 +45,7 @@ function CitizenSection(props) {
         lastFed: props.stats.lastFed,
         maxTime: props.stats.maxTime,
         birthDate: props.stats.birthDate,
+        owner: props.stats.owner
       }
       props.clickInfoHandler(modalData);
 

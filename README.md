@@ -5,17 +5,6 @@
 2. Feed your citizen to keep them happy. If their health goes to 0 they will leave town
 3. If a citizen leaves town, it can be removed by anyone. The NFT gets burned, making room for anyone to mint a new citizen
 
-## To do
-- make cat sprite and add more colors
-- mobile friendly
-- scale to more players
-
-- passkeys
-- refactor
-- add wallet owner to the metadata
-- base
-
-
 ## Available Scripts
 
 In the project directory, you can run:

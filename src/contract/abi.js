@@ -340,6 +340,11 @@ export const abi =
 						"internalType": "uint256",
 						"name": "birthDate",
 						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
 					}
 				],
 				"internalType": "struct NFTzen.Metadata[]",
@@ -585,6 +590,11 @@ export const abi =
 				"internalType": "uint256",
 				"name": "birthDate",
 				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
 			}
 		],
 		"stateMutability": "view",
