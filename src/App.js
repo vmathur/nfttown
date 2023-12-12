@@ -3,12 +3,9 @@ import Board from './game/Board'
 import Dashboard from './dashboard/Dashboard'
 import Header from './header/Header'
 import React, {useRef, useEffect, useState} from 'react'
-import Modal from 'react-modal';
+import InfoModal from "./utils/infoModal.js"
 import {spriteData, spriteDimensions, startingLocation} from './data/characterData'
-import { MdClose } from 'react-icons/md';
 import { getCitizens, getOwnedCitizens } from './contract/contractFunctions.js';
-
-Modal.setAppElement('#root');
 
 function App() {
   //game objects
@@ -54,7 +51,7 @@ function App() {
 
   function clickInfoHandler(modalData) {
     setModalData(modalData)
-    setModalType('info')
+    setModalType('metadata')
     setIsOpen(true);
   }
 
@@ -80,11 +77,12 @@ function App() {
 
   return (
     <div className="App">
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        style={modalType === 'help'? helpModalStyle : infoModalStyle}
-      >{modalType === 'help'? getHelpContent(closeModal) : getInfoModalContet(modalData, closeModal)}</Modal>
+      <InfoModal
+        modalIsOpen={modalIsOpen}
+        closeModal={closeModal}
+        modalType={modalType}
+        modalData={modalData}
+      />
       <Header 
         account={account} 
         setAccount={setAccount} 
@@ -111,62 +109,3 @@ function App() {
 }
 
 export default App;
-
-function getHelpContent(closeModal){
-  return (<div className='modal-container'>
-    <MdClose onClick={closeModal} style={{ color: "white", fontSize: "1em", right:'30px', position: 'absolute'}}/>
-    <div style={{marginBottom: '20px'}}><b>How to play</b></div>
-    <div style={{marginBottom: '20px'}}>1. Connect your wallet and mint a new citizen NFT to get started. NFT Town is limited to 4 citizens at a time</div>
-    <div style={{marginBottom: '20px'}}>2. Feed your citizen to keep them happy. If their health goes to 0 they will leave town</div>
-    <div style={{marginBottom: '20px'}}>3. If a citizen leaves town, it can be removed by anyone burning the NFT forever. This will make room for anyone to mint a new citizen</div>
-    <div style={{marginBottom: '20px'}}></div>
-    <div style={{marginBottom: '20px'}}><a href={'https://mumbai.polygonscan.com/address/0xb3d2381f29c2d0db43628a130f21b83772820499'} style ={{color:'white'}} target={"_blank"} rel="noreferrer">View contract</a></div>
-  </div>)
-}
-
-function getInfoModalContet(data, closeModal){
-  if(!data){return}
-
-  return (<div className='modal-container'>
-    <MdClose onClick={closeModal} style={{ color: "white", fontSize: "1em", right:'30px', position: 'absolute'}}/>
-    <div style={{marginBottom: '20px'}}><b>On chain metadata</b></div>
-    <div>id:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{data.tokenId}</div>
-    <div>animal: &nbsp;&nbsp;&nbsp;{data.animalId}</div>
-    <div>color: &nbsp;&nbsp;&nbsp;&nbsp;{data.color}</div>
-    <div>lastFed: &nbsp;&nbsp;{data.lastFed}</div>
-    <div>maxTime: &nbsp;&nbsp;{data.maxTime}</div>
-    <div>birthDate: {data.birthDate}</div>
-  </div>)
-}
-
-const helpModalStyle = {
-  content: {
-    position: 'relative',
-    top: '50%',
-    left: '50%',
-    width: '60%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    fontFamily: 'Monaco',
-    backgroundColor: '#353739',
-    borderRadius: '10px',
-    fontSize: '20px',
-    transform: 'translate(-50%, -50%)',
-  },
-};
-
-const infoModalStyle = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    fontFamily: 'Monospace',
-    backgroundColor: '#353739',
-    borderRadius: '10px',
-    fontSize: '20px',
-    transform: 'translate(-50%, -50%)',
-  },
-};
