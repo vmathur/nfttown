@@ -26,9 +26,13 @@ function Dashboard({charactersRef, account, ownedCitizens, selectedCitizen, clic
       )
     });
 
-    const callMint = () =>{
+    const callMint = async () =>{
       setIsUpdating(true);
-      mint(setInitiatlActions, setCitizens, setOwnedCitizens, account)
+      try{
+        await mint(setInitiatlActions, setCitizens, setOwnedCitizens, account)
+      }catch(error){
+        console.log(error)
+      }
       setIsUpdating(false)
     }
 

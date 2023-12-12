@@ -51,15 +51,23 @@ function CitizenSection(props) {
 
     }
 
-    const callFeed = () =>{
+    const callFeed = async () =>{
       props.setIsUpdating(true)
-      feed(props.stats.tokenId, props.account, props.setCitizens, props.setInitiatlActions)
+      try{
+        await feed(props.stats.tokenId, props.account, props.setCitizens, props.setInitiatlActions)
+      }catch(error){
+        console.log(error)
+      }
       props.setIsUpdating(false)
     }
 
-    const callClean = () =>{
+    const callClean = async () =>{
       props.setIsUpdating(true)
-      clean(props.stats.tokenId, props.account, props.setCitizens, props.setInitiatlActions)
+      try{
+        await clean(props.stats.tokenId, props.account, props.setCitizens, props.setInitiatlActions)
+      }catch(error){
+        console.log(error)
+      }
       props.setIsUpdating(false)
     }
 

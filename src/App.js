@@ -14,11 +14,10 @@ function App() {
   const [selectedCitizen, setSelectedCitizen] = useState([]);
   const [initialActions, setInitiatlActions] = useState({});
 
-  //state variables
-  const [isUpdating, setIsUpdating] = useState(false);
-  const [getCitizenDone, setGetCitizenDone] = useState(false)
+  //UI update variables
+  const [isUpdating, setIsUpdating] = useState(true);
 
-  //user objects
+  //user variables
   const [account, setAccount] = useState(localStorage.getItem('user'));
 
   //modal
@@ -66,14 +65,15 @@ function App() {
   }
 
   useEffect(() => {
-    setIsUpdating(true);
-    setGetCitizenDone(false)
-    getCitizens(setCitizens);
-    if(account){
-      getOwnedCitizens(setOwnedCitizens, account)
+    const fetchData = async () => {
+      await getCitizens(setCitizens);
+      setIsUpdating(false);
+      if(account){
+        getOwnedCitizens(setOwnedCitizens, account)
+      }
     }
-    setGetCitizenDone(true)
-    setIsUpdating(false);
+
+    fetchData().catch(console.error);
   },[account]);
 
   return (
@@ -90,12 +90,11 @@ function App() {
         clickHelpHandler={clickHelpHandler}
         getOwnedCitizens={getOwnedCitizens}
         setOwnedCitizens={setOwnedCitizens}/>
-      { getCitizenDone ? 
-        <Board 
-          charactersRef={characters}
-          initialActions={initialActions} 
-          isUpdating={isUpdating}
-          setSelectedCitizen={setSelectedCitizen}/>: 'loading'}
+      <Board 
+        charactersRef={characters}
+        initialActions={initialActions} 
+        isUpdating={isUpdating}
+        setSelectedCitizen={setSelectedCitizen}/>
       <Dashboard 
         charactersRef={characters} 
         account={account} 
