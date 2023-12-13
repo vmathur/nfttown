@@ -40,7 +40,7 @@ function Dashboard({charactersRef, account, ownedCitizens, selectedCitizen, clic
       <div className="citizen-container">
         {!account && charactersRef.current.length<4 ? <div className="login-message"><i>Connect wallet to mint and feed</i></div> : ''}
         <div className="citien-section-container">{allSections}</div>
-        {account && charactersRef.current.length<4 ? <button onClick={callMint} className="mint-button button-secondary">Mint a citizen</button> : ''}
+        {account && charactersRef.current.length<4 ? <button onClick={callMint} className="mint-button button-secondary">+ Mint a citizen</button> : ''}
       </div>
     );
   }
