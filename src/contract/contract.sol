@@ -20,6 +20,7 @@ contract NFTzen is ERC2771Context, ERC721, ERC721Enumerable, ERC721Burnable {
         uint256 animal;
         uint256 color;  
         uint256 birthDate;  
+        address owner;  
     }
 
     Counters.Counter private _tokenIdCounter;
@@ -49,7 +50,8 @@ contract NFTzen is ERC2771Context, ERC721, ERC721Enumerable, ERC721Burnable {
     //key methods
     function mint() public returns (uint256){
         uint256 length = allTokenIds.length;
-        require(length < maxSupply, "Max NFTs reached already");
+        uint256 numberOfOwnedCitizens = balanceOf(_msgSender());
+        require(numberOfOwnedCitizens == 0, "Users can mint only 1 nft");
 
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
@@ -62,8 +64,9 @@ contract NFTzen is ERC2771Context, ERC721, ERC721Enumerable, ERC721Burnable {
         uint256 animal = random(maxAnimals);
         uint256 color = random(maxColors);
         uint256 birthDate = block.timestamp;
+        address owner = _msgSender();
 
-        tokenMetadata[tokenId] = Metadata (tokenId, currentTimestamp, maxTime, animal, color, birthDate);
+        tokenMetadata[tokenId] = Metadata (tokenId, currentTimestamp, maxTime, animal, color, birthDate, owner);
 
         return tokenId;
     }
