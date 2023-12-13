@@ -50,19 +50,19 @@ export const spriteData = {
       imgSource : '/assets/characters/bunny-orange.gif', //need to update this
     },
     '1' :{
-      imgSource : '/assets/characters/bunny-orange.gif', //need to update this
+      imgSource : '/assets/characters/bunny-red.gif', //need to update this
     },
     '2' :{
-      imgSource : '/assets/characters/bunny-orange.gif', //need to update this
+      imgSource : '/assets/characters/bunny-blue.gif', //need to update this
     },
     '3' :{
-      imgSource : '/assets/characters/bunny-orange.gif', //need to update this
+      imgSource : '/assets/characters/bunny-green.gif', //need to update this
     },
   }, 
 }
 
 export const spriteDimensions = {
-  width: 16,
+width: 16,
   height: 18,
 }
 
