@@ -1,7 +1,7 @@
 import magic from "../utils/magic"
 import './Header.css'
 
-function Header({account, setAccount, clickHelpHandler, getOwnedCitizens, setOwnedCitizens}) {
+function Header({account, setAccount, clickHelpHandler, getOwnedCitizens, setOwnedCitizens, mapMode, setMapMode}) {
     async function handleLogin(){
       let account = await magic.wallet.connectWithUI();
       localStorage.setItem('user', account[0])
@@ -15,10 +15,19 @@ function Header({account, setAccount, clickHelpHandler, getOwnedCitizens, setOwn
         localStorage.setItem('user', '')
       })
     }
+
+    function toggleMap(){
+      if(mapMode==='game'){
+        setMapMode('world')
+      }else if(mapMode==='world'){
+        setMapMode('game')
+      }
+    }
   
     return (
       <div className="header-container">
         <div className="header-button-area">
+        {mapMode && mapMode==='game' ? <button className="view-map button-secondary" onClick={toggleMap}>View world</button>:''}
         <button className="how-to-play-button button-secondary" onClick={clickHelpHandler}>About</button>
 
         {!account? 

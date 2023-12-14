@@ -8,22 +8,31 @@
         /* float: right;
         margin: 10px; */
         position: relative;
-        left:470px;;
+        left:415px;; 
+    }
+    .connect-button{
+        font-size: large;
+    }
+    
+    .view-account-button{
+        font-size: large;
+    }
+    
+    .disconnect-button{
+        font-size: large;
+    }
+    
+    .how-to-play-button{
+        font-size: large;
+    }
+    
+    .view-map{
+        font-size: large;
     }
 }
 
-.connect-button{
-    font-size: large;
-}
-
-.view-account-button{
-    font-size: large;
-}
-
-.disconnect-button{
-    font-size: large;
-}
-
-.how-to-play-button{
-    font-size: large;
-}
+@media screen and (max-width: 1000px){
+    .view-map{
+        display: none;
+    }
+};

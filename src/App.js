@@ -1,5 +1,6 @@
 import './App.css';
 import Board from './game/Board'
+import World from './game/World.js';
 import Dashboard from './dashboard/Dashboard'
 import Header from './header/Header'
 import React, {useRef, useEffect, useState} from 'react'
@@ -13,6 +14,8 @@ function App() {
   const [ownedCitizens, setOwnedCitizens] = useState([]);
   const [selectedCitizen, setSelectedCitizen] = useState([]);
   const [initialActions, setInitiatlActions] = useState({});
+  const [selectedZone, setSelectedZone] = useState([1,1]);
+  const [mapMode, setMapMode] = useState('game')
 
   //UI update variables
   const [isUpdating, setIsUpdating] = useState(true);
@@ -89,12 +92,21 @@ function App() {
         setAccount={setAccount} 
         clickHelpHandler={clickHelpHandler}
         getOwnedCitizens={getOwnedCitizens}
-        setOwnedCitizens={setOwnedCitizens}/>
-      <Board 
+        setOwnedCitizens={setOwnedCitizens}
+        mapMode={mapMode}
+        setMapMode={setMapMode}/>
+      {mapMode === 'game' && 
+        <Board 
         charactersRef={characters}
         initialActions={initialActions} 
         isUpdating={isUpdating}
-        setSelectedCitizen={setSelectedCitizen}/>
+        selectedZone={selectedZone}
+        setSelectedCitizen={setSelectedCitizen}/>}
+      {mapMode === 'world' && 
+        <World 
+        isUpdating={isUpdating}
+        setSelectedZone={setSelectedZone}
+        setMapMode={setMapMode}/>}
       <Dashboard 
         charactersRef={characters} 
         account={account} 

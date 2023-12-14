@@ -1,0 +1,29 @@
+@media screen and (max-width: 1000px) {
+  .container  {
+    visibility: hidden;
+    display: none;
+  }
+}
+
+
+.container {
+    position: relative;
+}
+
+.canvas, #rectangle {
+    position: absolute;
+    height: 100%;
+    border-radius: 50px;
+    pointer-events: none;
+  }
+  canvas {
+    border: 5px solid green;
+    border-radius: 50px;
+}
+
+.loading-text{
+  font-size: x-large;
+  font-weight: 5px;
+  color: white;
+  margin-top:300px;
+}

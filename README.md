@@ -1,5 +1,10 @@
 # NFT Town
 
+- create zones
+- map selectedZone to an index
+- dynamically render the zone
+- render the relevant citizens
+
 ## How to play
 1. Connect your wallet and mint a new citizen NFT to get started. NFT Town is limited to 4 citizens at a time
 2. Feed your citizen to keep them happy. If their health goes to 0 they will leave town

@@ -14,7 +14,7 @@ import getColorFromTime from './TimeOfDay';
 import { getHealthRemaining } from './utils'
 import './Board.css';
 
-export default function Board({charactersRef, initialActions, isUpdating, setSelectedCitizen}) {
+export default function Board({charactersRef, initialActions, isUpdating, selectedZone, setSelectedCitizen}) {
     const canvasRef = useRef(null);
     //initialize characters
     let characters = []
@@ -59,11 +59,13 @@ export default function Board({charactersRef, initialActions, isUpdating, setSel
         const render = () => {
             //get canvas
             const canvas = canvasRef.current;
+            if(!canvas){
+                return;
+            }
             const ctx = canvas.getContext('2d');
 
             // draw world map
             Map(ctx);
-            // Grid(ctx, canvas);
             clockTower.draw(ctx)
 
             //update objects

@@ -8,6 +8,8 @@ export function Grid(ctx, canvas){
 class Lines {
     constructor(tileSize){
         this.tileSize = tileSize
+        this.tileSizeX = tileSize*8
+        this.tileSizeY = tileSize*5
     }
 
     draw(ctx, height, width){
@@ -19,14 +21,14 @@ class Lines {
             ctx.moveTo(0, y);
             ctx.lineTo(width, y);
             ctx.stroke();
-            y +=this.tileSize;
+            y +=this.tileSizeY;
         }
         for(let j = 0; j < width; j+=this.tileSize) {
             ctx.beginPath();
             ctx.moveTo(x, 0);
             ctx.lineTo(x, height);
             ctx.stroke();
-            x +=this.tileSize;
+            x +=this.tileSizeX;
         } 
     }
 }
