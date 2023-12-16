@@ -7,6 +7,7 @@ import React, {useRef, useEffect, useState} from 'react'
 import InfoModal from "./utils/infoModal.js"
 import {spriteData, spriteDimensions, startingLocation} from './data/characterData'
 import { getCitizens, getOwnedCitizens } from './contract/contractFunctions.js';
+import { maxCitizens } from "./utils/constants.js" 
 
 function App() {
   //game objects
@@ -14,11 +15,11 @@ function App() {
   const [ownedCitizens, setOwnedCitizens] = useState([]);
   const [selectedCitizen, setSelectedCitizen] = useState([]);
   const [initialActions, setInitiatlActions] = useState({});
-  const [selectedZone, setSelectedZone] = useState([1,1]);
+  const [selectedZone, setSelectedZone] = useState(1);
   const [mapMode, setMapMode] = useState('game')
 
   //UI update variables
-  const [isUpdating, setIsUpdating] = useState(true);
+  const [isUpdating, setIsUpdating] = useState(false);
 
   //user variables
   const [account, setAccount] = useState(localStorage.getItem('user'));
@@ -30,7 +31,7 @@ function App() {
 
   let characterData3 = []
   for (const [i, citizen] of citizens.entries()){
-    if(i>=4){break} //can only render 4 NFTs right now
+    if(i>=maxCitizens){break}
     let spriteMap = spriteData[String(citizen.animal)][String(citizen.color)];
     let currentLocation = startingLocation[String(i)]
     characterData3.push({
@@ -69,6 +70,7 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsUpdating(true);
       await getCitizens(setCitizens);
       setIsUpdating(false);
       if(account){

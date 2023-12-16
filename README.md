@@ -1,9 +1,7 @@
 # NFT Town
 
-- create zones
-- map selectedZone to an index
-- dynamically render the zone
-- render the relevant citizens
+- animate the pond
+- render the citizens in the corresponding zone
 
 ## How to play
 1. Connect your wallet and mint a new citizen NFT to get started. NFT Town is limited to 4 citizens at a time

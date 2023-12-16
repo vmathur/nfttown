@@ -1,5 +1,5 @@
-export const initialObjectParams = [
-    {
+export const pondData = 
+{
         width: 384,
         height: 384,
         imgSource : '/assets/pond.png',
@@ -7,17 +7,9 @@ export const initialObjectParams = [
           x: 0,
           y: 10
         },
-        totalAnimationFrames: 12
-    },{
-        width: 256,
-        height: 128,
-        imgSource : '/assets/welcome.png',
-        currentLocation: {
-            x: 10,
-            y: 0
-        },
-        totalAnimationFrames: 1
-    }]
+        totalAnimationFrames: 12,
+        zone: 1
+}
 
 export const clockTowerData =
 {
@@ -29,7 +21,49 @@ export const clockTowerData =
         y: 1
     }
 }
-    
+
+export const welcomeBannerData = 
+{
+    width: 256,
+    height: 128,
+    imgSource : '/assets/welcome.png',
+    currentLocation: {
+        x: 10,
+        y: 0
+    },
+}    
+
+export const housesByZoneData = [
+    [
+        //1
+        [2,1],[5,1],[15,12],[18,12]
+    ],[
+        //2
+        [17,1],[20,1],[2,12],[5,12]
+    ],[
+        //3
+        [2,1],[5,1],[2,12],[5,12]
+    ],    [
+        //4
+        [15,1],[18,1],[15,12],[18,12]
+    ],[
+        //5
+        [2,12],[5,12],[15,12],[18,12]
+    ],[
+        //6
+        [15,1],[18,1],[2,12],[5,12]
+    ],    [
+        //7
+        [2,1],[5,1],[2,12],[5,12]
+    ],[
+        //8
+        [2,12],[5,12],[15,12],[18,12]
+    ],[
+        //9
+        [2,12],[5,12],[15,1],[18,1]
+    ]
+]
+
 
 export const objectLocations = [
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,

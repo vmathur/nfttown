@@ -3,6 +3,7 @@ import './Dashboard.css';
 import CitizenSection from './CitizenSection';
 import { getHealthRemaining } from '../game/utils';
 import { mint } from "../contract/contractFunctions"
+// import { maxCitizens } from "../utils/constants"
 
 function Dashboard({charactersRef, account, ownedCitizens, selectedCitizen, clickInfoHandler, setCitizens, setOwnedCitizens, setIsUpdating, setInitiatlActions}) {
     let canMint = ownedCitizens.length > 0 ? false : true;

@@ -3,7 +3,7 @@ import { worldMap } from "../data/tileConstants"
 export function WorldMap(ctx){
     let mapTiles = new Tiles();
     let tileImage = new Image();   // Create new img element
-    tileImage.src = './assets/tilesv2.png'; // Set source path
+    tileImage.src = './assets/tilesv3.png'; // Set source path
     mapTiles.draw(ctx, worldMap, tileImage)
 }
 

@@ -1,4 +1,4 @@
-export default class Object {
+export default class AnimatedObject {
     constructor(objectData, tileSize){
         let image = new Image();  
         image.src = objectData.imgSource;

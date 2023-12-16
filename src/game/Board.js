@@ -4,12 +4,8 @@ import React, {useRef, useEffect} from 'react'
 import { Map } from "./Map"
 import { tileMap } from "../data/tileConstants"
 import WallCollision from "../utils/WallCollision"
-import {initialObjectParams} from "../data/objectData" 
-import {clockTowerData} from "../data/objectData" 
 
 import Character  from "./Character"
-import Object from "./Object"
-import ClockTower from "./ClockTower"
 import getColorFromTime from './TimeOfDay';
 import { getHealthRemaining } from './utils'
 import './Board.css';
@@ -26,34 +22,6 @@ export default function Board({charactersRef, initialActions, isUpdating, select
         characters.push(character)
     }
 
-    //initialize objects
-    let objects = []
-    for(let data of initialObjectParams){
-        let object = new Object(data, tileMap.tsize)
-        objects.push(object)
-    }
-
-    let clockTower = new ClockTower(clockTowerData, tileMap.tsize)
-
-    //click handler
-    const canvasClickHandler=(event)=>{
-        let rect = canvasRef.current.getBoundingClientRect();
-        const x = Math.floor(event.clientX-rect.left)
-        const y = Math.floor(event.clientY-rect.top)
-        let citizenId = getClickedCitizen(x,y)
-        setSelectedCitizen(citizenId)
-    }
-
-    function getClickedCitizen(x,y){
-        let offset=50
-        for(const character of characters){
-            if((x>=character.x-offset&&x<=character.x+offset)&&(y>=character.y-offset&&y<=character.y+offset)){
-                return character.id
-            }
-        }
-        return ''
-    }
-
     //didmount
     useEffect(()=>{
         const render = () => {
@@ -64,14 +32,8 @@ export default function Board({charactersRef, initialActions, isUpdating, select
             }
             const ctx = canvas.getContext('2d');
 
-            // draw world map
-            Map(ctx);
-            clockTower.draw(ctx)
-
-            //update objects
-            for(let object of objects){
-                object.draw(ctx)
-            }
+            // draw zone map
+            Map(ctx, selectedZone);
 
             //update characters
             for(let character of characters){
@@ -96,13 +58,34 @@ export default function Board({charactersRef, initialActions, isUpdating, select
         opacity = 0.8
     }
 
+    //render
     return (
         <div className='container'>
             <div id="rectangle" className="loading-rectangle" style={{left: "calc((100vw - "+tileMap.tsize*tileMap.cols+"px)/2)", width:tileMap.tsize*tileMap.cols+"px", backgroundColor : color, opacity:opacity}} height={tileMap.tsize*tileMap.rows +'px'} width={tileMap.tsize*tileMap.cols +'px'} ><div className='loading-text'>{isUpdating ? 'Loading...': ''}</div></div>
-            <canvas id="canvas" ref={canvasRef} height={tileMap.tsize*tileMap.rows +'px'} width={tileMap.tsize*tileMap.cols +'px'} onClick={canvasClickHandler}/>
+            <canvas id="canvas" ref={canvasRef} height={tileMap.tsize*tileMap.rows +'px'} width={tileMap.tsize*tileMap.cols +'px'}/>
         </div>
     )
+
 }
 
 //clear screen
 // ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+// //click handler
+// const canvasClickHandler=(event)=>{
+//     let rect = canvasRef.current.getBoundingClientRect();
+//     const x = Math.floor(event.clientX-rect.left)
+//     const y = Math.floor(event.clientY-rect.top)
+//     let citizenId = getClickedCitizen(x,y)
+//     setSelectedCitizen(citizenId)
+// }
+
+// function getClickedCitizen(x,y){
+//     let offset=50
+//     for(const character of characters){
+//         if((x>=character.x-offset&&x<=character.x+offset)&&(y>=character.y-offset&&y<=character.y+offset)){
+//             return character.id
+//         }
+//     }
+//     return ''
+// }

@@ -24,9 +24,6 @@ export default function World({isUpdating, setSelectedZone, setMapMode}) {
         const render = () => {
             //get canvas
             const canvas = canvasRef.current;
-            // if(!canvas){
-            //     return;
-            // }
             const ctx = canvas.getContext('2d');
 
             // draw world map
@@ -50,7 +47,31 @@ export default function World({isUpdating, setSelectedZone, setMapMode}) {
 function mapCoordinateToZone(x,y){
     let zoneX = Math.floor(x/(worldMap.tsize*8))
     let zoneY = Math.floor(y/(worldMap.tsize*5))
-    return [zoneX,zoneY];
+
+    let coordinates = zoneX.toString()+zoneY.toString()
+
+    switch(coordinates){
+        case '11':
+            return 1;
+        case '21':
+            return 2;
+        case '22':
+            return 3;
+        case '12':
+            return 4;
+        case '02':
+            return 5;
+        case '01':
+            return 6;
+        case '00':
+            return 7;
+        case '10':
+            return 8;
+        case '20':
+            return 9;
+        default:
+            return 0
+    }
 }
 //clear screen
 // ctx.clearRect(0, 0, canvas.width, canvas.height);
