@@ -89,22 +89,6 @@ export const startingLocation = {
 }, 
 }
 
-export const initialCharacterParams = [
-  {
-      id: 'monkey1',
-      maxBananas: 30,
-      eatRate: 0.25,
-      width: 16,
-      height: 18,
-      imgSource : '/assets/monkey-orange.png',
-      currentLocation: {
-        x: 600,
-        y: 400
-      },
-      currentAction: 'eat',
-    }
-  ]
-
 let fps = 60
 
 export const behaviorLoops = {

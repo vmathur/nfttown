@@ -8,6 +8,7 @@ import InfoModal from "./utils/infoModal.js"
 import {spriteData, spriteDimensions, startingLocation} from './data/characterData'
 import { getCitizens, getOwnedCitizens } from './contract/contractFunctions.js';
 import { maxCitizens } from "./utils/constants.js" 
+import { startingPosition } from './utils/startingPosition.js';
 
 function App() {
   //game objects
@@ -42,7 +43,7 @@ function App() {
       if(i>=maxCitizens){break}
     
       let spriteMap = spriteData[String(citizen.animal)][String(citizen.color)];
-      let currentLocation = startingLocation[String(i)]
+      let currentLocation = startingPosition();
       characterData.push({
         animalId: citizen.animal,
         tokenId: citizen.tokenId,
