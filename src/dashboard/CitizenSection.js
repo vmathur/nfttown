@@ -56,7 +56,7 @@ function CitizenSection(props) {
       try{
         await feed(props.stats.tokenId, props.account, props.setCitizens, props.setInitiatlActions)
       }catch(error){
-        console.log(error)
+        console.error(error)
       }
       props.setIsUpdating(false)
     }
@@ -66,7 +66,7 @@ function CitizenSection(props) {
       try{
         await clean(props.stats.tokenId, props.account, props.setCitizens, props.setInitiatlActions)
       }catch(error){
-        console.log(error)
+        console.error(error)
       }
       props.setIsUpdating(false)
     }
@@ -97,9 +97,9 @@ function CitizenSection(props) {
               // labelAlignment={'center'}
               /></span>
           </div>
-          {props.account ? 
+          {props.renderActions ? 
             <div className="citizen-section-item">
-              {!canClean && isOwner ? 
+              {!canClean && isOwner ?  
               <button className="feed-button button-primary"onClick={callFeed}>Feed</button> 
               : ''}
               {canClean ? 

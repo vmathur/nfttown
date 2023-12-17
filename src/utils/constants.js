@@ -1,3 +1,3 @@
-let maxCitizens = 4;
+let maxCitizens = 36;
 
 export {maxCitizens};

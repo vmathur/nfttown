@@ -29,29 +29,39 @@ function App() {
   const [modalData, setModalData] = useState();
   const [modalType, setModalType] = useState('help');
 
-  let characterData3 = []
-  for (const [i, citizen] of citizens.entries()){
-    if(i>=maxCitizens){break}
-    let spriteMap = spriteData[String(citizen.animal)][String(citizen.color)];
-    let currentLocation = startingLocation[String(i)]
-    characterData3.push({
-      animalId: citizen.animal,
-      tokenId: citizen.tokenId,
-      lastFed: citizen.lastFed,
-      maxTime: citizen.maxTime,
-      color: citizen.color,
-      birthDate: citizen.birthDate,
-      owner: citizen.owner,
-      width: spriteDimensions.width,
-      height: spriteDimensions.height,
-      imgSource : spriteMap.imgSource,
-      currentAction: 'idle',
-      currentLocation: currentLocation,
-    });
+  let citizensInSelectedZone = []
+  if(mapMode==='game'){
+    citizensInSelectedZone = splitCitizensIntoGroups(citizens, selectedZone);
+  }else if(mapMode==='world'){
+    citizensInSelectedZone=citizens;
+  }
+
+  let characterData = []
+  if(citizensInSelectedZone.length>0){
+    for (const [i, citizen] of citizensInSelectedZone.entries()){
+      if(i>=maxCitizens){break}
+    
+      let spriteMap = spriteData[String(citizen.animal)][String(citizen.color)];
+      let currentLocation = startingLocation[String(i)]
+      characterData.push({
+        animalId: citizen.animal,
+        tokenId: citizen.tokenId,
+        lastFed: citizen.lastFed,
+        maxTime: citizen.maxTime,
+        color: citizen.color,
+        birthDate: citizen.birthDate,
+        owner: citizen.owner,
+        width: spriteDimensions.width,
+        height: spriteDimensions.height,
+        imgSource : spriteMap.imgSource,
+        currentAction: 'idle',
+        currentLocation: currentLocation,
+      });
+    }
   }
 
   let characters = useRef([])
-  characters.current=characterData3
+  characters.current=characterData
 
   function clickInfoHandler(modalData) {
     setModalData(modalData)
@@ -71,14 +81,16 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       setIsUpdating(true);
-      await getCitizens(setCitizens);
+      let cits = await getCitizens(setCitizens);
       setIsUpdating(false);
       if(account){
-        getOwnedCitizens(setOwnedCitizens, account)
+        let owned = await getOwnedCitizens(setOwnedCitizens, account)
+        let zone = getOwnedCitizenZoneFromCitizens(owned, cits);
+        setSelectedZone(zone);
       }
     }
 
-    fetchData().catch(console.error);
+    fetchData().catch(console.error)
   },[account]);
 
   return (
@@ -121,6 +133,37 @@ function App() {
         setInitiatlActions={setInitiatlActions}/>
     </div>
   );
+}
+
+function splitCitizensIntoGroups(citizens, selectedZone) {
+  const groups = [];
+  let currentGroup = [];
+
+  for (let i = 0; i < citizens.length; i++) {
+    currentGroup.push(citizens[i]);
+
+    if (currentGroup.length === 4 || i === citizens.length - 1) {
+      groups.push([...currentGroup]); // Make a copy of the current group
+      currentGroup = []; // Reset the current group
+    }
+  }
+
+  if(groups[selectedZone-1]){
+    return groups[selectedZone-1];
+  }else{
+    return []
+  }
+}
+
+function getOwnedCitizenZoneFromCitizens(ownedCitizen, citizens){
+  let zone = 1;
+  let tokenId = ownedCitizen[0]
+  for(let i=0;i<citizens.length;i++){
+    if(citizens[i].tokenId===tokenId){
+      zone=Math.floor(i/4)+1
+    }
+  }
+  return zone;
 }
 
 export default App;

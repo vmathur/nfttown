@@ -31,6 +31,7 @@ export async function getCitizens(setCitizens){
 
     setCitizens(convertedCitizens)
     console.log('Fetched citizens')
+    return convertedCitizens;
 }
 
 //get users citizens
@@ -44,6 +45,7 @@ export async function getOwnedCitizens(setOwnedCitizens, account){
 
     setOwnedCitizens(newArray)
     console.log('Fetched users citizens')
+    return newArray
 }
   
 //mint

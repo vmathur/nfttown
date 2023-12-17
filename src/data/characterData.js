@@ -83,6 +83,10 @@ export const startingLocation = {
       x: 900,
       y: 700
   }, 
+  '4' : {
+    x: 500,
+    y: 500
+}, 
 }
 
 export const initialCharacterParams = [

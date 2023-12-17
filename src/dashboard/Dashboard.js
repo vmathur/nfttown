@@ -3,10 +3,15 @@ import './Dashboard.css';
 import CitizenSection from './CitizenSection';
 import { getHealthRemaining } from '../game/utils';
 import { mint } from "../contract/contractFunctions"
-// import { maxCitizens } from "../utils/constants"
+import { maxCitizens } from "../utils/constants"
 
 function Dashboard({charactersRef, account, ownedCitizens, selectedCitizen, clickInfoHandler, setCitizens, setOwnedCitizens, setIsUpdating, setInitiatlActions}) {
     let canMint = ownedCitizens.length > 0 ? false : true;
+    let renderActions = false;
+    charactersRef.current.map((citizen)=>{
+      renderActions = renderActions || (ownedCitizens.includes(citizen.tokenId)) || getHealthRemaining( parseInt(citizen.lastFed), parseInt(citizen.maxTime)) === 0 ? true : false;
+    })
+
     const allSections = charactersRef.current.map((citizen) => {
       let canClean = getHealthRemaining( parseInt(citizen.lastFed), parseInt(citizen.maxTime)) === 0 ? true : false;
       let isOwner = ownedCitizens.includes(citizen.tokenId);
@@ -22,6 +27,7 @@ function Dashboard({charactersRef, account, ownedCitizens, selectedCitizen, clic
             clickInfoHandler={clickInfoHandler}
             setIsUpdating={setIsUpdating}
             setInitiatlActions={setInitiatlActions}
+            renderActions={renderActions}
             setCitizens={setCitizens}
             canClean={canClean}/>
         </div>
@@ -33,16 +39,16 @@ function Dashboard({charactersRef, account, ownedCitizens, selectedCitizen, clic
       try{
         await mint(setInitiatlActions, setCitizens, setOwnedCitizens, account)
       }catch(error){
-        console.log(error)
+        console.error(error)
       }
       setIsUpdating(false)
     }
 
     return (
       <div className="citizen-container">
-        {!account && charactersRef.current.length<4 ? <div className="login-message"><i>Connect wallet to mint and feed</i></div> : ''}
+        {!account && charactersRef.current.length<maxCitizens ? <div className="login-message"><i>Connect wallet to mint and feed</i></div> : ''}
+        {canMint && account && charactersRef.current.length<maxCitizens ? <button onClick={callMint} className="mint-button button-secondary">+ Mint a citizen</button> : ''}
         <div className="citien-section-container">{allSections}</div>
-        {canMint && account && charactersRef.current.length<4 ? <button onClick={callMint} className="mint-button button-secondary">+ Mint a citizen</button> : ''}
       </div>
     );
   }
