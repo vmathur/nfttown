@@ -8,6 +8,7 @@ import { maxCitizens } from "../utils/constants"
 function Dashboard({charactersRef, account, ownedCitizens, selectedCitizen, clickInfoHandler, setCitizens, setOwnedCitizens, setIsUpdating, setInitiatlActions}) {
     let canMint = ownedCitizens.length > 0 ? false : true;
     let renderActions = false;
+    // eslint-disable-next-line array-callback-return
     charactersRef.current.map((citizen)=>{
       renderActions = renderActions || (ownedCitizens.includes(citizen.tokenId)) || getHealthRemaining( parseInt(citizen.lastFed), parseInt(citizen.maxTime)) === 0 ? true : false;
     })
