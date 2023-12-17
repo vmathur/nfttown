@@ -5,7 +5,7 @@ import Dashboard from './dashboard/Dashboard'
 import Header from './header/Header'
 import React, {useRef, useEffect, useState} from 'react'
 import InfoModal from "./utils/infoModal.js"
-import {spriteData, spriteDimensions, startingLocation} from './data/characterData'
+import {spriteData, spriteDimensions } from './data/characterData'
 import { getCitizens, getOwnedCitizens } from './contract/contractFunctions.js';
 import { maxCitizens } from "./utils/constants.js" 
 import { startingPosition } from './utils/startingPosition.js';
