@@ -1,4 +1,4 @@
-.modal-style {
+/* .modal-style {
     top: 50%;
     left: 50%;
     right: auto;
@@ -18,5 +18,29 @@
 @media screen and (max-width: 500px) {
     .modal-style {
         width: 90%;
+    }
+} */
+.ReactModal__Content {
+    top: 50% !important ;
+    left: 50% !important ;
+    right: auto !important ;
+    bottom: auto !important ;
+    width: 60% !important ;
+    margin-right: -50% !important ;
+    font-family: Monospace !important ;
+    background-color: #353739 !important ;
+    border-radius: 10px !important ;
+    font-size: 20px !important ;
+    transform: translate(-50%, -50%) !important ;
+    color: white !important ;
+    padding: 30px !important ;
+    position: inherit !important ;
+}
+
+@media screen and (max-width: 500px) {
+    .ReactModal__Content {
+        width: 90% !important ;
+        font-size: medium !important ;
+        top :30% !important ;
     }
 }
