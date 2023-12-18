@@ -16,7 +16,7 @@ function Dashboard({charactersRef, account, ownedCitizens, selectedCitizen, clic
     const allSections = charactersRef.current.map((citizen) => {
       let canClean = getHealthRemaining( parseInt(citizen.lastFed), parseInt(citizen.maxTime)) === 0 ? true : false;
       let isOwner = ownedCitizens.includes(citizen.tokenId);
-      let selected = citizen.tokenId===String(selectedCitizen)?true:false
+      let selected = citizen.tokenId===ownedCitizens[0];
       return (
         <div key={citizen.tokenId}>
           <CitizenSection 

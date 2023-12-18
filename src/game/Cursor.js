@@ -22,7 +22,7 @@ export default class Cursor {
             this.width, // source width
             this.height, // source height
             x+8, // target x
-            y-15, // target y
+            y-20, // target y
             this.width/(64/64), // target width
             this.height/(64/64) // target height
         );

@@ -63,7 +63,8 @@
 }
   
 .selected{
-    border: 3px solid#a4d4ff;
+    /* border: 3px solid#a4d4ff; */
+    background: aliceblue;
 }
 
 .citizen-section-item{
