@@ -17,7 +17,7 @@ function App() {
   const [selectedCitizen, setSelectedCitizen] = useState([]);
   const [initialActions, setInitiatlActions] = useState({});
   const [selectedZone, setSelectedZone] = useState(1);
-  const [mapMode, setMapMode] = useState('game')
+  const [mapMode, setMapMode] = useState(window.innerWidth>1000? 'game' : 'world')
 
   //UI update variables
   const [isUpdating, setIsUpdating] = useState(false);
