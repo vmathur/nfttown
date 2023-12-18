@@ -12,7 +12,7 @@ export default function InfoModal({modalIsOpen, closeModal, modalType, modalData
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
-        className={'modalStyles'}
+        style={modalProperties}
       >{modalType === 'help'? getHelpContent(closeModal) : getInfoModalContet(modalData, closeModal)}
     </Modal>
     </div>)
@@ -21,7 +21,7 @@ export default function InfoModal({modalIsOpen, closeModal, modalType, modalData
 function getInfoModalContet(data, closeModal){
     if(!data){return}
   
-    return (<div>
+    return (<div className={'modalStyles'}>
       <MdClose onClick={closeModal} style={{ color: "white", fontSize: "1em", right:'30px', position: 'absolute'}}/>
       <div style={{marginBottom: '20px'}}><b>On chain metadata</b></div>
       <div>owner: &nbsp;&nbsp;&nbsp;&nbsp;{data.owner}</div>
@@ -35,7 +35,7 @@ function getInfoModalContet(data, closeModal){
   }
 
 function getHelpContent(closeModal){
-    return (<div>
+    return (<div className={'modalStyles'}>
       <MdClose onClick={closeModal} style={{ color: "white", fontSize: "1em", right:'30px', position: 'absolute'}}/>
       <div style={{marginBottom: '20px'}}><b>How to play</b></div>
       <div style={{marginBottom: '20px', marginLeft: '20px'}}>1. Connect your wallet and mint a new citizen to get started, one per wallet. NFT Town is limited to {maxCitizens} citizens at a time</div>
@@ -46,4 +46,11 @@ function getHelpContent(closeModal){
       <div style={{marginBottom: '20px'}}><a href={'https://github.com/vmathur/nfttown'} style ={{color:'white'}} target={"_blank"} rel="noreferrer">View source</a></div>
 
     </div>)
+}
+
+let modalProperties = {
+  content : {
+    background: 'none',
+    border: 'none',
+  }
 }
