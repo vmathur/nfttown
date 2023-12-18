@@ -68,9 +68,12 @@
   text-decoration: none;
   margin: 4px 2px;
   cursor: pointer;
-  font-size: large;  
 }
 
 .button-secondary:hover {
   background-color:rgb(224, 224, 222);
+}
+
+.button-header{
+  font-size: large;  
 }

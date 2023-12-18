@@ -27,13 +27,13 @@ function Header({account, setAccount, clickHelpHandler, getOwnedCitizens, setOwn
     return (
       <div className="header-container">
         <div className="header-button-area">
-        {mapMode && mapMode==='game' ? <button className="view-map button-secondary" onClick={toggleMap}>View town</button>:''}
-        <button className="how-to-play-button button-secondary" onClick={clickHelpHandler}>About</button>
+        {mapMode && mapMode==='game' ? <button className="view-map button-secondary button-header" onClick={toggleMap}>View town</button>:''}
+        <button className="how-to-play-button button-secondary button-header" onClick={clickHelpHandler}>About</button>
 
         {!account? 
-          <button className="connect-button button-primary" onClick={handleLogin}>Connect</button> : 
+          <button className="connect-button button-primary button-header" onClick={handleLogin}>Connect</button> : 
           <span>
-            <button className="disconnect-button button-secondary" onClick={handleWallet}>Account</button>
+            <button className="disconnect-button button-secondary button-header" onClick={handleWallet}>Account</button>
           </span>}
           </div>
       </div>
