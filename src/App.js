@@ -113,6 +113,7 @@ function App() {
       {mapMode === 'game' && 
         <Board 
         charactersRef={characters}
+        ownedCitizens={ownedCitizens}
         initialActions={initialActions} 
         isUpdating={isUpdating}
         selectedZone={selectedZone}

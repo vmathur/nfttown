@@ -9,10 +9,12 @@ import Character  from "./Character"
 import getColorFromTime from './TimeOfDay';
 import { getHealthRemaining } from './utils'
 import './Board.css';
+import Cursor from './Cursor'
+import { cursorData } from '../data/objectData'
 
 // const fps = 2000;
 
-export default function Board({charactersRef, initialActions, isUpdating, selectedZone, setSelectedCitizen}) {
+export default function Board({charactersRef, ownedCitizens, initialActions, isUpdating, selectedZone, setSelectedCitizen}) {
     const canvasRef = useRef(null);
     //initialize characters
     let characters = []
@@ -46,9 +48,17 @@ export default function Board({charactersRef, initialActions, isUpdating, select
                 character.update(health)
                 WallCollision(character, canvas);
                 character.draw(ctx)
+
+                if(character.id===ownedCitizens[0]){   
+                    let cursor = new Cursor(cursorData, 48)
+                    cursor.draw(ctx,character.x,character.y)     
+                }
+
+
             }
-            
-            // setTimeout(() => {
+            // let cursor = new Cursor(cursorData, 48)
+            // cursor.draw(ctx,character.x,character.y)            
+            // // setTimeout(() => {
             //     requestAnimationFrame(render);
             // }, 1000 / fps);
 

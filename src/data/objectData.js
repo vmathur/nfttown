@@ -53,6 +53,17 @@ export const clockTowerData =
     }
 }
 
+export const cursorData =
+{
+    width: 16,
+    height: 16,
+    imgSource : '/assets/cursor.png',
+    currentLocation: {
+        x: 5,
+        y: 5
+    },
+}
+
 export const welcomeBannerData = 
 {
     width: 256,
