@@ -1,8 +1,8 @@
 import './GameModal.css';
 import Modal from 'react-modal';
 import { MdClose } from 'react-icons/md';
-import { contractAddress } from '../contract/contractFunctions';
-import { maxCitizens } from './constants';
+import { contractAddress } from './contract/contractFunctions';
+import { maxCitizens } from './utils/constants';
 
 export default function InfoModal({modalIsOpen, closeModal, modalType, modalData}){
   Modal.setAppElement('#root');
