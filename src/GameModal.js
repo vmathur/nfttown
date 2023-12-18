@@ -21,7 +21,7 @@ export default function InfoModal({modalIsOpen, closeModal, modalType, modalData
 function getInfoModalContet(data, closeModal){
     if(!data){return}
   
-    return (<div className={'modalStyles'}>
+    return (<div className={'modal-style'}>
       <MdClose onClick={closeModal} style={{ color: "white", fontSize: "1em", right:'30px', position: 'absolute'}}/>
       <div style={{marginBottom: '20px'}}><b>On chain metadata</b></div>
       <div>owner: &nbsp;&nbsp;&nbsp;&nbsp;{data.owner}</div>
@@ -35,7 +35,7 @@ function getInfoModalContet(data, closeModal){
   }
 
 function getHelpContent(closeModal){
-    return (<div className={'modalStyles'}>
+    return (<div className={'modal-style'}>
       <MdClose onClick={closeModal} style={{ color: "white", fontSize: "1em", right:'30px', position: 'absolute'}}/>
       <div style={{marginBottom: '20px'}}><b>How to play</b></div>
       <div style={{marginBottom: '20px', marginLeft: '20px'}}>1. Connect your wallet and mint a new citizen to get started, one per wallet. NFT Town is limited to {maxCitizens} citizens at a time</div>
