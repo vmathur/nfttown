@@ -4,7 +4,7 @@ import World from './game/World.js';
 import Dashboard from './dashboard/Dashboard'
 import Header from './header/Header'
 import React, {useRef, useEffect, useState} from 'react'
-import InfoModal from './utils/InfoModal.js'
+import GameModal from './utils/GameModal.js'
 import {spriteData, spriteDimensions } from './data/characterData'
 import { getCitizens, getOwnedCitizens } from './contract/contractFunctions.js';
 import { maxCitizens } from "./utils/constants.js" 
@@ -96,7 +96,7 @@ function App() {
 
   return (
     <div className="App">
-      <InfoModal
+      <GameModal
         modalIsOpen={modalIsOpen}
         closeModal={closeModal}
         modalType={modalType}

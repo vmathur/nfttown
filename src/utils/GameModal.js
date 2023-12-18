@@ -1,4 +1,4 @@
-import './InfoModal.css';
+import './GameModal.css';
 import Modal from 'react-modal';
 import { MdClose } from 'react-icons/md';
 import { contractAddress } from '../contract/contractFunctions';
