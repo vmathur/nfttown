@@ -1,3 +1,4 @@
+import './InfoModal.css';
 import Modal from 'react-modal';
 import { MdClose } from 'react-icons/md';
 import { contractAddress } from '../contract/contractFunctions';
@@ -11,7 +12,7 @@ export default function InfoModal({modalIsOpen, closeModal, modalType, modalData
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
-        style={modalType === 'help'? helpModalStyle : infoModalStyle}
+        className={'modalStyles'}
       >{modalType === 'help'? getHelpContent(closeModal) : getInfoModalContet(modalData, closeModal)}
     </Modal>
     </div>)
@@ -20,7 +21,7 @@ export default function InfoModal({modalIsOpen, closeModal, modalType, modalData
 function getInfoModalContet(data, closeModal){
     if(!data){return}
   
-    return (<div className='modal-container'>
+    return (<div>
       <MdClose onClick={closeModal} style={{ color: "white", fontSize: "1em", right:'30px', position: 'absolute'}}/>
       <div style={{marginBottom: '20px'}}><b>On chain metadata</b></div>
       <div>owner: &nbsp;&nbsp;&nbsp;&nbsp;{data.owner}</div>
@@ -34,7 +35,7 @@ function getInfoModalContet(data, closeModal){
   }
 
 function getHelpContent(closeModal){
-    return (<div className='modal-container'>
+    return (<div>
       <MdClose onClick={closeModal} style={{ color: "white", fontSize: "1em", right:'30px', position: 'absolute'}}/>
       <div style={{marginBottom: '20px'}}><b>How to play</b></div>
       <div style={{marginBottom: '20px', marginLeft: '20px'}}>1. Connect your wallet and mint a new citizen to get started, one per wallet. NFT Town is limited to {maxCitizens} citizens at a time</div>
@@ -46,35 +47,3 @@ function getHelpContent(closeModal){
 
     </div>)
 }
-  
-const helpModalStyle = {
-  content: {
-    position: 'relative',
-    top: '50%',
-    left: '50%',
-    width: '60%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    fontFamily: 'Monaco',
-    backgroundColor: '#353739',
-    borderRadius: '10px',
-    fontSize: '20px',
-    transform: 'translate(-50%, -50%)',
-  },
-};
-
-const infoModalStyle = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    fontFamily: 'Monospace',
-    backgroundColor: '#353739',
-    borderRadius: '10px',
-    fontSize: '20px',
-    transform: 'translate(-50%, -50%)',
-  },
-};

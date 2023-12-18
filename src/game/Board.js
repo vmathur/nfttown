@@ -10,6 +10,8 @@ import getColorFromTime from './TimeOfDay';
 import { getHealthRemaining } from './utils'
 import './Board.css';
 
+// const fps = 2000;
+
 export default function Board({charactersRef, initialActions, isUpdating, selectedZone, setSelectedCitizen}) {
     const canvasRef = useRef(null);
     //initialize characters
@@ -46,7 +48,11 @@ export default function Board({charactersRef, initialActions, isUpdating, select
                 character.draw(ctx)
             }
             
-            requestAnimationFrame(render)
+            // setTimeout(() => {
+            //     requestAnimationFrame(render);
+            // }, 1000 / fps);
+
+            requestAnimationFrame(render);
         }
         render();
     })

@@ -67,15 +67,10 @@
   text-align: center;
   text-decoration: none;
   margin: 4px 2px;
-  cursor: pointer;  
+  cursor: pointer;
+  font-size: large;  
 }
 
 .button-secondary:hover {
   background-color:rgb(224, 224, 222);
-}
-
-.modal-container{
-  background-color: #353739;
-  color: white;
-  padding: 20px;
 }
