@@ -23,11 +23,19 @@ export function Map(ctx, selectedZone){
         let townhall = new MapObjects('./assets/townhall.png',tileMap.tsize);
         townhall.draw(ctx, 18, 0, 320,192)
 
-        let pond = new AnimatedObject(pondData, tileMap.tsize)
+        let pond = new AnimatedObject(pondData[0], tileMap.tsize)
+        pond.draw(ctx)
+    }else if(selectedZone===4){
+        let pond = new AnimatedObject(pondData[1], tileMap.tsize)
+        pond.draw(ctx)
+    }else if(selectedZone===5){
+        let pond = new AnimatedObject(pondData[2], tileMap.tsize)
+        pond.draw(ctx)
+    }else if(selectedZone===6){
+        let pond = new AnimatedObject(pondData[3], tileMap.tsize)
         pond.draw(ctx)
     }
 }
-
 class ZoneTiles {
     draw(ctx, selectedZone, img){  
         for(let i = 0; i<zoneMap.zoneLayer[selectedZone-1].length; i++){

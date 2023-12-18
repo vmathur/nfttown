@@ -1,15 +1,46 @@
-export const pondData = 
-{
-        width: 384,
-        height: 384,
-        imgSource : '/assets/pond.png',
-        currentLocation: {
-          x: 0,
-          y: 10
-        },
-        totalAnimationFrames: 12,
-        zone: 1
-}
+export const pondData = [
+    {
+            width: 384,
+            height: 384,
+            imgSource : '/assets/pond/pond-1.png',
+            currentLocation: {
+              x: 0,
+              y: 10
+            },
+            totalAnimationFrames: 12,
+            zone: 1
+    },{
+            width: 384,
+            height: 384,
+            imgSource : '/assets/pond/pond-2.png',
+            currentLocation: {
+              x: 0,
+              y: 0
+            },
+            totalAnimationFrames: 12,
+            zone: 4
+    },{
+            width: 384,
+            height: 384,
+            imgSource : '/assets/pond/pond-3.png',
+            currentLocation: {
+              x: 18,
+              y: 0
+            },
+            totalAnimationFrames: 12,
+            zone: 5
+    },{
+            width: 384,
+            height: 384,
+            imgSource : '/assets/pond/pond-4.png',
+            currentLocation: {
+              x: 18,
+              y: 10
+            },
+            totalAnimationFrames: 12,
+            zone: 6
+    }
+]
 
 export const clockTowerData =
 {
