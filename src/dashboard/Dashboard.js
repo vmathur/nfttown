@@ -12,9 +12,10 @@ function Dashboard({charactersRef, account, ownedCitizens, selectedCitizen, clic
     charactersRef.current.map((citizen)=>{
       renderActions = renderActions || (ownedCitizens.includes(citizen.tokenId)) || getHealthRemaining( parseInt(citizen.lastFed), parseInt(citizen.maxTime)) === 0 ? true : false;
     })
+    renderActions = renderActions && account;
 
     const allSections = charactersRef.current.map((citizen) => {
-      let canClean = getHealthRemaining( parseInt(citizen.lastFed), parseInt(citizen.maxTime)) === 0 ? true : false;
+      let canClean = (getHealthRemaining( parseInt(citizen.lastFed), parseInt(citizen.maxTime)) === 0 ? true : false)&&account;
       let isOwner = ownedCitizens.includes(citizen.tokenId);
       let selected = citizen.tokenId===ownedCitizens[0];
       return (
