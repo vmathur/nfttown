@@ -1,3 +1,12 @@
+/*
+@media screen and (max-width: 500px) {
+    .game-modal {
+        width: 90% !important ;
+        font-size: medium !important ;
+        top :30% !important ;
+    }
+} */
+
 .game-modal {
     top: 50%;
     left: 50%;
