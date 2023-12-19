@@ -2,6 +2,10 @@
     .heart-icon{
         visibility: hidden;
     }
+
+    .item-section-visibility{
+        display: none;
+    }
 }
 
 @media screen and (max-width: 1000px) {

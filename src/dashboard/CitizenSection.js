@@ -75,14 +75,14 @@ function CitizenSection(props) {
       <div>
         <div className={"citizen-section " + (selected?'selected':'')}>
           <div className="citizen-section-image" alt="" style={{backgroundImage: "url("+img}}/>
-          {!props.renderActions && <div className="citizen-section-item-text">
+          <div className={"citizen-section-item-text "+(props.renderActions?"item-section-visibility":'')}>
             <span className='info-line'>{ageLabel}&nbsp;
               <HiInformationCircle
                 className="info-icon"
                 onClick={infoClickHandler}
                 size={20}
                             />
-            </span></div>}
+            </span></div>
           <div>
             <span><AiFillHeart
               className="heart-icon"
