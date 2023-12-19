@@ -9,6 +9,7 @@ import {spriteData, spriteDimensions } from './data/characterData'
 import { getCitizens, getOwnedCitizens } from './contract/contractFunctions.js';
 import { maxCitizens } from "./utils/constants.js" 
 import { startingPosition } from './utils/startingPosition.js';
+import { getOwnedCitizenZoneFromCitizens } from './utils/zones.js'
 
 function App() {
   //game objects
@@ -115,8 +116,10 @@ function App() {
         ownedCitizens={ownedCitizens}
         initialActions={initialActions} 
         isUpdating={isUpdating}
+        setMapMode={setMapMode}
         selectedZone={selectedZone}
-        setSelectedZone={setSelectedZone}/>}
+        setSelectedZone={setSelectedZone}
+        citizens={citizens}/>}
       {mapMode === 'world' && 
         <World 
         isUpdating={isUpdating}
@@ -153,17 +156,6 @@ function splitCitizensIntoGroups(citizens, selectedZone) {
   }else{
     return []
   }
-}
-
-function getOwnedCitizenZoneFromCitizens(ownedCitizen, citizens){
-  let zone = 1;
-  let tokenId = ownedCitizen[0]
-  for(let i=0;i<citizens.length;i++){
-    if(citizens[i].tokenId===tokenId){
-      zone=Math.floor(i/4)+1
-    }
-  }
-  return zone;
 }
 
 export default App;

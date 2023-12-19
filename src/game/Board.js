@@ -8,13 +8,15 @@ import WallCollision from "../utils/WallCollision"
 import Character  from "./Character"
 import getColorFromTime from './TimeOfDay';
 import { getHealthRemaining } from './utils'
+import { getOwnedCitizenZoneFromCitizens } from '../utils/zones'
 import './Board.css';
 import Cursor from './Cursor'
 import { cursorData, arrowsData } from '../data/objectData'
+import Hud from './Hud'
 
 // const fps = 2000;
 
-export default function Board({charactersRef, ownedCitizens, initialActions, isUpdating, selectedZone, setSelectedZone}) {
+export default function Board({charactersRef, ownedCitizens, initialActions, isUpdating, setMapMode, selectedZone, setSelectedZone, citizens}) {
     const canvasRef = useRef(null);
     //initialize characters
     let characters = []
@@ -35,6 +37,14 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
             let zone = arrowsData.arrowToZoneMap[selectedZone-1][arrowId-1]
             setSelectedZone(zone)
         }
+
+        let hud = getClickedHud(x,y)
+        if(hud===1){
+            setMapMode('world')
+        }else if(hud===2){
+            getOwnedCitizenZoneFromCitizens(ownedCitizens, citizens)
+            setSelectedZone(1)
+        }
     }
 
     function getClickedArrow(x,y){
@@ -45,6 +55,17 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
                 return i
             }
             i++;
+        }
+        return 0
+    }
+
+    function getClickedHud(x,y){
+        let offset=50
+        if((x>=30-offset&&x<=30+offset)&&(y>=10-offset&&y<=10+offset)){
+            return 1
+        }
+        if((x>=70-offset&&x<=70+offset)&&(y>=10-offset&&y<=10+offset)){
+            return 2
         }
         return 0
     }
@@ -79,6 +100,8 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
                     cursor.draw(ctx,character.x,character.y)     
                 }
             }
+            let hud = new Hud(tileMap.tsize);
+            hud.drawHud(ctx)
             // setTimeout(() => {
             //     requestAnimationFrame(render);
             // }, 1000 / fps);
