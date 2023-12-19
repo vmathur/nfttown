@@ -10,9 +10,9 @@ export default function InfoModal({modalIsOpen, closeModal, modalType, modalData
   return (
     <div>
       <Modal
+        className={'game-modal'}
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
-        style={modalProperties}
       >{modalType === 'help'? getHelpContent(closeModal) : getInfoModalContet(modalData, closeModal)}
     </Modal>
     </div>)
@@ -47,11 +47,3 @@ function getHelpContent(closeModal){
 
     </div>)
 }
-
-let modalProperties = {
-  content : {
-    background: 'none',
-    border: 'none',
-  }
-}
-//test

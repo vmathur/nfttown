@@ -1,24 +1,24 @@
-.ReactModal__Content {
-    top: 50% !important ;
-    left: 50% !important ;
-    right: auto !important ;
-    bottom: auto !important ;
-    width: 60% !important ;
-    margin-right: -50% !important ;
-    font-family: Monospace !important ;
-    background-color: #353739 !important ;
-    border-radius: 10px !important ;
-    font-size: 20px !important ;
-    transform: translate(-50%, -50%) !important ;
-    color: white !important ;
-    padding: 30px !important ;
-    position: inherit !important ;
+.game-modal {
+    top: 50%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    width: 60%;
+    margin-right: -50%;
+    font-family: Monospace;
+    background-color: #353739;
+    border-radius: 10px;
+    font-size: 20px;
+    transform: translate(-50%, -50%);
+    color: white;
+    padding: 30px;
+    position: inherit;
 }
 
 @media screen and (max-width: 500px) {
-    .ReactModal__Content {
-        width: 90% !important ;
-        font-size: medium !important ;
-        top :30% !important ;
+    .game-modal {
+        width: 90%;
+        font-size: medium;
+        top :30%;
     }
 }
