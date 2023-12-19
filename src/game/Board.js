@@ -42,8 +42,8 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
         if(hud===1){
             setMapMode('world')
         }else if(hud===2){
-            getOwnedCitizenZoneFromCitizens(ownedCitizens, citizens)
-            setSelectedZone(1)
+            let zone = getOwnedCitizenZoneFromCitizens(ownedCitizens, citizens)
+            setSelectedZone(zone)
         }
     }
 
