@@ -16,14 +16,6 @@ function Header({account, setAccount, clickHelpHandler, getOwnedCitizens, setOwn
         localStorage.setItem('user', '')
       })
     }
-
-    function toggleMap(){
-      if(mapMode==='game'){
-        setMapMode('world')
-      }else if(mapMode==='world'){
-        setMapMode('game')
-      }
-    }
   
     return (
       <div className="header-container">
