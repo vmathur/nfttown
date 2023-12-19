@@ -31,8 +31,10 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
         const x = Math.floor(event.clientX-rect.left)
         const y = Math.floor(event.clientY-rect.top)
         let arrowId = getClickedArrow(x,y)
-        let zone = arrowsData.arrowToZoneMap[selectedZone-1][arrowId-1]
-        setSelectedZone(zone)
+        if(arrowId>0){
+            let zone = arrowsData.arrowToZoneMap[selectedZone-1][arrowId-1]
+            setSelectedZone(zone)
+        }
     }
 
     function getClickedArrow(x,y){
