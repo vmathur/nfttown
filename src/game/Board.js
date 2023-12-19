@@ -10,11 +10,11 @@ import getColorFromTime from './TimeOfDay';
 import { getHealthRemaining } from './utils'
 import './Board.css';
 import Cursor from './Cursor'
-import { cursorData } from '../data/objectData'
+import { cursorData, arrowsData } from '../data/objectData'
 
 // const fps = 2000;
 
-export default function Board({charactersRef, ownedCitizens, initialActions, isUpdating, selectedZone, setSelectedCitizen}) {
+export default function Board({charactersRef, ownedCitizens, initialActions, isUpdating, selectedZone, setSelectedZone}) {
     const canvasRef = useRef(null);
     //initialize characters
     let characters = []
@@ -25,6 +25,29 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
         let character = new Character(data, tileMap.tsize)
         characters.push(character)
     }
+
+    const canvasClickHandler=(event)=>{
+        let rect = canvasRef.current.getBoundingClientRect();
+        const x = Math.floor(event.clientX-rect.left)
+        const y = Math.floor(event.clientY-rect.top)
+        let arrowId = getClickedArrow(x,y)
+        let zone = arrowsData.arrowToZoneMap[selectedZone-1][arrowId-1]
+        setSelectedZone(zone)
+    }
+
+    function getClickedArrow(x,y){
+        let offset=50
+        let i=1;
+        for(const arrow of arrowsData.arrowLocations){
+            if((x>=arrow[0]-offset&&x<=arrow[0]+offset)&&(y>=arrow[1]-offset&&y<=arrow[1]+offset)){
+                return i
+            }
+            i++;
+        }
+        return 0
+    }
+
+    
 
     //didmount
     useEffect(()=>{
@@ -53,12 +76,8 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
                     let cursor = new Cursor(cursorData, 48)
                     cursor.draw(ctx,character.x,character.y)     
                 }
-
-
             }
-            // let cursor = new Cursor(cursorData, 48)
-            // cursor.draw(ctx,character.x,character.y)            
-            // // setTimeout(() => {
+            // setTimeout(() => {
             //     requestAnimationFrame(render);
             // }, 1000 / fps);
 
@@ -78,7 +97,7 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
     return (
         <div className='container'>
             <div id="rectangle" className="loading-rectangle" style={{left: "calc((100vw - "+tileMap.tsize*tileMap.cols+"px)/2)", width:tileMap.tsize*tileMap.cols+"px", backgroundColor : color, opacity:opacity}} height={tileMap.tsize*tileMap.rows +'px'} width={tileMap.tsize*tileMap.cols +'px'} ><div className='loading-text'>{isUpdating ? 'Loading...': ''}</div></div>
-            <canvas id="canvas" ref={canvasRef} height={tileMap.tsize*tileMap.rows +'px'} width={tileMap.tsize*tileMap.cols +'px'}/>
+            <canvas id="canvas" ref={canvasRef} height={tileMap.tsize*tileMap.rows +'px'} width={tileMap.tsize*tileMap.cols +'px'} onClick={canvasClickHandler}/>
         </div>
     )
 
@@ -86,15 +105,6 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
 
 //clear screen
 // ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-// //click handler
-// const canvasClickHandler=(event)=>{
-//     let rect = canvasRef.current.getBoundingClientRect();
-//     const x = Math.floor(event.clientX-rect.left)
-//     const y = Math.floor(event.clientY-rect.top)
-//     let citizenId = getClickedCitizen(x,y)
-//     setSelectedCitizen(citizenId)
-// }
 
 // function getClickedCitizen(x,y){
 //     let offset=50

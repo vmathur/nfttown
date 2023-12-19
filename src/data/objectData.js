@@ -64,6 +64,39 @@ export const cursorData =
     },
 }
 
+export const arrowsData =
+{
+    width: 16,
+    height: 16,
+    imgSource : '/assets/arrows.png',
+    arrowLocations : [
+        [1100,360],
+        [550,620],
+        [0,360],
+        [550,0]
+    ],
+    arrowToZoneMap : [
+        //1
+        [2,4,6,1],
+        //2
+        [0,3,1,9],
+        //3
+        [0,0,4,2],
+        //4
+        [3,0,5,1],
+        //5
+        [4,0,0,6],
+        //6
+        [1,5,0,7],
+        //7
+        [8,6,0,0],
+        //8
+        [9,1,7,0],
+        //9
+        [0,2,8,0]
+    ]
+}
+
 export const welcomeBannerData = 
 {
     width: 256,

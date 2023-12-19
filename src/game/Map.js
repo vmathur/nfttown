@@ -3,6 +3,7 @@ import { clockTowerData, welcomeBannerData, pondData, housesByZoneData } from ".
 import ClockTower from "./ClockTower";
 import WelcomeBanner from "./WelcomeBanner";
 import AnimatedObject from "./AnimatedObject";
+import Arrows from "./Arrows";
 
 export function Map(ctx, selectedZone){
     let tileImage = new Image();   // Create new img element
@@ -35,6 +36,9 @@ export function Map(ctx, selectedZone){
         let pond = new AnimatedObject(pondData[3], tileMap.tsize)
         pond.draw(ctx)
     }
+
+    let arrows = new Arrows(selectedZone, tileMap.tsize);
+    arrows.drawImages(ctx);
 }
 class ZoneTiles {
     draw(ctx, selectedZone, img){  

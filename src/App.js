@@ -14,7 +14,6 @@ function App() {
   //game objects
   const [citizens, setCitizens] = useState([]);
   const [ownedCitizens, setOwnedCitizens] = useState([]);
-  const [selectedCitizen, setSelectedCitizen] = useState([]);
   const [initialActions, setInitiatlActions] = useState({});
   const [selectedZone, setSelectedZone] = useState(1);
   const [mapMode, setMapMode] = useState(window.innerWidth>1000? 'game' : 'world')
@@ -117,7 +116,7 @@ function App() {
         initialActions={initialActions} 
         isUpdating={isUpdating}
         selectedZone={selectedZone}
-        setSelectedCitizen={setSelectedCitizen}/>}
+        setSelectedZone={setSelectedZone}/>}
       {mapMode === 'world' && 
         <World 
         isUpdating={isUpdating}
@@ -127,7 +126,6 @@ function App() {
         charactersRef={characters} 
         account={account} 
         ownedCitizens={ownedCitizens} 
-        selectedCitizen={selectedCitizen} 
         clickInfoHandler={clickInfoHandler}
         setCitizens={setCitizens}
         setOwnedCitizens={setOwnedCitizens}
