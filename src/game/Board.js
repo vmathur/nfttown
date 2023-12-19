@@ -64,7 +64,7 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
         if((x>=30-offset&&x<=30+offset)&&(y>=10-offset&&y<=10+offset)){
             return 1
         }
-        if((x>=70-offset&&x<=70+offset)&&(y>=10-offset&&y<=10+offset)){
+        if((x>=80-offset&&x<=80+offset)&&(y>=10-offset&&y<=10+offset)){
             return 2
         }
         return 0

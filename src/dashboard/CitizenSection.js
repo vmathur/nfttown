@@ -83,7 +83,7 @@ function CitizenSection(props) {
                 size={20}
                             />
             </span></div>
-          <div>
+          <div className='citizen-section-health-bar'>
             <span><AiFillHeart
               className="heart-icon"
               color={'red'}

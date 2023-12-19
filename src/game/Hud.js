@@ -15,7 +15,7 @@ export default class Hud {
 
     drawHud(ctx){
         this.draw(ctx,4,30)
-        this.draw(ctx,5,70)
+        this.draw(ctx,5,80)
     }
 
     draw(ctx, sourceX, targetX){
