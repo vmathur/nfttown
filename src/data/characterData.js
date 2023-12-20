@@ -302,4 +302,17 @@ export const behaviorLoops = {
       id: 'idleForever'
     }]
   },
+  demo: {
+    behaviorLoop: [
+      {type: 'idle', direction: 'down', duration: fps*4},
+      {type: 'eat', direction: 'down', duration: fps*4},
+      {type: 'idle', direction: 'down', duration: fps*4},
+      {type: 'walk', direction: 'right', duration:fps*2},
+      {type: 'walk', direction: 'left', duration:fps*2},
+    ],
+    next: [{
+      weight: 1,
+      id: 'demo'
+    }]
+  },
 }

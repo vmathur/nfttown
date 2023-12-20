@@ -49,7 +49,6 @@ contract NFTzen is ERC2771Context, ERC721, ERC721Enumerable, ERC721Burnable {
 
     //key methods
     function mint() public returns (uint256){
-        uint256 length = allTokenIds.length;
         uint256 numberOfOwnedCitizens = balanceOf(_msgSender());
         require(numberOfOwnedCitizens == 0, "Users can mint only 1 nft");
 
@@ -60,9 +59,9 @@ contract NFTzen is ERC2771Context, ERC721, ERC721Enumerable, ERC721Burnable {
         allTokenIds.push(tokenId);
 
         uint256 currentTimestamp = block.timestamp;
-        uint256 maxTime = minTime + (random(timeRange)*minTime);
-        uint256 animal = random(maxAnimals);
-        uint256 color = random(maxColors);
+        uint256 maxTime = minTime + (random(timeRange, 1, _msgSender())*minTime);
+        uint256 animal = random(maxAnimals, 2, _msgSender());
+        uint256 color = random(maxColors, 3, _msgSender());
         uint256 birthDate = block.timestamp;
         address owner = _msgSender();
 
@@ -140,8 +139,8 @@ contract NFTzen is ERC2771Context, ERC721, ERC721Enumerable, ERC721Burnable {
     }
 
     //utilities
-    function random(uint range) public view returns(uint){
-        return uint(keccak256(abi.encodePacked(block.timestamp,block.difficulty,_msgSender()))) % range;
+    function random(uint range, uint nonce, address sender) public view returns(uint){
+        return uint(keccak256(abi.encodePacked(block.timestamp, nonce, sender))) % range;
     }    
 
     function findElement(uint value) private view returns(uint) {
