@@ -487,6 +487,16 @@ export const abi =
 				"internalType": "uint256",
 				"name": "range",
 				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "nonce",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "sender",
+				"type": "address"
 			}
 		],
 		"name": "random",

@@ -5,6 +5,6 @@ const polygonNode = {
     chainId: 80001, // Polygon chain id 
 }
 
-const magic = new Magic("pk_live_BFB02F3E6751D40B", {network: polygonNode});
+const magic = new Magic("pk_live_FB3ACE38EDB23818", {network: polygonNode});
 
 export default magic;
