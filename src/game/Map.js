@@ -5,40 +5,67 @@ import WelcomeBanner from "./WelcomeBanner";
 import AnimatedObject from "./AnimatedObject";
 import Arrows from "./Arrows";
 
-export function Map(ctx, selectedZone){
-    let tileImage = new Image();   // Create new img element
-    tileImage.src = './assets/tilesv3.png'; // Set source path
-    let zoneTiles = new ZoneTiles();
-    zoneTiles.draw(ctx, selectedZone, tileImage);
+export default class Map {
+    constructor(selectedZone){
+        let tileImage = new Image();   // Create new img element
+        tileImage.src = './assets/tilesv3.png'; // Set source path
+        this.tileImage= tileImage;
 
-    let zoneHouses = new MapObjects('./assets/house.png', tileMap.tsize);
-    for(let i=0;i<housesByZoneData[selectedZone-1].length;i++){
-        zoneHouses.draw(ctx, housesByZoneData[selectedZone-1][i][0],housesByZoneData[selectedZone-1][i][1], 128,128)
-    }
+        let zoneTiles = new ZoneTiles();
+        this.zoneTiles=zoneTiles;
+
+        let zoneHouses = new MapObjects('./assets/house.png', tileMap.tsize);
+        this.zoneHouses=zoneHouses;
+
+        let arrows = new Arrows(selectedZone, tileMap.tsize);
+        this.arrows = arrows;
     
-    if(selectedZone===1){
         let clockTower = new ClockTower(clockTowerData, tileMap.tsize)
-        clockTower.draw(ctx)
+        this.clockTower = clockTower;
+    
         let welcomeBanner = new WelcomeBanner(welcomeBannerData, tileMap.tsize)
-        welcomeBanner.draw(ctx)
+        this.welcomeBanner = welcomeBanner;
+
         let townhall = new MapObjects('./assets/townhall.png',tileMap.tsize);
-        townhall.draw(ctx, 18, 0, 320,192)
+        this.townhall = townhall;
 
-        let pond = new AnimatedObject(pondData[0], tileMap.tsize)
-        pond.draw(ctx)
-    }else if(selectedZone===4){
-        let pond = new AnimatedObject(pondData[1], tileMap.tsize)
-        pond.draw(ctx)
-    }else if(selectedZone===5){
-        let pond = new AnimatedObject(pondData[2], tileMap.tsize)
-        pond.draw(ctx)
-    }else if(selectedZone===6){
-        let pond = new AnimatedObject(pondData[3], tileMap.tsize)
-        pond.draw(ctx)
+        let pond0 = new AnimatedObject(pondData[0], tileMap.tsize)
+        this.pond0=pond0;
+
+        let pond1 = new AnimatedObject(pondData[1], tileMap.tsize)
+        this.pond1=pond1;
+
+        let pond2 = new AnimatedObject(pondData[2], tileMap.tsize)
+        this.pond2=pond2;
+
+        let pond3 = new AnimatedObject(pondData[3], tileMap.tsize)
+        this.pond3=pond3;
+
     }
+        
+    draw(ctx, selectedZone){
+        this.zoneTiles.draw(ctx, selectedZone, this.tileImage);
 
-    let arrows = new Arrows(selectedZone, tileMap.tsize);
-    arrows.drawImages(ctx);
+        for(let i=0;i<housesByZoneData[selectedZone-1].length;i++){
+            this.zoneHouses.draw(ctx, housesByZoneData[selectedZone-1][i][0],housesByZoneData[selectedZone-1][i][1], 128,128)
+        }
+
+        if(selectedZone===1){
+            this.clockTower.draw(ctx)
+            this.welcomeBanner.draw(ctx)
+            this.townhall.draw(ctx, 18, 0, 320,192)
+
+            this.pond0.draw(ctx)
+        }else if(selectedZone===4){
+            this.pond1.draw(ctx)
+        }else if(selectedZone===5){
+            this.pond2.draw(ctx)
+        }else if(selectedZone===6){
+            this.pond3.draw(ctx)
+        }
+
+        this.arrows.drawImages(ctx);
+    }
 }
 class ZoneTiles {
     draw(ctx, selectedZone, img){  

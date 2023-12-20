@@ -1,7 +1,6 @@
 import React, {useRef, useEffect} from 'react'
 
-// import { Grid } from "./Grid"
-import { Map } from "./Map"
+import Map from "./Map"
 import { tileMap } from "../data/tileConstants"
 import WallCollision from "../utils/WallCollision"
 
@@ -14,8 +13,6 @@ import Cursor from './Cursor'
 import { cursorData, arrowsData } from '../data/objectData'
 import Hud from './Hud'
 
-// const fps = 2000;
-
 export default function Board({charactersRef, ownedCitizens, initialActions, isUpdating, setMapMode, selectedZone, setSelectedZone, citizens}) {
     const canvasRef = useRef(null);
     //initialize characters
@@ -27,6 +24,9 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
         let character = new Character(data, tileMap.tsize)
         characters.push(character)
     }
+    let cursor = new Cursor(cursorData, 48)
+    let hud = new Hud(tileMap.tsize);
+    let map = new Map(selectedZone);
 
     const canvasClickHandler=(event)=>{
         let rect = canvasRef.current.getBoundingClientRect();
@@ -81,10 +81,12 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
                 return;
             }
             const ctx = canvas.getContext('2d');
+
+            //clear screen
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             // draw zone map
-            Map(ctx, selectedZone);
+            map.draw(ctx, selectedZone)
 
             //update characters
             for(let character of characters){
@@ -97,15 +99,10 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
                 character.draw(ctx)
 
                 if(character.id===ownedCitizens[0]){   
-                    let cursor = new Cursor(cursorData, 48)
                     cursor.draw(ctx,character.x,character.y)     
                 }
             }
-            let hud = new Hud(tileMap.tsize);
             hud.drawHud(ctx)
-            // setTimeout(() => {
-            //     requestAnimationFrame(render);
-            // }, 1000 / fps);
 
             requestAnimationFrame(render);
         }
@@ -128,16 +125,3 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
     )
 
 }
-
-//clear screen
-// ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-// function getClickedCitizen(x,y){
-//     let offset=50
-//     for(const character of characters){
-//         if((x>=character.x-offset&&x<=character.x+offset)&&(y>=character.y-offset&&y<=character.y+offset)){
-//             return character.id
-//         }
-//     }
-//     return ''
-// }
