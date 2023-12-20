@@ -26,7 +26,7 @@ function Header({account, setAccount, clickHelpHandler, getOwnedCitizens, setOwn
         {!account? 
           <button className="connect-button button-primary button-header" onClick={handleLogin}>Connect</button> : 
           <span>
-            <button className="disconnect-button button-secondary button-header" onClick={handleWallet}>Account</button>
+            <button className="disconnect-button button-secondary button-header" onClick={handleWallet}>Wallet</button>
           </span>}
           </div>
       </div>
