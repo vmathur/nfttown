@@ -57,6 +57,7 @@ export default class Map {
 
             this.pond0.draw(ctx)
         }else if(selectedZone===4){
+            console.log('drawing pond1')
             this.pond1.draw(ctx)
         }else if(selectedZone===5){
             this.pond2.draw(ctx)

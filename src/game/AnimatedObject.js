@@ -34,7 +34,7 @@ export default class AnimatedObject {
     draw(ctx){
         ctx.drawImage(
             this.image, // image
-            this.currentAnimationFrame*this.width, // source x
+            0, // source x
             0, // source y
             this.width, // source width
             this.height, // source height
