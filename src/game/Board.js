@@ -27,6 +27,8 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
     let cursor = new Cursor(cursorData, 48)
     let hud = new Hud(tileMap.tsize);
     let map = new Map(selectedZone);
+    
+    const showHome = ownedCitizens.length > 0 ? true : false
 
     const canvasClickHandler=(event)=>{
         let rect = canvasRef.current.getBoundingClientRect();
@@ -102,7 +104,7 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
                     cursor.draw(ctx,character.x,character.y)     
                 }
             }
-            hud.drawHud(ctx)
+            hud.drawHud(ctx, showHome)
 
             requestAnimationFrame(render);
         }

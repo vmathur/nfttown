@@ -13,9 +13,11 @@ export default class Hud {
         this.tileSize = tileSize; 
     }
 
-    drawHud(ctx){
+    drawHud(ctx, showHome){
         this.draw(ctx,4,30)
-        this.draw(ctx,5,80)
+        if(showHome){
+            this.draw(ctx,5,80)
+        }
     }
 
     draw(ctx, sourceX, targetX){
