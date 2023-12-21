@@ -13,3 +13,13 @@
 .mint-button{
     font-size: large;
 }
+
+.dashboard-mobile-message{
+    color: gray
+}
+
+@media screen and (min-width: 1000px) {
+    .dashboard-mobile-message{
+        display: none;
+    }
+}
