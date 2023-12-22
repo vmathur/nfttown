@@ -10,6 +10,7 @@ import { getCitizens, getOwnedCitizens } from './contract/contractFunctions.js';
 import { maxCitizens } from "./utils/constants.js" 
 import { startingPosition } from './utils/startingPosition.js';
 import { getOwnedCitizenZoneFromCitizens } from './utils/zones.js'
+import { getGardenFromZone } from './contract/gardeningContractFunctions.js';
 
 function App() {
   //game objects
@@ -18,6 +19,8 @@ function App() {
   const [initialActions, setInitiatlActions] = useState({});
   const [selectedZone, setSelectedZone] = useState(1);
   const [mapMode, setMapMode] = useState(window.innerWidth>1000? 'game' : 'world')
+
+  const [garden, setGarden] = useState([]);
 
   //UI update variables
   const [isUpdating, setIsUpdating] = useState(false);
@@ -83,6 +86,7 @@ function App() {
     const fetchData = async () => {
       setIsUpdating(true);
       let cits = await getCitizens(setCitizens);
+      await getGardenFromZone(selectedZone, setGarden);
       setIsUpdating(false);
       if(account){
         let owned = await getOwnedCitizens(setOwnedCitizens, account)
@@ -117,6 +121,9 @@ function App() {
         initialActions={initialActions} 
         isUpdating={isUpdating}
         setMapMode={setMapMode}
+        garden={garden}
+        setGarden={setGarden}
+        account={account}
         selectedZone={selectedZone}
         setSelectedZone={setSelectedZone}
         citizens={citizens}/>}

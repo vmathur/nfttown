@@ -318,3 +318,9 @@ export const worldMap = {
     return this.tiles[layer][row * worldMap.cols + col]
   }
 };
+
+export const HUDlocations = [
+  [1,1],
+  [2,1],
+  [3,1],
+]

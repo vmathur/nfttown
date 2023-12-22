@@ -1,9 +1,9 @@
-import React, {useRef, useEffect} from 'react'
+import React, {useRef, useEffect, useState} from 'react'
 
 import Map from "./Map"
 import { tileMap } from "../data/tileConstants"
 import WallCollision from "../utils/WallCollision"
-
+import { getGardenFromZone, dig } from '../contract/gardeningContractFunctions'
 import Character  from "./Character"
 import getColorFromTime from './TimeOfDay';
 import { getHealthRemaining } from './utils'
@@ -11,9 +11,17 @@ import { getOwnedCitizenZoneFromCitizens } from '../utils/zones'
 import './Board.css';
 import Cursor from './Cursor'
 import { cursorData, arrowsData } from '../data/objectData'
+import GardenMap from './GardenMap'
 import Hud from './Hud'
+import Spot from './Spot'
 
-export default function Board({charactersRef, ownedCitizens, initialActions, isUpdating, setMapMode, selectedZone, setSelectedZone, citizens}) {
+
+export default function Board({charactersRef, ownedCitizens, initialActions, isUpdating, setMapMode, selectedZone, setSelectedZone, citizens, garden, setGarden, account}) {
+    const [mousePosition, setMousePosition] = useState({
+        left: -100,
+        top: -100
+    })
+    
     const canvasRef = useRef(null);
     //initialize characters
     let characters = []
@@ -27,25 +35,45 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
     let cursor = new Cursor(cursorData, 48)
     let hud = new Hud(tileMap.tsize);
     let map = new Map(selectedZone);
+    let spot = new Spot(selectedZone, tileMap.tsize);
+    let gardenMap = new GardenMap(garden);
     
     const showHome = ownedCitizens.length > 0 ? true : false
+
+    function handleMouseMove(e) { 
+        const canvas = canvasRef.current;
+        let x = e.pageX - canvas.offsetLeft;
+        let y = e.pageY - canvas.offsetTop-50;
+        
+        setMousePosition({left: x, top: y}); 
+        //todo hide square if out of bounds
+    }
 
     const canvasClickHandler=(event)=>{
         let rect = canvasRef.current.getBoundingClientRect();
         const x = Math.floor(event.clientX-rect.left)
         const y = Math.floor(event.clientY-rect.top)
+
         let arrowId = getClickedArrow(x,y)
+        let hud = getClickedHud(x,y)
+
         if(arrowId>0){
             let zone = arrowsData.arrowToZoneMap[selectedZone-1][arrowId-1]
             setSelectedZone(zone)
-        }
-
-        let hud = getClickedHud(x,y)
-        if(hud===1){
-            setMapMode('world')
-        }else if(hud===2){
-            let zone = getOwnedCitizenZoneFromCitizens(ownedCitizens, citizens)
-            setSelectedZone(zone)
+            getGardenFromZone(zone, setGarden);
+        }else if(hud===1 || hud === 2){
+            if(hud===1){
+                setMapMode('world')
+            }else if(hud===2){
+                let zone = getOwnedCitizenZoneFromCitizens(ownedCitizens, citizens)
+                setSelectedZone(zone)
+            }
+        }else{
+            if(account){
+                let xCord = Math.floor(x/tileMap.tsize)+1;
+                let yCord = Math.floor(y/tileMap.tsize)+1;
+                dig(selectedZone, xCord, yCord, setGarden, account)
+            }
         }
     }
 
@@ -89,6 +117,7 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
 
             // draw zone map
             map.draw(ctx, selectedZone)
+            gardenMap.draw(ctx);
 
             //update characters
             for(let character of characters){
@@ -105,7 +134,9 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
                 }
             }
             hud.drawHud(ctx, showHome)
-
+            if(account && ownedCitizens.length>0){
+                spot.draw(ctx, mousePosition.left, mousePosition.top);
+            }
             requestAnimationFrame(render);
         }
         render();
@@ -122,7 +153,7 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
     return (
         <div className='container'>
             <div id="rectangle" className="loading-rectangle" style={{left: "calc((100vw - "+tileMap.tsize*tileMap.cols+"px)/2)", width:tileMap.tsize*tileMap.cols+"px", backgroundColor : color, opacity:opacity}} height={tileMap.tsize*tileMap.rows +'px'} width={tileMap.tsize*tileMap.cols +'px'} ><div className='loading-text'>{isUpdating ? 'Loading...': ''}</div></div>
-            <canvas id="canvas" ref={canvasRef} height={tileMap.tsize*tileMap.rows +'px'} width={tileMap.tsize*tileMap.cols +'px'} onClick={canvasClickHandler}/>
+            <canvas id="canvas" ref={canvasRef} height={tileMap.tsize*tileMap.rows +'px'} width={tileMap.tsize*tileMap.cols +'px'} onClick={canvasClickHandler} onMouseMove={(ev)=> handleMouseMove(ev)}/>
         </div>
     )
 

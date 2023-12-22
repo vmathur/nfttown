@@ -97,6 +97,13 @@ export const arrowsData =
     ]
 }
 
+export const gardenData =
+{
+    width: 16,
+    height: 16,
+    imgSource : '/assets/garden.png'
+}
+
 export const welcomeBannerData = 
 {
     width: 256,

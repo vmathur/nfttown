@@ -1,8 +1,9 @@
 import magic from '../utils/magic.js'
+import provider from "../utils/ethers.js"
 import { abi } from "./abi.js"
 
 const ethers = require('ethers')
-const provider = new ethers.providers.Web3Provider(magic.rpcProvider);
+// const provider = new ethers.providers.Web3Provider(magic.rpcProvider);
 
 export const contractAddress ='0xa633722E673A2be31cBB95E202dc5EA2F847292a';
 
