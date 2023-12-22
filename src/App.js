@@ -96,6 +96,7 @@ function App() {
     }
 
     fetchData().catch(console.error)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[account]);
 
   return (
