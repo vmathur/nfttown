@@ -17,6 +17,7 @@ import Spot from './Spot'
 
 
 export default function Board({charactersRef, ownedCitizens, initialActions, isUpdating, setMapMode, selectedZone, setSelectedZone, citizens, garden, setGarden, account}) {
+    // eslint-disable-next-line
     const [mousePosition, setMousePosition] = useState({
         left: -100,
         top: -100
@@ -35,11 +36,13 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
     let cursor = new Cursor(cursorData, 48)
     let hud = new Hud(tileMap.tsize);
     let map = new Map(selectedZone);
+    // eslint-disable-next-line
     let spot = new Spot(selectedZone, tileMap.tsize);
     let gardenMap = new GardenMap(garden);
     
     const showHome = ownedCitizens.length > 0 ? true : false
 
+    // eslint-disable-next-line
     function handleMouseMove(e) { 
         const canvas = canvasRef.current;
         let x = e.pageX - canvas.offsetLeft;
