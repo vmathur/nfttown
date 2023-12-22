@@ -135,7 +135,7 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
             }
             hud.drawHud(ctx, showHome)
             if(account && ownedCitizens.length>0){
-                spot.draw(ctx, mousePosition.left, mousePosition.top);
+                // spot.draw(ctx, mousePosition.left, mousePosition.top);
             }
             requestAnimationFrame(render);
         }
@@ -153,7 +153,8 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
     return (
         <div className='container'>
             <div id="rectangle" className="loading-rectangle" style={{left: "calc((100vw - "+tileMap.tsize*tileMap.cols+"px)/2)", width:tileMap.tsize*tileMap.cols+"px", backgroundColor : color, opacity:opacity}} height={tileMap.tsize*tileMap.rows +'px'} width={tileMap.tsize*tileMap.cols +'px'} ><div className='loading-text'>{isUpdating ? 'Loading...': ''}</div></div>
-            <canvas id="canvas" ref={canvasRef} height={tileMap.tsize*tileMap.rows +'px'} width={tileMap.tsize*tileMap.cols +'px'} onClick={canvasClickHandler} onMouseMove={(ev)=> handleMouseMove(ev)}/>
+            {/* <canvas id="canvas" ref={canvasRef} height={tileMap.tsize*tileMap.rows +'px'} width={tileMap.tsize*tileMap.cols +'px'} onClick={canvasClickHandler} onMouseMove={(ev)=> handleMouseMove(ev)}/> */}
+            <canvas id="canvas" ref={canvasRef} height={tileMap.tsize*tileMap.rows +'px'} width={tileMap.tsize*tileMap.cols +'px'} onClick={canvasClickHandler}/>
         </div>
     )
 
