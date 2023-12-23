@@ -4,7 +4,7 @@ import { abi } from "./gardeningAbi.js"
 import { map1Dto2DArray} from "../utils/zones.js"
 
 const ethers = require('ethers')
-export const contractAddress ='0x56c3421dfc2bcCA488f8d50340dCE0B358E1ffA8';
+export const contractAddress ='0xC6fc1EAFA39433a5D8320015127861000853b6a4';
 
 const contract = new ethers.Contract(
   contractAddress,
@@ -20,17 +20,14 @@ export async function plant(selectedZone, x,y, setGarden, account){
     let result = await magic.wallet.sendGaslessTransaction(account,transaction)
 
     getGardenFromZone(selectedZone, setGarden)
-    console.log(result)
     console.log('Planted')
     return result;
 }
 
 export async function dig(selectedZone, x,y, setGarden, account){
   console.log('Digging')
-  console.log(selectedZone,y,x)
   let transaction = await contract.populateTransaction.dig(selectedZone, y,x);
   let result = await magic.wallet.sendGaslessTransaction(account,transaction);
-  console.log(result);
   console.log('Dug')
   getGardenFromZone(selectedZone, setGarden)
   return result;
@@ -39,7 +36,6 @@ export async function dig(selectedZone, x,y, setGarden, account){
 export async function getGardenFromZone(selectedZone, setGarden){
   console.log('Fetching garden')
   const result = await contract.getZone(selectedZone);
-  console.log(result)
   let grid = map1Dto2DArray(result,14,24)
   console.log('Fetched garden')
   setGarden(grid)

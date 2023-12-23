@@ -8,19 +8,19 @@ export const abi =
 	{
 		"inputs": [
 			{
-				"internalType": "uint8",
+				"internalType": "uint16",
 				"name": "zone",
-				"type": "uint8"
+				"type": "uint16"
 			},
 			{
-				"internalType": "uint8",
+				"internalType": "uint16",
 				"name": "row",
-				"type": "uint8"
+				"type": "uint16"
 			},
 			{
-				"internalType": "uint8",
+				"internalType": "uint16",
 				"name": "col",
-				"type": "uint8"
+				"type": "uint16"
 			}
 		],
 		"name": "dig",
@@ -31,19 +31,19 @@ export const abi =
 	{
 		"inputs": [
 			{
-				"internalType": "uint8",
+				"internalType": "uint16",
 				"name": "zone",
-				"type": "uint8"
+				"type": "uint16"
 			},
 			{
-				"internalType": "uint8",
+				"internalType": "uint16",
 				"name": "row",
-				"type": "uint8"
+				"type": "uint16"
 			},
 			{
-				"internalType": "uint8",
+				"internalType": "uint16",
 				"name": "col",
-				"type": "uint8"
+				"type": "uint16"
 			}
 		],
 		"name": "getValue",
@@ -60,9 +60,9 @@ export const abi =
 	{
 		"inputs": [
 			{
-				"internalType": "uint8",
+				"internalType": "uint16",
 				"name": "zone",
-				"type": "uint8"
+				"type": "uint16"
 			}
 		],
 		"name": "getZone",
@@ -122,19 +122,19 @@ export const abi =
 	{
 		"inputs": [
 			{
-				"internalType": "uint8",
+				"internalType": "uint16",
 				"name": "zone",
-				"type": "uint8"
+				"type": "uint16"
 			},
 			{
-				"internalType": "uint8",
+				"internalType": "uint16",
 				"name": "row",
-				"type": "uint8"
+				"type": "uint16"
 			},
 			{
-				"internalType": "uint8",
+				"internalType": "uint16",
 				"name": "col",
-				"type": "uint8"
+				"type": "uint16"
 			}
 		],
 		"name": "plant",
