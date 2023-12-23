@@ -49,8 +49,8 @@ function Dashboard({charactersRef, account, ownedCitizens, clickInfoHandler, set
     return (
       <div className="citizen-container">
         {!account && charactersRef.current.length<maxCitizens ? <div className="login-message"><i>Connect wallet</i></div> : ''}
-        <div className="dashboard-mobile-message"><i>View on a larger display for a better experience</i></div>
         {canMint && account && charactersRef.current.length<maxCitizens ? <button onClick={callMint} className="mint-button button-primary">+ Mint a citizen</button> : ''}
+        <div className="dashboard-mobile-message"><i>View on a larger display for a better experience</i></div>
         <div className="citien-section-container">{allSections}</div>
       </div>
     );
