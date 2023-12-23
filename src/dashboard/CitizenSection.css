@@ -62,7 +62,7 @@
     .citizen-section-item-text{
         color:gray;
         width:200px;
-        align-self: end;
+        align-self: center;
     }    
 }
 
@@ -70,6 +70,7 @@
   width: 16px;
   height: 18px;
   transform: scale(2,2);
+  align-self: center;
 }
   
 .selected{
