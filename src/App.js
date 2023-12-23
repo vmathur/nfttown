@@ -20,6 +20,7 @@ function App() {
   const [selectedZone, setSelectedZone] = useState(1);
   const [mapMode, setMapMode] = useState(window.innerWidth>1000? 'game' : 'world')
 
+  const [gardenLoading, setGardenLoading] = useState(false);
   const [garden, setGarden] = useState([]);
 
   //UI update variables
@@ -86,7 +87,7 @@ function App() {
     const fetchData = async () => {
       setIsUpdating(true);
       let cits = await getCitizens(setCitizens);
-      await getGardenFromZone(selectedZone, setGarden);
+      await getGardenFromZone(selectedZone, setGarden, setGardenLoading);
       setIsUpdating(false);
       if(account){
         let owned = await getOwnedCitizens(setOwnedCitizens, account)
@@ -119,7 +120,9 @@ function App() {
         <Board 
         charactersRef={characters}
         ownedCitizens={ownedCitizens}
-        initialActions={initialActions} 
+        initialActions={initialActions}
+        gardenLoading={gardenLoading}
+        setGardenLoading={setGardenLoading} 
         isUpdating={isUpdating}
         setMapMode={setMapMode}
         garden={garden}

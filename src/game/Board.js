@@ -16,7 +16,7 @@ import Hud from './Hud'
 import Spot from './Spot'
 
 
-export default function Board({charactersRef, ownedCitizens, initialActions, isUpdating, setMapMode, selectedZone, setSelectedZone, citizens, garden, setGarden, account}) {
+export default function Board({charactersRef, ownedCitizens, initialActions, isUpdating, setMapMode, selectedZone, setSelectedZone, citizens, garden, setGarden, account, gardenLoading, setGardenLoading}) {
     // eslint-disable-next-line
     const [mousePosition, setMousePosition] = useState({
         left: -100,
@@ -40,7 +40,11 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
     let spot = new Spot(selectedZone, tileMap.tsize);
     let gardenMap = new GardenMap(garden);
     
-    const showHome = ownedCitizens.length > 0 ? true : false
+    const ownedCitizenZone = getOwnedCitizenZoneFromCitizens(ownedCitizens, citizens)
+
+
+    let showHome = ownedCitizens.length > 0 ? true : false
+    showHome = showHome && (selectedZone!==ownedCitizenZone);
 
     // eslint-disable-next-line
     function handleMouseMove(e) { 
@@ -63,19 +67,20 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
         if(arrowId>0){
             let zone = arrowsData.arrowToZoneMap[selectedZone-1][arrowId-1]
             setSelectedZone(zone)
-            getGardenFromZone(zone, setGarden);
+            getGardenFromZone(zone, setGarden, setGardenLoading);
         }else if(hud===1 || hud === 2){
             if(hud===1){
                 setMapMode('world')
             }else if(hud===2){
-                let zone = getOwnedCitizenZoneFromCitizens(ownedCitizens, citizens)
-                setSelectedZone(zone)
+                let ownedCitizenZone = getOwnedCitizenZoneFromCitizens(ownedCitizens, citizens)
+                setSelectedZone(ownedCitizenZone);
+                getGardenFromZone(ownedCitizenZone, setGarden, setGardenLoading);
             }
         }else{
             if(account){
                 let xCord = Math.floor(x/tileMap.tsize)+1;
                 let yCord = Math.floor(y/tileMap.tsize)+1;
-                dig(selectedZone, xCord, yCord, setGarden, account)
+                dig(selectedZone, xCord, yCord, setGarden, account, setGardenLoading)
             }
         }
     }
@@ -104,7 +109,7 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
     }
 
     
-
+    if(gardenLoading){console.log('loading')};
     //didmount
     useEffect(()=>{
         const render = () => {
@@ -120,7 +125,9 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
 
             // draw zone map
             map.draw(ctx, selectedZone)
-            gardenMap.draw(ctx);
+            if(!gardenLoading){
+                gardenMap.draw(ctx);
+            }
 
             //update characters
             for(let character of characters){
