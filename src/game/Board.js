@@ -15,7 +15,6 @@ import GardenMap from './GardenMap'
 import Hud from './Hud'
 import Spot from './Spot'
 
-
 export default function Board({charactersRef, ownedCitizens, initialActions, isUpdating, setMapMode, selectedZone, setSelectedZone, citizens, garden, setGarden, account, gardenLoading, setGardenLoading}) {
     // eslint-disable-next-line
     const [mousePosition, setMousePosition] = useState({
@@ -33,18 +32,29 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
         let character = new Character(data, tileMap.tsize)
         characters.push(character)
     }
-    let cursor = new Cursor(cursorData, 48)
-    let hud = new Hud(tileMap.tsize);
-    let map = new Map(selectedZone);
-    // eslint-disable-next-line
-    let spot = new Spot(selectedZone, tileMap.tsize);
-    let gardenMap = new GardenMap(garden);
-    
     const ownedCitizenZone = getOwnedCitizenZoneFromCitizens(ownedCitizens, citizens)
-
-
     let showHome = ownedCitizens.length > 0 ? true : false
     showHome = showHome && (selectedZone!==ownedCitizenZone);
+    
+    let cursor = new Cursor(cursorData, 48)
+    
+    let hud = new Hud(tileMap.tsize);
+    let offScreenHudCanvas = createOffscreenCanvas(tileMap.tsize*tileMap.cols, tileMap.tsize*tileMap.rows);
+    hud.drawHud(offScreenHudCanvas.getContext('2d'), showHome);
+    
+    // eslint-disable-next-line
+    let spot = new Spot(selectedZone, tileMap.tsize);
+    
+    let map = new Map(selectedZone);
+    let offScreenMapCanvas = createOffscreenCanvas(tileMap.tsize*tileMap.cols, tileMap.tsize*tileMap.rows);
+    map.draw(offScreenMapCanvas.getContext('2d'), selectedZone)
+    
+    let gardenMap = new GardenMap(garden);
+    let offScreeGardenCanvas = createOffscreenCanvas(tileMap.tsize*tileMap.cols, tileMap.tsize*tileMap.rows);
+    gardenMap.draw(offScreeGardenCanvas.getContext('2d'));
+
+
+
 
     // eslint-disable-next-line
     function handleMouseMove(e) { 
@@ -123,11 +133,13 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             // draw zone map
-            // ctx.drawImage(offScreen,0,0);
-            map.draw(ctx, selectedZone); 
+            // map.draw(ctx, selectedZone); 
+            ctx.drawImage(offScreenMapCanvas,0,0);
+
             //draw garden
             if(!gardenLoading){
-                gardenMap.draw(ctx);
+                // gardenMap.draw(ctx);
+                ctx.drawImage(offScreeGardenCanvas,0,0);
             }
 
             //update and draw characters
@@ -146,7 +158,9 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
                 }
             }
             //draw hud
-            hud.drawHud(ctx, showHome)
+            // hud.drawHud(ctx, showHome)
+            ctx.drawImage(offScreenHudCanvas,0,0);
+
             if(account && ownedCitizens.length>0){
                 // spot.draw(ctx, mousePosition.left, mousePosition.top);
             }
@@ -171,4 +185,11 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
         </div>
     )
 
+}
+
+function createOffscreenCanvas(width, height) {
+    var offScreenCanvas = document.createElement('canvas');
+    offScreenCanvas.width = width;
+    offScreenCanvas.height = height;
+    return offScreenCanvas; //return canvas element
 }
