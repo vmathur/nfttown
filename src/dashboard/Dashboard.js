@@ -2,10 +2,11 @@ import React from 'react';
 import './Dashboard.css';
 import CitizenSection from './CitizenSection';
 import { getHealthRemaining } from '../game/utils';
-import { mint } from "../contract/contractFunctions"
+import { mint, getOwnedCitizens } from "../contract/contractFunctions"
 import { maxCitizens } from "../utils/constants"
+import { getOwnedCitizenZoneFromCitizens } from '../utils/zones';
 
-function Dashboard({charactersRef, account, ownedCitizens, clickInfoHandler, setCitizens, setOwnedCitizens, setIsUpdating, setInitiatlActions}) {
+function Dashboard({charactersRef, account, ownedCitizens, clickInfoHandler, setCitizens, setOwnedCitizens, setIsUpdating, setInitiatlActions, citizens, setSelectedZone}) {
     let canMint = ownedCitizens.length > 0 ? false : true;
     let renderActions = false;
     // eslint-disable-next-line array-callback-return
@@ -40,6 +41,9 @@ function Dashboard({charactersRef, account, ownedCitizens, clickInfoHandler, set
       setIsUpdating(true);
       try{
         await mint(setInitiatlActions, setCitizens, setOwnedCitizens, account)
+        let owned = await getOwnedCitizens(setOwnedCitizens, account)
+        let zone = getOwnedCitizenZoneFromCitizens(owned, citizens);
+        setSelectedZone(zone);
       }catch(error){
         console.error(error)
       }

@@ -108,8 +108,7 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
         return 0
     }
 
-    
-    if(gardenLoading){console.log('loading')};
+
     //didmount
     useEffect(()=>{
         const render = () => {
@@ -124,12 +123,14 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             // draw zone map
-            map.draw(ctx, selectedZone)
+            // ctx.drawImage(offScreen,0,0);
+            map.draw(ctx, selectedZone); 
+            //draw garden
             if(!gardenLoading){
                 gardenMap.draw(ctx);
             }
 
-            //update characters
+            //update and draw characters
             for(let character of characters){
                 let health = getHealthRemaining(character.lastFed, character.maxTime);
                 if(health<=0){
@@ -139,10 +140,12 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
                 WallCollision(character, canvas);
                 character.draw(ctx)
 
+                //draw cursor
                 if(character.id===ownedCitizens[0]){   
                     cursor.draw(ctx,character.x,character.y)     
                 }
             }
+            //draw hud
             hud.drawHud(ctx, showHome)
             if(account && ownedCitizens.length>0){
                 // spot.draw(ctx, mousePosition.left, mousePosition.top);

@@ -3,10 +3,11 @@ import React, {useRef, useEffect} from 'react'
 import { Grid } from "./Grid"
 import { WorldMap } from "./WorldMap"
 import { worldMap } from "../data/tileConstants"
+import { getGardenFromZone } from '../contract/gardeningContractFunctions'
 import getColorFromTime from './TimeOfDay';
 import './World.css';
 
-export default function World({isUpdating, setSelectedZone, setMapMode}) {
+export default function World({isUpdating, setSelectedZone, setMapMode,setGarden, setGardenLoading}) {
     const canvasRef = useRef(null);
 
     //click handler
@@ -16,6 +17,7 @@ export default function World({isUpdating, setSelectedZone, setMapMode}) {
         const y = Math.floor(event.clientY-rect.top)
         let zone = mapCoordinateToZone(x,y)
         setSelectedZone(zone)
+        getGardenFromZone(zone, setGarden, setGardenLoading);
         setMapMode('game')
     }
 

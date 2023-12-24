@@ -134,6 +134,8 @@ function App() {
       {mapMode === 'world' && 
         <World 
         isUpdating={isUpdating}
+        setGarden={setGarden}
+        setGardenLoading={setGardenLoading}
         setSelectedZone={setSelectedZone}
         setMapMode={setMapMode}/>}
       <Dashboard 
@@ -144,6 +146,8 @@ function App() {
         setCitizens={setCitizens}
         setOwnedCitizens={setOwnedCitizens}
         setIsUpdating={setIsUpdating}
+        setSelectedZone={setSelectedZone}
+        citizens={citizens}
         setInitiatlActions={setInitiatlActions}/>
     </div>
   );
