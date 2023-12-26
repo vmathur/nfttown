@@ -64,16 +64,23 @@ export const cursorData =
     },
 }
 
+export const shovelData =
+{
+    width: 16,
+    height: 16,
+    imgSource : '/assets/shovel.png'
+}
+
 export const arrowsData =
 {
     width: 16,
     height: 16,
     imgSource : '/assets/arrows.png',
     arrowLocations : [
-        [1100,360],
-        [550,620],
+        [1120,360],
+        [560,630],
         [0,360],
-        [550,0]
+        [560,0]
     ],
     arrowToZoneMap : [
         //1

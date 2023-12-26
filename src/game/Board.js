@@ -13,6 +13,7 @@ import Cursor from './Cursor'
 import { cursorData, arrowsData } from '../data/objectData'
 import GardenMap from './GardenMap'
 import Hud from './Hud'
+import Shovel from './Shovel'
 import Spot from './Spot'
 
 export default function Board({charactersRef, ownedCitizens, initialActions, isUpdating, setMapMode, selectedZone, setSelectedZone, citizens, garden, setGarden, account, gardenLoading, setGardenLoading}) {
@@ -21,6 +22,8 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
         left: -100,
         top: -100
     })
+    
+    const [enableShovel, setEnableShovel] = useState(false)
     
     const canvasRef = useRef(null);
     //initialize characters
@@ -53,8 +56,9 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
     let offScreeGardenCanvas = createOffscreenCanvas(tileMap.tsize*tileMap.cols, tileMap.tsize*tileMap.rows);
     gardenMap.draw(offScreeGardenCanvas.getContext('2d'));
 
-
-
+    let shovel = new Shovel(enableShovel);
+    let offScreenShovelCanvas = createOffscreenCanvas(tileMap.tsize*tileMap.cols, tileMap.tsize*tileMap.rows);
+    shovel.draw(offScreenShovelCanvas.getContext('2d'));
 
     // eslint-disable-next-line
     function handleMouseMove(e) { 
@@ -78,16 +82,18 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
             let zone = arrowsData.arrowToZoneMap[selectedZone-1][arrowId-1]
             setSelectedZone(zone)
             getGardenFromZone(zone, setGarden, setGardenLoading);
-        }else if(hud===1 || hud === 2){
+        }else if(hud===1 || hud === 2 || hud === 3){
             if(hud===1){
                 setMapMode('world')
             }else if(hud===2){
                 let ownedCitizenZone = getOwnedCitizenZoneFromCitizens(ownedCitizens, citizens)
                 setSelectedZone(ownedCitizenZone);
                 getGardenFromZone(ownedCitizenZone, setGarden, setGardenLoading);
+            }else if (hud===3){
+                setEnableShovel(!enableShovel)
             }
         }else{
-            if(account){
+            if(account && enableShovel){
                 let xCord = Math.floor(x/tileMap.tsize)+1;
                 let yCord = Math.floor(y/tileMap.tsize)+1;
                 dig(selectedZone, xCord, yCord, setGarden, account, setGardenLoading)
@@ -114,6 +120,9 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
         }
         if((x>=80-offset&&x<=80+offset)&&(y>=10-offset&&y<=10+offset)){
             return 2
+        }
+        if((x>=1120-offset&&x<=1120+offset)&&(y>=10-offset&&y<=10+offset)){
+            return 3
         }
         return 0
     }
@@ -162,7 +171,7 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
             ctx.drawImage(offScreenHudCanvas,0,0);
 
             if(account && ownedCitizens.length>0){
-                // spot.draw(ctx, mousePosition.left, mousePosition.top);
+                ctx.drawImage(offScreenShovelCanvas, 0,0);
             }
             requestAnimationFrame(render);
         }

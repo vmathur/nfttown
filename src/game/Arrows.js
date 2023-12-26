@@ -30,7 +30,7 @@ export default class Arrows {
         this.width = arrowsData.width;
         this.height = arrowsData.height;
 
-        this.scale = Math.floor(tileSize/16)
+        this.scale = Math.floor(tileSize/24)
         this.tileSize = tileSize; 
 
         this.arrowIDs = zoneToArrowMap[selectedZone-1]
