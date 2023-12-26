@@ -10,7 +10,7 @@ import { getHealthRemaining } from './utils'
 import { getOwnedCitizenZoneFromCitizens } from '../utils/zones'
 import './Board.css';
 import Cursor from './Cursor'
-import { cursorData, arrowsData } from '../data/objectData'
+import { arrowsData } from '../data/objectData'
 import GardenMap from './GardenMap'
 import Hud from './Hud'
 import Shovel from './Shovel'
@@ -34,18 +34,14 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
     let showHome = ownedCitizens.length > 0 ? true : false
     showHome = showHome && (selectedZone!==ownedCitizenZone);
     
-    let cursor = new Cursor(cursorData, 48)
+    let cursor = new Cursor()
+    let gardenMap = new GardenMap(garden);
+    let shovel = new Shovel();
     
     let hud = new Hud(tileMap.tsize);
     hud.drawHud(offScreenHudCanvas.getContext('2d'), showHome);
     let map = new Map(selectedZone);
     map.draw(offScreenMapCanvas.getContext('2d'), selectedZone)
-    
-    let gardenMap = new GardenMap(garden);
-    let offScreeGardenCanvas = createOffscreenCanvas(tileMap.tsize*tileMap.cols, tileMap.tsize*tileMap.rows);
-    gardenMap.draw(offScreeGardenCanvas.getContext('2d'));
-
-    let shovel = new Shovel();
 
     const canvasClickHandler=(event)=>{
         let rect = canvasRef.current.getBoundingClientRect();
@@ -118,17 +114,15 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
             //clear screen
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // draw zone map
-            // map.draw(ctx, selectedZone); 
+            //draw map
             ctx.drawImage(offScreenMapCanvas,0,0);
 
             //draw garden
             if(!gardenLoading){
-                // gardenMap.draw(ctx);
-                ctx.drawImage(offScreeGardenCanvas,0,0);
+                gardenMap.draw(ctx);
             }
 
-            //update and draw characters
+            //update and draw characters and cursoe
             for(let character of characters){
                 let health = getHealthRemaining(character.lastFed, character.maxTime);
                 if(health<=0){
@@ -138,15 +132,14 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
                 WallCollision(character, canvas);
                 character.draw(ctx)
 
-                //draw cursor
                 if(character.id===ownedCitizens[0]){   
                     cursor.draw(ctx,character.x,character.y)     
                 }
             }
             //draw hud
-            // hud.drawHud(ctx, showHome)
             ctx.drawImage(offScreenHudCanvas,0,0);
 
+            //draw shovel
             if(account && ownedCitizens.length>0){
                 shovel.draw(ctx, enableShovel)
             }
@@ -155,7 +148,7 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
         render();
     })
 
-    //get the color of the overlay
+    //update the color of the overlay
     let [color, opacity] = getColorFromTime();
     if(isUpdating){
         color = 'black'
@@ -176,5 +169,5 @@ function createOffscreenCanvas(width, height) {
     var offScreenCanvas = document.createElement('canvas');
     offScreenCanvas.width = width;
     offScreenCanvas.height = height;
-    return offScreenCanvas; //return canvas element
+    return offScreenCanvas;
 }

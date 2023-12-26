@@ -1,5 +1,8 @@
+import { cursorData } from "../data/objectData";
+import { tileMap } from "../data/tileConstants";
+
 export default class Cursor {
-    constructor(cursorData, tileSize){
+    constructor(){
         let image = new Image();  
         image.src = cursorData.imgSource;
         this.image = image;
@@ -10,8 +13,8 @@ export default class Cursor {
         this.x = cursorData.currentLocation.x
         this.y = cursorData.currentLocation.y
 
-        this.scale = Math.floor(tileSize/16)
-        this.tileSize = tileSize; 
+        this.scale = Math.floor(tileMap.tsize/16)
+        this.tileSize = tileMap.tsize; 
     }
 
     draw(ctx,x,y){
