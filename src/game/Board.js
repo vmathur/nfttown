@@ -17,8 +17,6 @@ import Shovel from './Shovel'
 
 let offScreenHudCanvas = createOffscreenCanvas(tileMap.tsize*tileMap.cols, tileMap.tsize*tileMap.rows);
 let offScreenMapCanvas = createOffscreenCanvas(tileMap.tsize*tileMap.cols, tileMap.tsize*tileMap.rows);
-// let offScreeGardenCanvas = createOffscreenCanvas(tileMap.tsize*tileMap.cols, tileMap.tsize*tileMap.rows);
-let offScreenShovelCanvas = createOffscreenCanvas(tileMap.tsize*tileMap.cols, tileMap.tsize*tileMap.rows);
 
 export default function Board({charactersRef, ownedCitizens, initialActions, isUpdating, setMapMode, selectedZone, setSelectedZone, citizens, garden, setGarden, account, gardenLoading, setGardenLoading}) {    
     const [enableShovel, setEnableShovel] = useState(false)
@@ -47,8 +45,7 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
     let offScreeGardenCanvas = createOffscreenCanvas(tileMap.tsize*tileMap.cols, tileMap.tsize*tileMap.rows);
     gardenMap.draw(offScreeGardenCanvas.getContext('2d'));
 
-    let shovel = new Shovel(enableShovel);
-    shovel.draw(offScreenShovelCanvas.getContext('2d'));
+    let shovel = new Shovel();
 
     const canvasClickHandler=(event)=>{
         let rect = canvasRef.current.getBoundingClientRect();
@@ -151,7 +148,7 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
             ctx.drawImage(offScreenHudCanvas,0,0);
 
             if(account && ownedCitizens.length>0){
-                ctx.drawImage(offScreenShovelCanvas, 0,0);
+                shovel.draw(ctx, enableShovel)
             }
             requestAnimationFrame(render);
         }

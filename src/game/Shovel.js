@@ -2,7 +2,7 @@ import { shovelData } from "../data/objectData";
 import { tileMap } from "../data/tileConstants";
 
 export default class Shovel {
-    constructor(enableShovel){
+    constructor(){
         let image = new Image();  
         image.src = shovelData.imgSource;
         this.image = image;
@@ -13,18 +13,19 @@ export default class Shovel {
         this.scale = (Math.floor(tileMap.tsize/16))/(1.5)
         this.tileSize = tileMap.tsize; 
 
-        if(enableShovel){
-            this.sourceX = 1;
-        }else{
-            this.sourceX = 0;
-        }
         this.targetX = 1100;
     }
 
-    draw(ctx){
+    draw(ctx, enableShovel){
+        let sourceX=3;
+        if(enableShovel){
+            sourceX = 1;
+        }else{
+            sourceX = 0
+        }
             ctx.drawImage(
                 this.image, // image
-                this.sourceX*this.width, // source x
+                sourceX*this.width, // source x
                 0, // source y
                 this.width, // source width
                 this.height, // source height
