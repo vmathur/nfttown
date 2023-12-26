@@ -87,12 +87,14 @@ function App() {
     const fetchData = async () => {
       setIsUpdating(true);
       let cits = await getCitizens(setCitizens);
-      await getGardenFromZone(selectedZone, setGarden, setGardenLoading);
       setIsUpdating(false);
       if(account){
         let owned = await getOwnedCitizens(setOwnedCitizens, account)
         let zone = getOwnedCitizenZoneFromCitizens(owned, cits);
         setSelectedZone(zone);
+        await getGardenFromZone(zone, setGarden, setGardenLoading);
+      }else{
+        await getGardenFromZone(selectedZone, setGarden, setGardenLoading);
       }
     }
 

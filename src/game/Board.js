@@ -14,17 +14,14 @@ import { cursorData, arrowsData } from '../data/objectData'
 import GardenMap from './GardenMap'
 import Hud from './Hud'
 import Shovel from './Shovel'
-import Spot from './Spot'
 
-export default function Board({charactersRef, ownedCitizens, initialActions, isUpdating, setMapMode, selectedZone, setSelectedZone, citizens, garden, setGarden, account, gardenLoading, setGardenLoading}) {
-    // eslint-disable-next-line
-    const [mousePosition, setMousePosition] = useState({
-        left: -100,
-        top: -100
-    })
-    
+let offScreenHudCanvas = createOffscreenCanvas(tileMap.tsize*tileMap.cols, tileMap.tsize*tileMap.rows);
+let offScreenMapCanvas = createOffscreenCanvas(tileMap.tsize*tileMap.cols, tileMap.tsize*tileMap.rows);
+// let offScreeGardenCanvas = createOffscreenCanvas(tileMap.tsize*tileMap.cols, tileMap.tsize*tileMap.rows);
+let offScreenShovelCanvas = createOffscreenCanvas(tileMap.tsize*tileMap.cols, tileMap.tsize*tileMap.rows);
+
+export default function Board({charactersRef, ownedCitizens, initialActions, isUpdating, setMapMode, selectedZone, setSelectedZone, citizens, garden, setGarden, account, gardenLoading, setGardenLoading}) {    
     const [enableShovel, setEnableShovel] = useState(false)
-    
     const canvasRef = useRef(null);
     //initialize characters
     let characters = []
@@ -42,14 +39,8 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
     let cursor = new Cursor(cursorData, 48)
     
     let hud = new Hud(tileMap.tsize);
-    let offScreenHudCanvas = createOffscreenCanvas(tileMap.tsize*tileMap.cols, tileMap.tsize*tileMap.rows);
     hud.drawHud(offScreenHudCanvas.getContext('2d'), showHome);
-    
-    // eslint-disable-next-line
-    let spot = new Spot(selectedZone, tileMap.tsize);
-    
     let map = new Map(selectedZone);
-    let offScreenMapCanvas = createOffscreenCanvas(tileMap.tsize*tileMap.cols, tileMap.tsize*tileMap.rows);
     map.draw(offScreenMapCanvas.getContext('2d'), selectedZone)
     
     let gardenMap = new GardenMap(garden);
@@ -57,18 +48,7 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
     gardenMap.draw(offScreeGardenCanvas.getContext('2d'));
 
     let shovel = new Shovel(enableShovel);
-    let offScreenShovelCanvas = createOffscreenCanvas(tileMap.tsize*tileMap.cols, tileMap.tsize*tileMap.rows);
     shovel.draw(offScreenShovelCanvas.getContext('2d'));
-
-    // eslint-disable-next-line
-    function handleMouseMove(e) { 
-        const canvas = canvasRef.current;
-        let x = e.pageX - canvas.offsetLeft;
-        let y = e.pageY - canvas.offsetTop-50;
-        
-        setMousePosition({left: x, top: y}); 
-        //todo hide square if out of bounds
-    }
 
     const canvasClickHandler=(event)=>{
         let rect = canvasRef.current.getBoundingClientRect();
@@ -189,7 +169,6 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
     return (
         <div className='container'>
             <div id="rectangle" className="loading-rectangle" style={{left: "calc((100vw - "+tileMap.tsize*tileMap.cols+"px)/2)", width:tileMap.tsize*tileMap.cols+"px", backgroundColor : color, opacity:opacity}} height={tileMap.tsize*tileMap.rows +'px'} width={tileMap.tsize*tileMap.cols +'px'} ><div className='loading-text'>{isUpdating ? 'Loading...': ''}</div></div>
-            {/* <canvas id="canvas" ref={canvasRef} height={tileMap.tsize*tileMap.rows +'px'} width={tileMap.tsize*tileMap.cols +'px'} onClick={canvasClickHandler} onMouseMove={(ev)=> handleMouseMove(ev)}/> */}
             <canvas id="canvas" ref={canvasRef} height={tileMap.tsize*tileMap.rows +'px'} width={tileMap.tsize*tileMap.cols +'px'} onClick={canvasClickHandler}/>
         </div>
     )
