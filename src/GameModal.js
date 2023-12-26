@@ -38,12 +38,12 @@ function getHelpContent(closeModal){
     return (<div className={'modal-style'}>
       <MdClose onClick={closeModal} style={{ color: "white", fontSize: "1em", right:'30px', position: 'absolute'}}/>
       {/* <div style={{marginBottom: '20px'}}><b>How to play</b></div> */}
-      <br/>
-      <div style={{marginBottom: '20px', marginLeft: '0px'}}>1. Connect your wallet and mint a citizen NFT, one per wallet. NFT Town is limited to {maxCitizens} citizens.</div>
-      <div style={{marginBottom: '20px', marginLeft: '0px'}}>2. Feed your citizen to keep them happy. If their hunger gets too low, they will leave town. If a citizen leaves town it can be removed by anyone, burning the NFT forever.</div>
-      <div style={{marginBottom: '20px', marginLeft: '0px'}}>3. Make NFT Town home! People that own citizen NFTs can dig and patch holes my clicking the shovel icon.</div>
-      <div style={{marginBottom: '20px'}}></div>
-      <br/>
+      <div style={{marginBottom: '20px', marginLeft: '0px'}}>NFT Town is an on-chain game inspired by animal crossing and tamagotchi.</div>
+      <ol>
+      <li style={{marginBottom: '20px', marginLeft: '20px'}}>Connect your wallet and mint a citizen NFT, one per wallet. NFT Town is limited to {maxCitizens} citizens.</li>
+      <li style={{marginBottom: '20px', marginLeft: '20px'}}>Feed your citizen to keep them happy. If their hunger gets too low, they will leave town. If a citizen leaves town it can be removed by anyone, burning the NFT forever.</li>
+      <li style={{marginBottom: '20px', marginLeft: '20px'}}>Make NFT Town home! People that own citizen NFTs can dig and patch holes by clicking the shovel icon.</li>
+      </ol>
       <br/>
       <div style={{marginBottom: '20px'}}><a href={'https://mumbai.polygonscan.com/address/'+contractAddress} style ={{color:'white'}} target={"_blank"} rel="noreferrer">View smart contract</a></div>
       <div style={{marginBottom: '20px'}}><a href={'https://github.com/vmathur/nfttown'} style ={{color:'white'}} target={"_blank"} rel="noreferrer">View source code</a></div>
