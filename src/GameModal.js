@@ -39,10 +39,9 @@ function getHelpContent(closeModal){
       <MdClose onClick={closeModal} style={{ color: "white", fontSize: "1em", right:'30px', position: 'absolute'}}/>
       {/* <div style={{marginBottom: '20px'}}><b>How to play</b></div> */}
       <br/>
-      <div style={{marginBottom: '20px', marginLeft: '0px'}}>Connect your wallet and mint a citizen NFT, one per wallet. NFT Town is limited to {maxCitizens} citizens.</div>
-      <div style={{marginBottom: '20px', marginLeft: '0px'}}>Feed your citizen to keep them happy. If their hunger gets too low, they will leave town.</div>
-      <div style={{marginBottom: '20px', marginLeft: '0px'}}>If a citizen leaves town it can be removed by anyone, burning the NFT forever.</div>
-      <div style={{marginBottom: '20px', marginLeft: '0px'}}>Make NFT Town home! Citizen holders can click anywhere to dig a hole.</div>
+      <div style={{marginBottom: '20px', marginLeft: '0px'}}>1. Connect your wallet and mint a citizen NFT, one per wallet. NFT Town is limited to {maxCitizens} citizens.</div>
+      <div style={{marginBottom: '20px', marginLeft: '0px'}}>2. Feed your citizen to keep them happy. If their hunger gets too low, they will leave town. If a citizen leaves town it can be removed by anyone, burning the NFT forever.</div>
+      <div style={{marginBottom: '20px', marginLeft: '0px'}}>3. Make NFT Town home! People that own citizen NFTs can dig and patch holes my clicking the shovel icon.</div>
       <div style={{marginBottom: '20px'}}></div>
       <br/>
       <br/>

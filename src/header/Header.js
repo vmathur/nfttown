@@ -21,7 +21,7 @@ function Header({account, setAccount, clickHelpHandler, getOwnedCitizens, setOwn
       <div className="header-container">
         <div className="header-button-area">
         {/* {mapMode && mapMode==='game' ? <button className="view-map button-secondary button-header" onClick={toggleMap}>Zoom out</button>:''} */}
-        <button className="how-to-play-button button-secondary button-header" onClick={clickHelpHandler}>About</button>
+        <button className="how-to-play-button button-secondary button-header" onClick={clickHelpHandler}>Help</button>
 
         {!account? 
           <button className="connect-button button-primary button-header" onClick={handleLogin}>Connect</button> : 
