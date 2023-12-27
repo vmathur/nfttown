@@ -14,9 +14,9 @@ export default class Hud {
     }
 
     drawHud(ctx, showHome){
-        this.draw(ctx,4,30)
+        // this.draw(ctx,4,30)
         if(showHome){
-            this.draw(ctx,5,80)
+            this.draw(ctx,5,30)
         }
     }
 

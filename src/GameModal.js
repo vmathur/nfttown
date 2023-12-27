@@ -38,7 +38,7 @@ function getHelpContent(closeModal){
     return (<div className={'modal-style'}>
       <MdClose onClick={closeModal} style={{ color: "white", fontSize: "1em", right:'30px', position: 'absolute'}}/>
       {/* <div style={{marginBottom: '20px'}}><b>How to play</b></div> */}
-      <div style={{marginBottom: '20px', marginLeft: '0px'}}>NFT Town is an on-chain game inspired by animal crossing and tamagotchi.</div>
+      <div style={{marginBottom: '20px', marginLeft: '0px'}}>NFT Town is an on-chain game sim inspired by animal crossing and tamagotchi. To get started: </div>
       <ol>
       <li style={{marginBottom: '20px', marginLeft: '20px'}}>Connect your wallet and mint a citizen NFT, one per wallet. NFT Town is limited to {maxCitizens} citizens.</li>
       <li style={{marginBottom: '20px', marginLeft: '20px'}}>Feed your citizen to keep them happy. If their hunger gets too low, they will leave town. If a citizen leaves town it can be removed by anyone, burning the NFT forever.</li>

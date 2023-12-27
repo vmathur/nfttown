@@ -57,7 +57,7 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
             getGardenFromZone(zone, setGarden, setGardenLoading);
         }else if(hud===1 || hud === 2 || hud === 3){
             if(hud===1){
-                setMapMode('world')
+                // setMapMode('world')
             }else if(hud===2){
                 let ownedCitizenZone = getOwnedCitizenZoneFromCitizens(ownedCitizens, citizens)
                 setSelectedZone(ownedCitizenZone);
@@ -89,11 +89,11 @@ export default function Board({charactersRef, ownedCitizens, initialActions, isU
     function getClickedHud(x,y){
         let offset=50
         if((x>=30-offset&&x<=30+offset)&&(y>=10-offset&&y<=10+offset)){
-            return 1
-        }
-        if((x>=80-offset&&x<=80+offset)&&(y>=10-offset&&y<=10+offset)){
             return 2
         }
+        // if((x>=80-offset&&x<=80+offset)&&(y>=10-offset&&y<=10+offset)){
+        //     return 2
+        // }
         if((x>=1120-offset&&x<=1120+offset)&&(y>=10-offset&&y<=10+offset)){
             return 3
         }
