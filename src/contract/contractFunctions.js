@@ -5,7 +5,7 @@ import { abi } from "./abi.js"
 const ethers = require('ethers')
 // const provider = new ethers.providers.Web3Provider(magic.rpcProvider);
 
-export const contractAddress ='0xa633722E673A2be31cBB95E202dc5EA2F847292a';
+export const contractAddress ='0x6042098B62840BDb1ceE004476dd27EA03FCFe9c';
 
 const contract = new ethers.Contract(
   contractAddress,

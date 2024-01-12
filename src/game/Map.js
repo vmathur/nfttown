@@ -68,7 +68,10 @@ export default class Map {
     }
 }
 class ZoneTiles {
-    draw(ctx, selectedZone, img){  
+    draw(ctx, selectedZone, img){
+        if(!zoneMap.zoneLayer[selectedZone-1]){
+            return;
+        }  
         for(let i = 0; i<zoneMap.zoneLayer[selectedZone-1].length; i++){
             for (let c = 0; c < zoneMap.cols; c++) {
                 for (let r = 0; r < zoneMap.rows; r++) {

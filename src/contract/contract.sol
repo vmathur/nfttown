@@ -28,7 +28,7 @@ contract NFTzen is ERC2771Context, ERC721, ERC721Enumerable, ERC721Burnable {
     mapping(uint256 => Metadata) public tokenMetadata;
 
     //constants
-    uint maxSupply = 4;
+    uint maxSupply = 36;
     uint256 minTime = 86400;
     uint256 timeRange = 4;
     uint256 maxAnimals = 4;
@@ -50,6 +50,7 @@ contract NFTzen is ERC2771Context, ERC721, ERC721Enumerable, ERC721Burnable {
     //key methods
     function mint() public returns (uint256){
         uint256 numberOfOwnedCitizens = balanceOf(_msgSender());
+        require(allTokenIds.length < maxSupply, "Supply exceeded");
         require(numberOfOwnedCitizens == 0, "Users can mint only 1 nft");
 
         uint256 tokenId = _tokenIdCounter.current();

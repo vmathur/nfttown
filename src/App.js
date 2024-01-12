@@ -12,6 +12,8 @@ import { startingPosition } from './utils/startingPosition.js';
 import { getOwnedCitizenZoneFromCitizens } from './utils/zones.js'
 import { getGardenFromZone } from './contract/gardeningContractFunctions.js';
 
+const citizensPerGroup = 4;
+
 function App() {
   //game objects
   const [citizens, setCitizens] = useState([]);
@@ -162,7 +164,7 @@ function splitCitizensIntoGroups(citizens, selectedZone) {
   for (let i = 0; i < citizens.length; i++) {
     currentGroup.push(citizens[i]);
 
-    if (currentGroup.length === 4 || i === citizens.length - 1) {
+    if (currentGroup.length === citizensPerGroup || i === citizens.length - 1) {
       groups.push([...currentGroup]); // Make a copy of the current group
       currentGroup = []; // Reset the current group
     }

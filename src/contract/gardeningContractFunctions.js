@@ -4,7 +4,7 @@ import { abi } from "./gardeningAbi.js"
 import { map1Dto2DArray} from "../utils/zones.js"
 
 const ethers = require('ethers')
-export const contractAddress ='0xC6fc1EAFA39433a5D8320015127861000853b6a4';
+export const contractAddress ='0x51c0429C38ce3Ae6DFBFcbDe26aCA16Da1Bc851c';
 
 const contract = new ethers.Contract(
   contractAddress,
