@@ -57,8 +57,9 @@ export async function mint(setInitiatlActions, setCitizens, setOwnedCitizens, ac
     console.log('Minted')
 
     setInitiatlActions({})
-    getCitizens(setCitizens);
+    let citizens = getCitizens(setCitizens);
     getOwnedCitizens(setOwnedCitizens, account);
+    return citizens;
 };
 
 //feed

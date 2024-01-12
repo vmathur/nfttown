@@ -40,9 +40,9 @@ function Dashboard({charactersRef, account, ownedCitizens, clickInfoHandler, set
     const callMint = async () =>{
       setIsUpdating(true);
       try{
-        await mint(setInitiatlActions, setCitizens, setOwnedCitizens, account)
+        let updatedCitizens = await mint(setInitiatlActions, setCitizens, setOwnedCitizens, account)
         let owned = await getOwnedCitizens(setOwnedCitizens, account)
-        let zone = getOwnedCitizenZoneFromCitizens(owned, citizens);
+        let zone = getOwnedCitizenZoneFromCitizens(owned, updatedCitizens);
         setSelectedZone(zone);
       }catch(error){
         console.error(error)
